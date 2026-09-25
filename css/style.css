@@ -362,3 +362,247 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .serviceGrid,.metrics,.contactGrid,.formRow{grid-template-columns:1fr}.journeyMedia{min-height:430px}.journeyCaption{left:20px;right:20px;bottom:18px}.journeySteps{grid-template-columns:1fr}.section{padding:72px 0}.sectionHead{gap:20px}.contact{padding:24px}.mobileMenu{top:104px}
 }
 </style>
+
+/* ================================
+   FULL CINEMATIC DIAGNOSTICS SCENE
+================================ */
+
+.serviceDiag2 {
+  display:block !important;
+  min-height:640px;
+  padding:0;
+  overflow:hidden;
+}
+
+.serviceDiag2 .chapterCopy {
+  display:none;
+}
+
+.serviceDiag2 .chapterVisual {
+  width:100%;
+  min-height:640px;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  background:
+    radial-gradient(circle at 70% 45%,rgba(85,197,255,.18),transparent 30%),
+    linear-gradient(145deg,#111820,#05080b);
+}
+
+
+/* Large vehicle diagnostic visual */
+.serviceDiag2 .diagPhoto {
+  background:
+    radial-gradient(circle at 70% 50%,rgba(85,197,255,.12),transparent 30%),
+    linear-gradient(145deg,#111820,#05080b);
+}
+
+
+.serviceDiag2 .diagPhoto:after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2020/04/service-tab.png');
+  background-repeat:no-repeat;
+  background-size:75% auto;
+  background-position:center;
+  filter:
+    drop-shadow(0 40px 60px rgba(0,0,0,.55));
+  transform:scale(1.15);
+  z-index:1;
+}
+
+
+/* Dark cinematic overlay */
+.serviceDiag2 .diagPhoto:before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3,6,9,.75),
+      transparent 45%,
+      rgba(3,6,9,.35)
+    ),
+    linear-gradient(
+      0deg,
+      rgba(3,6,9,.85),
+      transparent 55%
+    );
+  z-index:2;
+}
+
+
+/* Floating diagnostic panel */
+.serviceDiag2 .diagOverlay {
+  position:absolute;
+  z-index:5;
+  right:40px;
+  top:40px;
+  width:300px;
+  padding:22px;
+  border-radius:22px;
+
+  background:
+    rgba(8,13,17,.78);
+
+  border:
+    1px solid rgba(255,255,255,.12);
+
+  backdrop-filter:
+    blur(18px);
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.4);
+}
+
+
+.serviceDiag2 .diagOverlay small {
+  color:#b9dbea;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:10px;
+  display:block;
+  margin-bottom:14px;
+}
+
+
+.serviceDiag2 .diagOverlay i {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:12px 0;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.08);
+
+  font-style:normal;
+  font-size:14px;
+}
+
+
+.serviceDiag2 .diagOverlay b {
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:#68f0aa;
+
+  box-shadow:
+    0 0 15px rgba(104,240,170,.8);
+}
+
+
+/* Scan beam */
+.serviceDiag2 .diagLaser {
+
+  position:absolute;
+
+  z-index:4;
+
+  left:12%;
+  right:12%;
+
+  height:2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #55c5ff,
+      transparent
+    );
+
+  box-shadow:
+    0 0 25px rgba(85,197,255,.9);
+
+  animation:
+    diagnosticScan 3.5s ease-in-out infinite;
+}
+
+
+@keyframes diagnosticScan {
+
+  0%,100% {
+    top:25%;
+    opacity:.3;
+  }
+
+  50% {
+    top:75%;
+    opacity:1;
+  }
+
+}
+
+
+
+/* Bottom cinematic caption */
+
+.serviceDiag2 .chapterVisual:after {
+
+  content:
+  "Vehicle diagnostics";
+
+  position:absolute;
+
+  z-index:6;
+
+  left:45px;
+  bottom:45px;
+
+
+  color:white;
+
+  font-size:
+  clamp(42px,5vw,75px);
+
+  font-weight:800;
+
+  letter-spacing:-.06em;
+
+}
+
+
+
+/* Mobile */
+@media(max-width:700px){
+
+.serviceDiag2 .chapterVisual {
+
+  min-height:520px;
+
+}
+
+
+.serviceDiag2 .diagPhoto:after {
+
+  background-size:
+  115% auto;
+
+}
+
+
+.serviceDiag2 .diagOverlay {
+
+  top:20px;
+  right:20px;
+
+  width:240px;
+
+}
+
+
+.serviceDiag2 .chapterVisual:after {
+
+  left:20px;
+  bottom:25px;
+
+  font-size:42px;
+
+}
+
+}
