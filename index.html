@@ -57,42 +57,53 @@ button{font:inherit}
 .hero{padding-top:78px}
 .heroMedia{
   position:relative;
-  min-height:690px;
+  min-height:720px;
   overflow:hidden;
   border-bottom:1px solid var(--line);
-  background:#0a0e12;
+  background:
+    radial-gradient(circle at 78% 34%,rgba(126,200,248,.10),transparent 24%),
+    radial-gradient(circle at 92% 86%,rgba(255,255,255,.035),transparent 20%),
+    linear-gradient(135deg,#0b1015 0%,#080c10 48%,#0d1319 100%);
 }
 .heroMedia:before{
-  content:"";position:absolute;inset:0;
-  background-image:url('hero.jpg');
-  background-size:cover;
-  background-position:center 46%;
-  transform:scale(1.025);
-  filter:saturate(.82) contrast(1.02) brightness(.78);
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:
+    linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 40%,#000 100%);
 }
 .heroMedia:after{
-  content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(90deg,rgba(5,8,11,.90) 0%,rgba(5,8,11,.66) 33%,rgba(5,8,11,.16) 62%,rgba(5,8,11,.10) 100%),
-    linear-gradient(180deg,rgba(5,8,11,.10) 0%,rgba(5,8,11,.05) 55%,rgba(5,8,11,.55) 100%);
+  content:"";position:absolute;right:-10%;top:8%;width:54%;height:84%;
+  border:1px solid rgba(255,255,255,.06);border-radius:50%;
+  box-shadow:
+    0 0 0 90px rgba(255,255,255,.012),
+    0 0 0 180px rgba(255,255,255,.008);
+  transform:rotate(-12deg);
 }
-.heroInner{position:relative;z-index:2;min-height:690px;display:flex;align-items:center}
-.heroCopy{width:min(670px,54%);padding:50px 0 56px}
+.heroInner{position:relative;z-index:2;min-height:720px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:50px}
+.heroCopy{width:auto;padding:58px 0}
 .ey{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.20em;text-transform:uppercase;color:#d0eaf9}
 .ey:before{content:"";width:36px;height:1px;background:var(--steel)}
-.hero h1{font-size:clamp(56px,6.6vw,104px);line-height:.88;letter-spacing:-.075em;margin:18px 0 20px}
+.hero h1{font-size:clamp(58px,6.6vw,104px);line-height:.88;letter-spacing:-.075em;margin:18px 0 20px}
 .hero h1 span{display:block;color:#d8e0e5}
 .hero p{margin:0;max-width:560px;color:#c1cbd2;font-size:18px;line-height:1.72}
 .heroActions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
 .heroTrust{display:flex;gap:26px;flex-wrap:wrap;margin-top:34px;padding-top:24px;border-top:1px solid rgba(255,255,255,.10)}
 .heroTrustItem strong{display:block;font-size:24px;letter-spacing:-.04em}
 .heroTrustItem span{display:block;margin-top:4px;color:#a4b0b8;font-size:12px}
-.heroLabel{
-  position:absolute;right:4vw;bottom:26px;z-index:2;
-  padding:11px 14px;border-radius:999px;background:rgba(7,11,15,.62);
-  border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(10px);
-  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dbe7ed
-}
+.heroRight{position:relative;padding:22px 0 22px 28px}
+.heroRight:before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(126,200,248,.45),transparent)}
+.heroRightTop{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#94a8b5;margin-bottom:22px}
+.heroServices{display:grid;gap:0;border-top:1px solid rgba(255,255,255,.08)}
+.heroService{display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:14px;padding:19px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.heroService .n{font-size:11px;color:#6f8290;letter-spacing:.12em}
+.heroService strong{font-size:clamp(22px,2vw,31px);letter-spacing:-.035em;font-weight:750}
+.heroService span{font-size:12px;color:#8ea0ac}
+.heroMeta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.heroMetaCard{padding:18px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.025)}
+.heroMetaCard small{display:block;text-transform:uppercase;letter-spacing:.14em;font-size:9px;color:#8ea0ad;margin-bottom:7px}
+.heroMetaCard strong{display:block;font-size:18px;line-height:1.35}
 
 /* SERVICE STRIP */
 .serviceStrip{border-bottom:1px solid var(--line);background:#0a0f14}
@@ -153,7 +164,7 @@ footer{padding:28px 0 36px;color:#7e8a92;font-size:12px}
 .footerin{padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 @media(max-width:1100px){
-  .heroCopy{width:64%}
+  .heroInner{grid-template-columns:1fr}.heroRight{padding:20px 0 0}.heroRight:before{display:none}
   .sectionHead,.workshopGrid,.contact{grid-template-columns:1fr}
   .serviceGrid{grid-template-columns:repeat(2,1fr)}
   .reviews{grid-template-columns:1fr}
@@ -163,7 +174,7 @@ footer{padding:28px 0 36px;color:#7e8a92;font-size:12px}
   .mobileMenu{position:fixed;z-index:999;top:78px;left:16px;right:16px;padding:16px;border-radius:18px;background:rgba(8,12,17,.97);border:1px solid var(--line);box-shadow:var(--shadow)}
   .mobileMenu.open{display:grid;gap:10px}
   .mobileMenu a{padding:14px;border-radius:13px;background:#ffffff06;border:1px solid #ffffff0a;font-weight:750}
-  .heroCopy{width:78%}
+  
   .stripGrid{grid-template-columns:repeat(2,1fr)}
   .stripItem:nth-child(2){border-right:0}
   .stripItem:nth-child(-n+2){border-bottom:1px solid var(--line)}
@@ -172,15 +183,15 @@ footer{padding:28px 0 36px;color:#7e8a92;font-size:12px}
   .wrap{width:min(calc(100% - 24px),var(--max))}
   .navin{height:70px}.brand{font-size:11px;letter-spacing:.11em}.mark{width:34px;height:34px;font-size:20px}
   .hero{padding-top:70px}.heroMedia,.heroInner{min-height:610px}
-  .heroMedia:before{background-position:58% 50%}
-  .heroMedia:after{background:
-    linear-gradient(180deg,rgba(5,8,11,.72) 0%,rgba(5,8,11,.46) 34%,rgba(5,8,11,.34) 58%,rgba(5,8,11,.76) 100%),
-    linear-gradient(90deg,rgba(5,8,11,.78),rgba(5,8,11,.28))}
-  .heroCopy{width:100%;padding:42px 0}
+  
+  .heroMedia:after{opacity:.55}
+  .heroInner{grid-template-columns:1fr;min-height:auto;padding:24px 0 36px}
+  .heroCopy{width:100%;padding:42px 0 22px}
+  .heroRight{padding:8px 0 0}
   .hero h1{font-size:58px}
   .hero p{font-size:16px}
   .heroTrust{gap:18px}
-  .heroLabel{display:none}
+  .heroMeta{grid-template-columns:1fr}
   .serviceGrid,.metrics,.contactGrid{grid-template-columns:1fr}
   .section{padding:70px 0}.sectionHead{gap:20px}
   .contact{padding:24px}
@@ -216,19 +227,32 @@ footer{padding:28px 0 36px;color:#7e8a92;font-size:12px}
       <div class="heroCopy">
         <div class="ey">Queenstown · Adelaide</div>
         <h1>Reliable repairs.<span>Done properly.</span></h1>
-        <p>Servicing, diagnostics, brakes, suspension and mechanical repairs from a local workshop focused on honest advice, quality work and getting you back on the road.</p>
+        <p>Servicing, diagnostics and mechanical repairs from a local workshop focused on honest advice, quality workmanship and getting you back on the road.</p>
         <div class="heroActions">
           <a class="btn primary" href="#contact">Book a Service</a>
           <a class="btn" href="#services">View Services</a>
         </div>
         <div class="heroTrust">
           <div class="heroTrustItem"><strong>5.0★</strong><span>Customer rating</span></div>
+          <div class="heroTrustItem"><strong>49+</strong><span>Google reviews</span></div>
           <div class="heroTrustItem"><strong>Local</strong><span>Queenstown workshop</span></div>
-          <div class="heroTrustItem"><strong>All-in-one</strong><span>Servicing to repairs</span></div>
+        </div>
+      </div>
+
+      <div class="heroRight">
+        <div class="heroRightTop">Workshop services</div>
+        <div class="heroServices">
+          <div class="heroService"><span class="n">01</span><strong>Logbook servicing</strong><span>Maintenance</span></div>
+          <div class="heroService"><span class="n">02</span><strong>Diagnostics</strong><span>Fault finding</span></div>
+          <div class="heroService"><span class="n">03</span><strong>Brakes & clutch</strong><span>Safety</span></div>
+          <div class="heroService"><span class="n">04</span><strong>Steering & suspension</strong><span>Handling</span></div>
+        </div>
+        <div class="heroMeta">
+          <div class="heroMetaCard"><small>Workshop</small><strong>113–115 Port Rd<br>Queenstown SA 5014</strong></div>
+          <div class="heroMetaCard"><small>Call</small><strong>08 8341 2199</strong></div>
         </div>
       </div>
     </div>
-    <div class="heroLabel">Diagnostics · Brakes · Servicing · Repairs</div>
   </div>
 </section>
 
