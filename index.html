@@ -201,21 +201,22 @@ border:2px solid rgba(255,255,255,.2);box-shadow:inset 0 0 0 20px rgba(0,0,0,.14
 .contactCard small{display:block;text-transform:uppercase;letter-spacing:.15em;font-size:10px;color:#b8d1df;margin-bottom:8px}
 .contactCard strong{display:block;font-size:18px;margin-bottom:4px}
 .contactCard span{display:block;color:var(--muted);font-size:13px;line-height:1.5}
-.journeyGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.journeyCard{position:relative;padding:18px;border-radius:22px;background:linear-gradient(180deg,#10171e,#0a1015);border:1px solid var(--line);overflow:hidden}
-.journeyCard>span{position:absolute;top:15px;left:15px;z-index:2;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(5,9,12,.72);border:1px solid rgba(255,255,255,.10);font-size:10px;letter-spacing:.12em;color:#b8d6e4}
-.journeyVisual{height:210px;border-radius:16px;margin-bottom:18px;border:1px solid rgba(255,255,255,.07);position:relative;overflow:hidden;background:#0b1116}
-.journeyVisual:before,.journeyVisual:after{content:"";position:absolute}
-.journeyVisual.vehicle:before{left:12%;right:10%;bottom:19%;height:34%;border-radius:44% 28% 18% 18%/32% 30% 22% 22%;background:linear-gradient(180deg,#29353e,#111820);box-shadow:0 18px 34px rgba(0,0,0,.34)}
-.journeyVisual.vehicle:after{left:24%;right:27%;bottom:45%;height:22%;clip-path:polygon(13% 100%,26% 18%,76% 12%,98% 100%);background:#1b2c37}
-.journeyVisual.oil:before{width:42%;height:56%;right:14%;top:17%;border-radius:18px 18px 26px 26px;background:linear-gradient(90deg,#171d22,#353c41 48%,#14191d);border:1px solid rgba(255,255,255,.13);transform:rotate(-8deg)}
-.journeyVisual.oil:after{width:5px;height:36%;right:31%;top:49%;background:linear-gradient(#d59a2a,#67420d);border-radius:99px;transform:rotate(10deg);box-shadow:0 0 12px rgba(193,130,35,.35)}
-.journeyVisual.brake:before{width:58%;aspect-ratio:1;left:10%;top:12%;border-radius:50%;background:radial-gradient(circle,#d1d8dc 0 12%,#9ca6ac 25%,#515b61 46%,#21292e 69%,#101519 71%);box-shadow:inset 0 0 0 14px rgba(0,0,0,.15)}
-.journeyVisual.brake:after{width:24%;height:43%;right:11%;top:29%;border-radius:28px 18px 28px 22px;background:linear-gradient(90deg,#ff574d,#d72d25 62%,#81120e);border:2px solid #ff6a61}
-.journeyVisual.handover:before{left:14%;right:14%;top:19%;bottom:17%;border-radius:14px;background:linear-gradient(180deg,#182129,#0d141a);border:1px solid rgba(255,255,255,.09)}
-.journeyVisual.handover:after{left:24%;right:24%;top:33%;height:6px;background:var(--blue);box-shadow:0 28px 0 rgba(255,255,255,.18),0 56px 0 rgba(255,255,255,.10)}
-.journeyCard h3{margin:0 0 8px;font-size:21px;letter-spacing:-.035em}
-.journeyCard p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+.journeyFeature{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);gap:16px;align-items:stretch}
+.journeyMedia{position:relative;min-height:560px;border-radius:26px;overflow:hidden;border:1px solid var(--line);background:#070b0f;box-shadow:var(--shadow)}
+.journeyVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.92) contrast(1.05) brightness(.82)}
+.journeyShade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,7,10,.08),rgba(4,7,10,.10) 55%,rgba(4,7,10,.82));pointer-events:none}
+.journeyCount{position:absolute;top:18px;right:18px;padding:10px 13px;border-radius:999px;background:rgba(5,9,12,.60);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(10px);font-size:10px;letter-spacing:.16em;color:#d2e3eb}
+.journeyCaption{position:absolute;left:28px;right:28px;bottom:24px}
+.journeyCaption small{display:block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#b8d8e7;margin-bottom:8px}
+.journeyCaption strong{display:block;font-size:clamp(30px,3.2vw,48px);line-height:.98;letter-spacing:-.045em;max-width:720px}
+.journeySteps{display:grid;gap:10px}
+.journeyStep{width:100%;display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:center;text-align:left;padding:18px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,#0f161d,#0a1015);color:var(--text);cursor:pointer;transition:.22s}
+.journeyStep:hover{transform:translateX(3px);border-color:rgba(255,255,255,.16)}
+.journeyStep.active{border-color:rgba(85,197,255,.42);background:linear-gradient(180deg,#111d25,#0b1319);box-shadow:inset 3px 0 0 var(--blue)}
+.journeyStep>span{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:#ffffff06;border:1px solid #ffffff0b;color:#a9bfcb;font-size:10px;letter-spacing:.12em;font-weight:800}
+.journeyStep.active>span{background:#fff;color:#081017;border-color:#fff}
+.journeyStep strong{display:block;font-size:16px;margin-bottom:4px}
+.journeyStep small{display:block;color:#8fa0ab;font-size:12px;line-height:1.45}
 .bookingForm{display:grid;gap:14px;padding:22px;border-radius:20px;background:#ffffff05;border:1px solid #ffffff0a}
 .formRow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .bookingForm label{display:grid;gap:7px}
@@ -230,7 +231,7 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 
 @media(max-width:1180px){
   .stageInner{grid-template-columns:1fr}.storyCopy{padding-top:24px}.viewport3d{height:55%;min-height:440px}.stage{min-height:760px}
-  .sectionHead,.split,.contact{grid-template-columns:1fr}.serviceGrid{grid-template-columns:repeat(2,1fr)}.journeyGrid{grid-template-columns:repeat(2,1fr)}.reviews{grid-template-columns:1fr}
+  .sectionHead,.split,.contact,.journeyFeature{grid-template-columns:1fr}.serviceGrid{grid-template-columns:repeat(2,1fr)}.reviews{grid-template-columns:1fr}
 }
 @media(max-width:920px){
   .navlinks,.navcta .phone{display:none}.menu{display:grid;place-items:center}
@@ -244,7 +245,7 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .viewport3d{position:absolute;left:0;right:0;bottom:22px;height:43%;min-height:320px}.sceneLabel,.scrollHint{display:none}
   .serviceSync{margin-top:16px;gap:7px}.serviceStep{grid-template-columns:42px 1fr;padding:10px 11px}.serviceStepNum{width:35px;height:35px;font-size:10px}
   .diagPanel{left:14px;right:14px;top:auto;bottom:8px;width:auto;min-width:0}.diagPanel .system:nth-of-type(n+4){display:none}
-  .serviceGrid,.metrics,.contactGrid,.journeyGrid,.formRow{grid-template-columns:1fr}.section{padding:72px 0}.sectionHead{gap:20px}.contact{padding:24px}.mobileMenu{top:70px}
+  .serviceGrid,.metrics,.contactGrid,.formRow{grid-template-columns:1fr}.journeyMedia{min-height:430px}.journeyCaption{left:20px;right:20px;bottom:18px}.journeySteps{grid-template-columns:1fr}.section{padding:72px 0}.sectionHead{gap:20px}.contact{padding:24px}.mobileMenu{top:70px}
 }
 </style>
 </head>
@@ -388,34 +389,41 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 <section class="section journey" id="journey">
   <div class="wrap">
     <div class="sectionHead">
-      <div><div class="ey">What to expect</div><h2>A better workshop experience from arrival to handover.</h2></div>
-      <p>The homepage now follows the same journey a customer takes through the workshop, making the business easier to understand and more trustworthy before they even call.</p>
+      <div><div class="ey">What to expect</div><h2>From check-in to handover.</h2></div>
+      <p>A straightforward workshop process: inspect the vehicle, service what it needs, diagnose faults properly and explain the work clearly before you leave.</p>
     </div>
-    <div class="journeyGrid">
-      <article class="journeyCard">
-        <span>01</span>
-        <div class="journeyVisual vehicle"></div>
-        <h3>Vehicle check-in</h3>
-        <p>Tell us what the car is doing and what you need looked at. We start with the right inspection.</p>
-      </article>
-      <article class="journeyCard">
-        <span>02</span>
-        <div class="journeyVisual oil"></div>
-        <h3>Service & maintenance</h3>
-        <p>Oil, filters and scheduled maintenance are handled with the correct checks and clear advice.</p>
-      </article>
-      <article class="journeyCard">
-        <span>03</span>
-        <div class="journeyVisual brake"></div>
-        <h3>Repair & diagnostics</h3>
-        <p>Brakes, suspension, electrical and faults are diagnosed properly before parts are replaced.</p>
-      </article>
-      <article class="journeyCard">
-        <span>04</span>
-        <div class="journeyVisual handover"></div>
-        <h3>Clear handover</h3>
-        <p>Know what was done, what was found and what may need attention next — without the guesswork.</p>
-      </article>
+
+    <div class="journeyFeature">
+      <div class="journeyMedia">
+        <video class="journeyVideo" id="journeyVideo" muted playsinline preload="metadata">
+          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/hf_20260925_033124_8b4797b6-966e-47b8-9dd9-aeb21c7cbb40.mp4" type="video/mp4">
+        </video>
+        <div class="journeyShade"></div>
+        <div class="journeyCount" id="journeyCount">01 / 04</div>
+        <div class="journeyCaption">
+          <small id="journeyKicker">Vehicle check-in</small>
+          <strong id="journeyHeadline">Start with the right inspection.</strong>
+        </div>
+      </div>
+
+      <div class="journeySteps" id="journeySteps">
+        <button class="journeyStep active" type="button" data-step="0" data-time="0.6">
+          <span>01</span>
+          <div><strong>Vehicle check-in</strong><small>Arrival, inspection and service bay</small></div>
+        </button>
+        <button class="journeyStep" type="button" data-step="1" data-time="3.1">
+          <span>02</span>
+          <div><strong>Service & maintenance</strong><small>Oil, filters and scheduled servicing</small></div>
+        </button>
+        <button class="journeyStep" type="button" data-step="2" data-time="5.6">
+          <span>03</span>
+          <div><strong>Brakes & diagnostics</strong><small>Safety checks and fault finding</small></div>
+        </button>
+        <button class="journeyStep" type="button" data-step="3" data-time="7.2">
+          <span>04</span>
+          <div><strong>Clear handover</strong><small>What was done and what comes next</small></div>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -592,6 +600,33 @@ addEventListener('scroll',parallax,{passive:true});
 addEventListener('resize',parallax);
 syncToVideo();
 parallax();
+
+const journeyVideo=document.getElementById('journeyVideo');
+const journeySteps=[...document.querySelectorAll('.journeyStep')];
+const journeyCount=document.getElementById('journeyCount');
+const journeyKicker=document.getElementById('journeyKicker');
+const journeyHeadline=document.getElementById('journeyHeadline');
+const journeyCopy=[
+  {k:'Vehicle check-in',h:'Start with the right inspection.'},
+  {k:'Service & maintenance',h:'Look after the things that keep it reliable.'},
+  {k:'Brakes & diagnostics',h:'Find the problem before replacing parts.'},
+  {k:'Clear handover',h:'Know what was done and what comes next.'}
+];
+
+function setJourneyStep(i){
+  const btn=journeySteps[i];
+  if(!btn||!journeyVideo)return;
+  journeySteps.forEach((el,n)=>el.classList.toggle('active',n===i));
+  journeyCount.textContent=String(i+1).padStart(2,'0')+' / 04';
+  journeyKicker.textContent=journeyCopy[i].k;
+  journeyHeadline.textContent=journeyCopy[i].h;
+  const seek=Number(btn.dataset.time||0);
+  const doSeek=()=>{try{journeyVideo.currentTime=seek;journeyVideo.pause()}catch(e){}};
+  if(journeyVideo.readyState>=1) doSeek();
+  else journeyVideo.addEventListener('loadedmetadata',doSeek,{once:true});
+}
+journeySteps.forEach((btn,i)=>btn.addEventListener('click',()=>setJourneyStep(i)));
+setJourneyStep(0);
 </script>
 </body>
 </html>
