@@ -212,6 +212,55 @@ border:2px solid rgba(255,255,255,.2);box-shadow:inset 0 0 0 20px rgba(0,0,0,.14
 .moreService strong{display:block;font-size:14px;margin-bottom:3px}
 .moreService small{display:block;color:#81929c;font-size:11px;line-height:1.35}
 .moreService b{font-size:16px;color:#9dcfe8;font-weight:500}
+.serviceChapters{display:grid;gap:28px;margin-top:34px}
+.serviceChapter{display:grid;grid-template-columns:.86fr 1.14fr;min-height:520px;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(135deg,#0e151b,#080d11);box-shadow:0 28px 70px rgba(0,0,0,.28)}
+.serviceChapter.reverse{grid-template-columns:1.14fr .86fr}
+.serviceChapter.reverse .chapterCopy{order:2}
+.serviceChapter.reverse .chapterVisual{order:1}
+.chapterCopy{padding:48px;display:flex;flex-direction:column;justify-content:center}
+.chapterCopy>span{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#9eb7c4}
+.chapterCopy h3{font-size:clamp(38px,4.2vw,64px);line-height:.94;letter-spacing:-.055em;margin:14px 0 14px}
+.chapterCopy p{margin:0;color:var(--muted);line-height:1.72;max-width:520px}
+.chapterCopy a{margin-top:24px;color:#d8eef9;font-weight:800;font-size:14px}
+.chapterVisual{position:relative;overflow:hidden;background:
+radial-gradient(circle at 50% 40%,rgba(85,197,255,.12),transparent 28%),
+linear-gradient(145deg,#0b1116,#060a0e)}
+.chapterVisual:before{content:"";position:absolute;inset:0;background:
+linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:42px 42px;opacity:.45}
+.engineScene,.brakeScene2,.diagScene2,.suspScene2{position:absolute;inset:0}
+.engineBlock2{position:absolute;left:15%;right:12%;bottom:14%;height:50%;border-radius:28px;background:linear-gradient(145deg,#303a40,#12191e 58%,#080d10);border:1px solid rgba(255,255,255,.13);box-shadow:0 26px 55px rgba(0,0,0,.4)}
+.engineCover2{position:absolute;left:28%;right:26%;top:29%;height:26%;border-radius:22px;background:linear-gradient(180deg,#343d43,#171e23);border:1px solid rgba(255,255,255,.13);display:grid;place-items:center;color:#96aab5;letter-spacing:.18em;font-size:12px;font-weight:900}
+.oilBottle2{position:absolute;right:8%;top:14%;width:18%;height:45%;border-radius:18px 18px 28px 28px;background:linear-gradient(90deg,#171d22,#353c41 48%,#14191d);border:1px solid rgba(255,255,255,.16);transform:rotate(-10deg);box-shadow:0 20px 38px rgba(0,0,0,.32)}
+.oilBottle2 b{position:absolute;left:13%;right:13%;top:41%;padding:9px 0;text-align:center;background:#e6e9eb;color:#0d1216;border-radius:6px;font-size:16px}
+.oilPour2{position:absolute;right:17%;top:52%;width:5px;height:27%;border-radius:99px;background:linear-gradient(#d49628,#5c3a0d);transform:rotate(11deg);box-shadow:0 0 14px rgba(194,129,34,.38);animation:oilPulse 2s ease-in-out infinite}
+@keyframes oilPulse{0%,100%{opacity:.55}50%{opacity:1}}
+.engineGlow2{position:absolute;left:24%;right:22%;bottom:8%;height:12%;background:radial-gradient(ellipse,rgba(85,197,255,.15),transparent 68%);filter:blur(9px)}
+.disc2{position:absolute;width:58%;aspect-ratio:1;left:15%;top:10%;border-radius:50%;background:radial-gradient(circle,#d7dde1 0 12%,#a8b1b7 24%,#646e74 44%,#252d32 69%,#11171a 72%);box-shadow:inset 0 0 0 18px rgba(0,0,0,.15),0 32px 50px rgba(0,0,0,.35);animation:discFloat 4s ease-in-out infinite}
+@keyframes discFloat{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-7px)}}
+.hub2{position:absolute;width:19%;aspect-ratio:1;left:34.5%;top:31%;border-radius:50%;background:#171d21;border:7px solid #7b858b}
+.caliper2{position:absolute;right:11%;top:27%;width:24%;height:42%;border-radius:36px 22px 34px 25px;background:linear-gradient(90deg,#ff584d,#d82d25 60%,#7d110d);border:2px solid #ff6c63;display:grid;place-items:center;color:#3a0704;font-size:12px;font-weight:900;letter-spacing:.12em;writing-mode:vertical-rl;box-shadow:0 24px 34px rgba(0,0,0,.34)}
+.brakeSweep2{position:absolute;left:9%;right:8%;top:48%;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent);box-shadow:0 0 18px rgba(255,75,66,.55);animation:sweepBrake 3s ease-in-out infinite}
+@keyframes sweepBrake{0%,100%{top:27%;opacity:.2}50%{top:72%;opacity:1}}
+.diagCar2{position:absolute;left:12%;right:30%;top:20%;bottom:18%;border:2px solid rgba(85,197,255,.6);clip-path:polygon(5% 68%,14% 43%,30% 29%,67% 25%,82% 34%,95% 67%,93% 82%,76% 86%,71% 73%,28% 73%,24% 87%,9% 84%);box-shadow:0 0 26px rgba(85,197,255,.18)}
+.diagScan2{position:absolute;left:12%;right:30%;height:1px;top:24%;background:linear-gradient(90deg,transparent,var(--blue),transparent);box-shadow:0 0 16px rgba(85,197,255,.75);animation:diagSweep 3.5s ease-in-out infinite}
+@keyframes diagSweep{0%,100%{top:24%;opacity:.2}50%{top:74%;opacity:1}}
+.diagRows2{position:absolute;right:7%;top:18%;width:28%;padding:16px;border-radius:18px;background:rgba(8,13,17,.72);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(10px)}
+.diagRows2 i{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);font-style:normal;font-size:12px}
+.diagRows2 i:last-child{border-bottom:0}
+.diagRows2 b{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(104,240,170,.55)}
+.strut2{position:absolute;left:42%;top:8%;width:13%;height:64%;border-radius:12px;background:linear-gradient(90deg,#737d83,#2a3338 50%,#8e989e);border:1px solid rgba(255,255,255,.18);box-shadow:0 22px 40px rgba(0,0,0,.3)}
+.strut2 i{position:absolute;left:-46%;right:-46%;height:7px;background:#49545b;border-radius:99px}
+.strut2 i:nth-child(1){top:15%}.strut2 i:nth-child(2){top:29%}.strut2 i:nth-child(3){top:43%}.strut2 i:nth-child(4){top:57%}.strut2 i:nth-child(5){top:71%}
+.spring2{position:absolute;left:29%;top:19%;width:40%;height:45%;border:10px solid #2d3941;border-left-color:#7a8992;border-right-color:#1d262c;border-radius:50%}
+.arm2{position:absolute;left:18%;right:12%;bottom:18%;height:10%;background:linear-gradient(90deg,#202a31,#58646b,#1b242a);clip-path:polygon(0 35%,78% 0,100% 30%,75% 100%,0 62%)}
+.wheelGhost2{position:absolute;right:4%;bottom:8%;width:31%;aspect-ratio:1;border-radius:50%;border:14px solid rgba(255,255,255,.09);box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}
+.processLine{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}
+.processLine:before{content:"";position:absolute;left:8%;right:8%;top:28px;height:1px;background:linear-gradient(90deg,transparent,rgba(85,197,255,.35),transparent)}
+.processStep{position:relative;padding:62px 20px 20px;border-radius:18px;background:#ffffff04;border:1px solid #ffffff09}
+.processStep>span{position:absolute;top:10px;left:18px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#0c141a;border:1px solid rgba(85,197,255,.30);color:#b9dceb;font-size:10px;z-index:2}
+.processStep strong{display:block;font-size:18px;margin-bottom:7px}
+.processStep p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
 .section{padding:92px 0}
 .sectionHead{display:grid;grid-template-columns:.88fr 1.12fr;gap:48px;align-items:end;margin-bottom:34px}
 .section h2{margin:14px 0 0;font-size:clamp(42px,5.3vw,72px);line-height:.93;letter-spacing:-.06em}
@@ -272,7 +321,7 @@ border:2px solid rgba(255,255,255,.2);box-shadow:inset 0 0 0 20px rgba(0,0,0,.14
 footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 .footerin{padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
-@media(max-width:1180px){.servicesIntro{grid-template-columns:1fr;gap:20px}.serviceStorySticky{grid-template-columns:1fr;height:auto;min-height:0;position:relative;top:auto}.serviceStoryMedia{min-height:620px}.serviceStoryNav{grid-template-columns:repeat(2,1fr)}.serviceStorySpacer{display:none}.moreServicesGrid{grid-template-columns:repeat(2,1fr)}
+@media(max-width:1180px){.serviceChapter,.serviceChapter.reverse{grid-template-columns:1fr}.serviceChapter.reverse .chapterCopy,.serviceChapter.reverse .chapterVisual{order:initial}.chapterVisual{min-height:420px}.processLine{grid-template-columns:repeat(2,1fr)}.servicesIntro{grid-template-columns:1fr;gap:20px}.serviceStorySticky{grid-template-columns:1fr;height:auto;min-height:0;position:relative;top:auto}.serviceStoryMedia{min-height:620px}.serviceStoryNav{grid-template-columns:repeat(2,1fr)}.serviceStorySpacer{display:none}.moreServicesGrid{grid-template-columns:repeat(2,1fr)}
   .stageInner{grid-template-columns:minmax(0,610px) 1fr}.storyCopy{padding:18px 0}.viewport3d{height:55%;min-height:440px}.stage{min-height:760px}
   .sectionHead,.split,.contact,.journeyFeature{grid-template-columns:1fr}.serviceGrid{grid-template-columns:repeat(2,1fr)}.reviews{grid-template-columns:1fr}
 }
@@ -281,7 +330,7 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .mobileMenu{position:fixed;z-index:1999;top:118px;left:16px;right:16px;padding:16px;border-radius:20px;background:rgba(8,12,17,.97);border:1px solid var(--line);box-shadow:var(--shadow)}
   .mobileMenu.open{display:grid;gap:10px}.mobileMenu a{padding:14px;border-radius:14px;background:#ffffff07;border:1px solid #ffffff0b;font-weight:750}
 }
-@media(max-width:700px){.servicesCinema{padding:72px 0}.serviceStoryMedia{min-height:500px}.serviceStoryNav{grid-template-columns:1fr}.serviceStoryCopy{left:20px;right:20px;bottom:20px}.serviceStoryCopy h3{font-size:38px}.moreServicesGrid{grid-template-columns:1fr}.moreServicesHead{display:block}.moreServicesHead strong{display:block;margin-top:5px}.utilityBar{height:34px}.utilityIn{height:34px;grid-template-columns:1fr;font-size:10px}.utilityItem.hours{display:none}.utilityItem.phone{justify-content:center}
+@media(max-width:700px){.serviceChapter{min-height:0}.chapterCopy{padding:30px 22px}.chapterVisual{min-height:340px}.processLine{grid-template-columns:1fr}.processLine:before{display:none}.servicesCinema{padding:72px 0}.serviceStoryMedia{min-height:500px}.serviceStoryNav{grid-template-columns:1fr}.serviceStoryCopy{left:20px;right:20px;bottom:20px}.serviceStoryCopy h3{font-size:38px}.moreServicesGrid{grid-template-columns:1fr}.moreServicesHead{display:block}.moreServicesHead strong{display:block;margin-top:5px}.utilityBar{height:34px}.utilityIn{height:34px;grid-template-columns:1fr;font-size:10px}.utilityItem.hours{display:none}.utilityItem.phone{justify-content:center}
   .wrap{width:min(calc(100% - 24px),var(--max))}.navin{height:70px}.brandLogo{width:150px;max-height:56px}.brand{font-size:11px;letter-spacing:.11em}.mark{width:34px;height:34px;font-size:20px}
   .scrollExperience{height:150vh}.stage{top:104px;height:calc(100vh - 104px);min-height:730px}
   .stageInner{display:block;padding-top:18px}.storyCopy{padding-top:12px}.storyTitle{font-size:52px;line-height:.9}.storyText{font-size:15px}.storyMeta{gap:16px;margin-top:22px}
@@ -420,103 +469,110 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     <div class="servicesIntro">
       <div>
         <div class="ey">Services</div>
-        <h2>See what happens in the workshop.</h2>
+        <h2>Different work. Different visual story.</h2>
       </div>
-      <p>Scroll through the core jobs Nextech handles every day. Each chapter follows the actual workshop footage so the service feels real instead of becoming another list of boxes.</p>
+      <p>The home-page film stays unique. From here, each core service gets its own mechanical scene, motion and character instead of repeating the same footage.</p>
     </div>
 
-    <div class="serviceStory" id="serviceStory">
-      <div class="serviceStorySticky">
-        <div class="serviceStoryMedia">
-          <video id="serviceStoryVideo" muted playsinline preload="auto">
-            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/hf_20260925_033124_8b4797b6-966e-47b8-9dd9-aeb21c7cbb40.mp4" type="video/mp4">
-          </video>
-          <div class="serviceStoryShade"></div>
-          <div class="serviceStoryTop">
-            <span id="serviceStoryCount">01 / 04</span>
-            <span id="serviceStoryTag">Scheduled care</span>
-          </div>
-          <div class="serviceStoryCopy">
-            <small id="serviceStoryEy">Logbook servicing</small>
-            <h3 id="serviceStoryTitle">Keep it serviced. Keep it reliable.</h3>
-            <p id="serviceStoryText">Oil, filters and scheduled maintenance help protect the engine, maintain efficiency and reduce unexpected repairs.</p>
-          </div>
-          <div class="serviceStoryProgress"><i id="serviceStoryProgressBar"></i></div>
+    <div class="serviceChapters">
+      <article class="serviceChapter serviceOil">
+        <div class="chapterCopy">
+          <span>01 · Scheduled care</span>
+          <h3>Logbook servicing & oil</h3>
+          <p>Fresh oil, filters, fluids and scheduled checks designed to keep everyday vehicles reliable.</p>
+          <a href="#contact">Book servicing →</a>
         </div>
+        <div class="chapterVisual">
+          <div class="engineScene">
+            <div class="engineBlock2"></div>
+            <div class="engineCover2">SERVICE</div>
+            <div class="oilBottle2"><b>5W-30</b></div>
+            <div class="oilPour2"></div>
+            <div class="engineGlow2"></div>
+          </div>
+        </div>
+      </article>
 
-        <div class="serviceStoryNav">
-          <button class="serviceStoryStep active" type="button" data-service-step="0">
-            <span>01</span>
-            <div><strong>Logbook servicing</strong><small>Oil, filters & scheduled maintenance</small></div>
-          </button>
-          <button class="serviceStoryStep" type="button" data-service-step="1">
-            <span>02</span>
-            <div><strong>Oil & engine care</strong><small>Fluids, filters & engine-bay checks</small></div>
-          </button>
-          <button class="serviceStoryStep" type="button" data-service-step="2">
-            <span>03</span>
-            <div><strong>Brakes & safety</strong><small>Pads, rotors & stopping performance</small></div>
-          </button>
-          <button class="serviceStoryStep" type="button" data-service-step="3">
-            <span>04</span>
-            <div><strong>Diagnostics</strong><small>Scanning, faults & electrical systems</small></div>
-          </button>
+      <article class="serviceChapter reverse serviceBrake2">
+        <div class="chapterCopy">
+          <span>02 · Safety systems</span>
+          <h3>Brakes & clutch</h3>
+          <p>Pads, rotors, clutch components and stopping performance inspected properly before parts are replaced.</p>
+          <a href="#contact">Book a brake check →</a>
         </div>
-      </div>
-      <div class="serviceStorySpacer" aria-hidden="true"></div>
+        <div class="chapterVisual">
+          <div class="brakeScene2">
+            <div class="disc2"></div>
+            <div class="hub2"></div>
+            <div class="caliper2">NEXTECH</div>
+            <div class="brakeSweep2"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="serviceChapter serviceDiag2">
+        <div class="chapterCopy">
+          <span>03 · Fault finding</span>
+          <h3>Diagnostics</h3>
+          <p>Modern scanning and system checks help locate the cause of a fault instead of guessing at the repair.</p>
+          <a href="#contact">Book diagnostics →</a>
+        </div>
+        <div class="chapterVisual">
+          <div class="diagScene2">
+            <div class="diagCar2"></div>
+            <div class="diagScan2"></div>
+            <div class="diagRows2">
+              <i><span>Engine</span><b></b></i>
+              <i><span>Transmission</span><b></b></i>
+              <i><span>ABS / Braking</span><b></b></i>
+              <i><span>Electrical</span><b></b></i>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="serviceChapter reverse serviceSusp2">
+        <div class="chapterCopy">
+          <span>04 · Ride & handling</span>
+          <h3>Steering & suspension</h3>
+          <p>Struts, springs, steering components and road feel checked to restore comfort and handling.</p>
+          <a href="#contact">Book suspension inspection →</a>
+        </div>
+        <div class="chapterVisual">
+          <div class="suspScene2">
+            <div class="strut2"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="spring2"></div>
+            <div class="arm2"></div>
+            <div class="wheelGhost2"></div>
+          </div>
+        </div>
+      </article>
     </div>
 
     <div class="moreServices">
       <div class="moreServicesHead"><span>Also in the workshop</span><strong>More mechanical services</strong></div>
       <div class="moreServicesGrid">
-        <a href="#contact" class="moreService"><span>05</span><div><strong>Steering & suspension</strong><small>Ride, handling and road feel</small></div><b>↗</b></a>
-        <a href="#contact" class="moreService"><span>06</span><div><strong>Transmission</strong><small>Servicing, diagnosis and repair</small></div><b>↗</b></a>
-        <a href="#contact" class="moreService"><span>07</span><div><strong>Tyres</strong><small>Tyres, balancing and road contact</small></div><b>↗</b></a>
-        <a href="#contact" class="moreService"><span>08</span><div><strong>Batteries & electrical</strong><small>Starting, charging and electrical checks</small></div><b>↗</b></a>
+        <a href="#contact" class="moreService"><span>05</span><div><strong>Transmission</strong><small>Servicing, diagnosis and repair</small></div><b>↗</b></a>
+        <a href="#contact" class="moreService"><span>06</span><div><strong>Tyres</strong><small>Tyres, balancing and road contact</small></div><b>↗</b></a>
+        <a href="#contact" class="moreService"><span>07</span><div><strong>Batteries & electrical</strong><small>Starting, charging and electrical checks</small></div><b>↗</b></a>
+        <a href="#contact" class="moreService"><span>08</span><div><strong>General repairs</strong><small>Mechanical repairs across major systems</small></div><b>↗</b></a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section journey" id="journey">
+<section class="section trustSection" id="journey">
   <div class="wrap">
     <div class="sectionHead">
-      <div><div class="ey">What to expect</div><h2>From check-in to handover.</h2></div>
-      <p>A straightforward workshop process: inspect the vehicle, service what it needs, diagnose faults properly and explain the work clearly before you leave.</p>
+      <div><div class="ey">What to expect</div><h2>Clear process. No repeated video.</h2></div>
+      <p>Once the cinematic service chapters finish, the page calms down and focuses on what customers actually care about: trust, communication and knowing what happens next.</p>
     </div>
 
-    <div class="journeyFeature">
-      <div class="journeyMedia">
-        <video class="journeyVideo" id="journeyVideo" autoplay muted loop playsinline preload="auto">
-          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/hf_20260925_033124_8b4797b6-966e-47b8-9dd9-aeb21c7cbb40.mp4" type="video/mp4">
-        </video>
-        <div class="journeyShade"></div>
-        <div class="journeyCount" id="journeyCount">01 / 04</div>
-        <div class="journeyCaption">
-          <small id="journeyKicker">Workshop & vehicle</small>
-          <strong id="journeyHeadline">Start with the right inspection.</strong>
-        </div>
-      </div>
-
-      <div class="journeySteps" id="journeySteps">
-        <div class="journeyFollow">Automatically follows the workshop footage</div>
-        <button class="journeyStep active" type="button" data-step="0" data-time="0.4">
-          <span>01</span>
-          <div><strong>Workshop & vehicle</strong><small>Car arrival and service-bay inspection</small></div>
-        </button>
-        <button class="journeyStep" type="button" data-step="1" data-time="5.1">
-          <span>02</span>
-          <div><strong>Oil & engine service</strong><small>Oil pour, filters and engine-bay work</small></div>
-        </button>
-        <button class="journeyStep" type="button" data-step="2" data-time="6.6">
-          <span>03</span>
-          <div><strong>Brakes & safety</strong><small>Brake rotor and caliper inspection</small></div>
-        </button>
-        <button class="journeyStep" type="button" data-step="3" data-time="7.55">
-          <span>04</span>
-          <div><strong>Diagnostics & final checks</strong><small>Scan tool, system checks and fault finding</small></div>
-        </button>
-      </div>
+    <div class="processLine">
+      <div class="processStep"><span>01</span><strong>Check-in</strong><p>Tell us what the car is doing and what you need looked at.</p></div>
+      <div class="processStep"><span>02</span><strong>Inspect</strong><p>We check the vehicle and confirm what needs attention.</p></div>
+      <div class="processStep"><span>03</span><strong>Repair</strong><p>The required service or repair is completed properly.</p></div>
+      <div class="processStep"><span>04</span><strong>Handover</strong><p>You know what was done and what may need attention next.</p></div>
     </div>
   </div>
 </section>
@@ -694,100 +750,7 @@ addEventListener('resize',parallax);
 syncToVideo();
 parallax();
 
-const serviceStory=document.getElementById('serviceStory');
-const serviceStoryVideo=document.getElementById('serviceStoryVideo');
-const serviceStorySteps=[...document.querySelectorAll('.serviceStoryStep')];
-const serviceStoryCount=document.getElementById('serviceStoryCount');
-const serviceStoryTag=document.getElementById('serviceStoryTag');
-const serviceStoryEy=document.getElementById('serviceStoryEy');
-const serviceStoryTitle=document.getElementById('serviceStoryTitle');
-const serviceStoryText=document.getElementById('serviceStoryText');
-const serviceStoryProgressBar=document.getElementById('serviceStoryProgressBar');
 
-const serviceStoryData=[
-  {time:.7,tag:'Scheduled care',ey:'Logbook servicing',title:'Keep it serviced. Keep it reliable.',text:'Oil, filters and scheduled maintenance help protect the engine, maintain efficiency and reduce unexpected repairs.'},
-  {time:5.1,tag:'Engine care',ey:'Oil & engine service',title:'Look after the heart of the car.',text:'Fresh oil, filters and engine-bay checks are the foundation of reliable everyday motoring.'},
-  {time:6.55,tag:'Safety systems',ey:'Brakes & safety',title:'Stopping performance checked properly.',text:'Pads, rotors and brake components are inspected for wear, condition and safe operation.'},
-  {time:7.55,tag:'Fault finding',ey:'Diagnostics',title:'Find the issue before replacing parts.',text:'Modern vehicle scanning helps identify faults properly and confirm the repair.'}
-];
-
-function paintServiceStory(i){
-  i=Math.max(0,Math.min(serviceStoryData.length-1,i));
-  const d=serviceStoryData[i];
-  serviceStorySteps.forEach((el,n)=>el.classList.toggle('active',n===i));
-  serviceStoryCount.textContent=String(i+1).padStart(2,'0')+' / 04';
-  serviceStoryTag.textContent=d.tag;
-  serviceStoryEy.textContent=d.ey;
-  serviceStoryTitle.textContent=d.title;
-  serviceStoryText.textContent=d.text;
-  if(serviceStoryVideo && serviceStoryVideo.readyState>=1){
-    try{serviceStoryVideo.currentTime=d.time;serviceStoryVideo.pause()}catch(e){}
-  }
-  if(serviceStoryProgressBar) serviceStoryProgressBar.style.width=((i+1)/4*100)+'%';
-}
-
-function updateServiceStoryFromScroll(){
-  if(!serviceStory || window.innerWidth<=1180) return;
-  const r=serviceStory.getBoundingClientRect();
-  const total=Math.max(1,serviceStory.offsetHeight-window.innerHeight);
-  const p=Math.max(0,Math.min(1,-r.top/total));
-  const i=Math.min(3,Math.floor(p*4));
-  if(!serviceStorySteps[i]?.classList.contains('active')) paintServiceStory(i);
-}
-
-serviceStorySteps.forEach((btn,i)=>btn.addEventListener('click',()=>paintServiceStory(i)));
-addEventListener('scroll',updateServiceStoryFromScroll,{passive:true});
-addEventListener('resize',updateServiceStoryFromScroll);
-paintServiceStory(0);
-
-const journeyVideo=document.getElementById('journeyVideo');
-const journeySteps=[...document.querySelectorAll('.journeyStep')];
-const journeyCount=document.getElementById('journeyCount');
-const journeyKicker=document.getElementById('journeyKicker');
-const journeyHeadline=document.getElementById('journeyHeadline');
-
-const journeyCopy=[
-  {k:'Workshop & vehicle',h:'Start with the right inspection.'},
-  {k:'Oil & engine service',h:'Maintain the things that keep it reliable.'},
-  {k:'Brakes & safety',h:'Inspect the parts you rely on to stop.'},
-  {k:'Diagnostics & final checks',h:'Find faults properly and confirm the repair.'}
-];
-
-const journeyTimes=[0.4,5.1,6.6,7.55];
-
-function paintJourney(i){
-  i=Math.max(0,Math.min(3,i));
-  journeySteps.forEach((el,n)=>el.classList.toggle('active',n===i));
-  journeyCount.textContent=String(i+1).padStart(2,'0')+' / 04';
-  journeyKicker.textContent=journeyCopy[i].k;
-  journeyHeadline.textContent=journeyCopy[i].h;
-}
-
-function chapterFromTime(t){
-  if(t>=7.35) return 3;
-  if(t>=6.25) return 2;
-  if(t>=4.55) return 1;
-  return 0;
-}
-
-journeySteps.forEach((btn,i)=>{
-  btn.addEventListener('click',()=>{
-    if(!journeyVideo)return;
-    const seek=journeyTimes[i];
-    try{
-      journeyVideo.currentTime=seek;
-      journeyVideo.play().catch(()=>{});
-    }catch(e){}
-    paintJourney(i);
-  });
-});
-
-if(journeyVideo){
-  journeyVideo.addEventListener('timeupdate',()=>paintJourney(chapterFromTime(journeyVideo.currentTime||0)));
-  journeyVideo.addEventListener('loadedmetadata',()=>paintJourney(chapterFromTime(journeyVideo.currentTime||0)));
-  journeyVideo.play().catch(()=>{});
-}
-paintJourney(0);
 </script>
 </body>
 </html>
