@@ -4,141 +4,199 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Nextech Auto Repairs | Queenstown, Adelaide</title>
-<meta name="description" content="Nextech Auto Repairs in Queenstown, Adelaide. Diagnostics, servicing, brakes, suspension and mechanical repairs.">
+<meta name="description" content="Nextech Auto Repairs in Queenstown, Adelaide. Servicing, diagnostics, brakes, suspension and mechanical repairs.">
 <style>
 :root{
-  --bg:#05070a;--bg2:#0a0f14;--panel:#0d141b;--panel2:#111a22;
-  --text:#f5f7f9;--muted:#9aa8b3;--blue:#54c0ff;--blue2:#9fe0ff;
-  --red:#ff4b42;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.15);
-  --shadow:0 30px 90px rgba(0,0,0,.48);--max:1460px
+  --bg:#0b0f13;
+  --panel:#11171d;
+  --panel2:#151c23;
+  --text:#f4f6f8;
+  --muted:#a7b1b9;
+  --steel:#7ec8f8;
+  --line:rgba(255,255,255,.09);
+  --line2:rgba(255,255,255,.15);
+  --max:1440px;
+  --shadow:0 24px 70px rgba(0,0,0,.38);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:86px;background:var(--bg)}
-body{margin:0;background:
-radial-gradient(circle at 50% -15%,rgba(84,192,255,.10),transparent 28%),
-linear-gradient(180deg,#030507 0%,#05080b 42%,#05070a 100%);
-color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:82px}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#080b0e 0%,#0b0f13 55%,#090d11 100%);
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  overflow-x:hidden
+}
+a{color:inherit;text-decoration:none}
 button{font:inherit}
 .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
-.nav{position:fixed;inset:0 0 auto;z-index:1000;background:rgba(4,7,10,.90);backdrop-filter:blur(18px) saturate(1.15);border-bottom:1px solid var(--line)}
-.navin{height:80px;display:flex;align-items:center;justify-content:space-between;gap:22px}
-.brand{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:900;letter-spacing:.16em;white-space:nowrap}
-.mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#111922,#080d12);border:1px solid var(--line2);color:var(--blue);font-size:23px;box-shadow:inset 0 0 22px rgba(84,192,255,.08)}
-.brand b{color:var(--blue)}
-.navlinks{display:flex;gap:26px;align-items:center;color:#d6dfe5;font-size:14px}
+
+/* NAV */
+.nav{
+  position:fixed;inset:0 0 auto;z-index:1000;
+  background:rgba(8,11,14,.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line)
+}
+.navin{height:78px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.14em;font-size:13px;white-space:nowrap}
+.mark{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;border:1px solid var(--line2);background:#121820;color:var(--steel);font-size:22px}
+.brand b{color:var(--steel)}
+.navlinks{display:flex;gap:26px;align-items:center;color:#d7dde2;font-size:14px}
 .navlinks a{position:relative}
-.navlinks a:after{content:"";position:absolute;left:0;right:100%;bottom:-9px;height:2px;background:var(--blue);transition:.2s}
+.navlinks a:after{content:"";position:absolute;left:0;right:100%;bottom:-9px;height:2px;background:var(--steel);transition:.2s}
 .navlinks a:hover:after{right:0}
 .navcta{display:flex;gap:10px;align-items:center}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 17px;border-radius:999px;border:1px solid var(--line2);background:#ffffff08;color:#fff;font-weight:800;transition:.2s;white-space:nowrap}
-.btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.26)}
-.btn.primary{background:#fff;color:#071017;border-color:#fff}
-.menu{display:none;width:46px;height:46px;border-radius:13px;border:1px solid var(--line2);background:#ffffff08;color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 17px;border-radius:999px;border:1px solid var(--line2);background:#ffffff08;font-weight:800;white-space:nowrap;transition:.2s}
+.btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.25)}
+.btn.primary{background:#fff;color:#0a0f14;border-color:#fff}
+.menu{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line2);background:#ffffff08;color:#fff}
 .mobileMenu{display:none}
 
 /* HERO */
-.hero{padding:102px 0 38px}
-.heroStage{position:relative;min-height:770px;border-radius:34px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);background:
-radial-gradient(circle at 70% 30%,rgba(84,192,255,.12),transparent 26%),
-linear-gradient(135deg,#0b1117 0%,#070b0f 54%,#05080b 100%)}
-.heroStage:before{content:"";position:absolute;inset:0;background-image:url('hero.jpg');background-size:cover;background-position:center;opacity:.10;filter:blur(2px) saturate(.8);transform:scale(1.03)}
-.heroStage:after{content:"";position:absolute;inset:0;background:
-linear-gradient(90deg,rgba(3,6,9,.96) 0%,rgba(3,6,9,.83) 34%,rgba(3,6,9,.30) 60%,rgba(3,6,9,.50) 100%),
-linear-gradient(180deg,rgba(4,7,10,.10),rgba(4,7,10,.02) 65%,rgba(4,7,10,.58))}
-.heroContent{position:relative;z-index:2;display:grid;grid-template-columns:.82fr 1.18fr;min-height:770px}
-.heroCopy{padding:68px 44px 54px 56px;display:flex;flex-direction:column;justify-content:center}
-.ey{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#caeafa}
-.ey:before{content:"";width:38px;height:1px;background:var(--blue)}
-.hero h1{margin:20px 0 18px;font-size:clamp(58px,6vw,102px);line-height:.87;letter-spacing:-.075em}
-.hero h1 span{display:block;color:#dce7ed}
-.hero p{margin:0;max-width:540px;color:var(--muted);font-size:17px;line-height:1.72}
-.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}
-.trustRow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:34px}
-.trust{padding:15px 14px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(10px)}
-.trust strong{display:block;font-size:23px;letter-spacing:-.04em}
-.trust span{display:block;margin-top:5px;color:#8997a2;font-size:12px;line-height:1.4}
+.hero{padding-top:78px}
+.heroMedia{
+  position:relative;
+  min-height:690px;
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+  background:#0a0e12;
+}
+.heroMedia:before{
+  content:"";position:absolute;inset:0;
+  background-image:url('hero.jpg');
+  background-size:cover;
+  background-position:center 46%;
+  transform:scale(1.025);
+  filter:saturate(.82) contrast(1.02) brightness(.78);
+}
+.heroMedia:after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(5,8,11,.90) 0%,rgba(5,8,11,.66) 33%,rgba(5,8,11,.16) 62%,rgba(5,8,11,.10) 100%),
+    linear-gradient(180deg,rgba(5,8,11,.10) 0%,rgba(5,8,11,.05) 55%,rgba(5,8,11,.55) 100%);
+}
+.heroInner{position:relative;z-index:2;min-height:690px;display:flex;align-items:center}
+.heroCopy{width:min(670px,54%);padding:50px 0 56px}
+.ey{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.20em;text-transform:uppercase;color:#d0eaf9}
+.ey:before{content:"";width:36px;height:1px;background:var(--steel)}
+.hero h1{font-size:clamp(56px,6.6vw,104px);line-height:.88;letter-spacing:-.075em;margin:18px 0 20px}
+.hero h1 span{display:block;color:#d8e0e5}
+.hero p{margin:0;max-width:560px;color:#c1cbd2;font-size:18px;line-height:1.72}
+.heroActions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.heroTrust{display:flex;gap:26px;flex-wrap:wrap;margin-top:34px;padding-top:24px;border-top:1px solid rgba(255,255,255,.10)}
+.heroTrustItem strong{display:block;font-size:24px;letter-spacing:-.04em}
+.heroTrustItem span{display:block;margin-top:4px;color:#a4b0b8;font-size:12px}
+.heroLabel{
+  position:absolute;right:4vw;bottom:26px;z-index:2;
+  padding:11px 14px;border-radius:999px;background:rgba(7,11,15,.62);
+  border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(10px);
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#dbe7ed
+}
 
-/* visual right */
-.machine{position:relative;min-height:770px}
-.machineGlow{position:absolute;left:12%;top:15%;width:64%;height:66%;background:radial-gradient(circle,rgba(84,192,255,.18),rgba(84,192,255,.04) 35%,transparent 70%);filter:blur(12px)}
-.carPlate{position:absolute;left:5%;right:21%;top:17%;bottom:15%;border-radius:28px;border:1px solid rgba(255,255,255,.10);background:linear-gradient(160deg,rgba(16,26,34,.82),rgba(8,13,18,.70));box-shadow:inset 0 1px rgba(255,255,255,.06),0 28px 70px rgba(0,0,0,.28);backdrop-filter:blur(16px);overflow:hidden}
-.carPlate:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.04),transparent 28%)}
-.carSvg{position:absolute;left:6%;right:6%;top:12%;bottom:8%;width:88%;height:80%;filter:drop-shadow(0 18px 26px rgba(0,0,0,.42))}
-.scanLine{position:absolute;left:10%;right:10%;height:1px;top:26%;background:linear-gradient(90deg,transparent,var(--blue),transparent);box-shadow:0 0 18px rgba(84,192,255,.8);animation:scan 4.8s ease-in-out infinite}
-@keyframes scan{0%,100%{top:23%;opacity:.2}50%{top:76%;opacity:.9}}
-.systemCard{position:absolute;right:4%;top:16%;width:34%;min-width:250px;padding:18px;border-radius:22px;background:rgba(10,16,21,.78);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(14px);box-shadow:0 22px 55px rgba(0,0,0,.30)}
-.systemCard small{display:block;color:#bcd6e3;font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:11px}
-.system{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07)}
-.system:last-child{border-bottom:0}
-.system span{font-size:13px;color:#dce6eb}
-.dot{width:8px;height:8px;border-radius:50%;background:#6df3a7;box-shadow:0 0 12px rgba(109,243,167,.7)}
-.brake{position:absolute;right:3%;bottom:8%;width:38%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;filter:drop-shadow(0 24px 34px rgba(0,0,0,.45))}
-.brake svg{width:100%;height:100%}
-.badge{position:absolute;left:7%;bottom:8%;padding:13px 16px;border-radius:18px;background:rgba(8,14,19,.70);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(12px)}
-.badge small{display:block;color:#b8d2df;text-transform:uppercase;letter-spacing:.15em;font-size:9px;margin-bottom:4px}
-.badge strong{font-size:14px}
+/* SERVICE STRIP */
+.serviceStrip{border-bottom:1px solid var(--line);background:#0a0f14}
+.stripGrid{display:grid;grid-template-columns:repeat(4,1fr)}
+.stripItem{padding:20px 24px;border-right:1px solid var(--line)}
+.stripItem:last-child{border-right:0}
+.stripItem small{display:block;text-transform:uppercase;letter-spacing:.16em;font-size:10px;color:#8ca0ad;margin-bottom:7px}
+.stripItem strong{display:block;font-size:15px}
 
-/* content sections */
-.section{padding:92px 0}
-.sectionHead{display:grid;grid-template-columns:.88fr 1.12fr;gap:48px;align-items:end;margin-bottom:34px}
-.section h2{margin:14px 0 0;font-size:clamp(42px,5.3vw,72px);line-height:.93;letter-spacing:-.06em}
+/* SECTIONS */
+.section{padding:88px 0}
+.sectionHead{display:grid;grid-template-columns:.88fr 1.12fr;gap:46px;align-items:end;margin-bottom:32px}
+.section h2{font-size:clamp(40px,5.2vw,70px);line-height:.94;letter-spacing:-.055em;margin:14px 0 0}
 .sectionHead p{margin:0;color:var(--muted);font-size:16px;line-height:1.75;max-width:720px}
-.serviceGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.card{position:relative;min-height:220px;padding:24px;border-radius:24px;background:linear-gradient(180deg,#0f161d,#0a0f14);border:1px solid var(--line);overflow:hidden;transition:.22s}
-.card:after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;right:-70px;bottom:-90px;background:radial-gradient(circle,rgba(84,192,255,.12),transparent 68%)}
-.card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.15)}
-.card .k{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#b7d0dd}
-.card h3{margin:48px 0 10px;font-size:26px;letter-spacing:-.04em}
+.serviceGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{
+  min-height:220px;padding:24px;border-radius:20px;
+  background:linear-gradient(180deg,#121920,#0d1318);
+  border:1px solid var(--line);
+  position:relative;overflow:hidden;transition:.2s
+}
+.card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.15)}
+.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--steel),transparent)}
+.card .k{display:block;font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:#a9c2d0}
+.card h3{margin:46px 0 9px;font-size:25px;letter-spacing:-.04em}
 .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
-.split{display:grid;grid-template-columns:1.02fr .98fr;gap:16px}
-.panel{padding:28px;border-radius:28px;background:linear-gradient(180deg,#0f161d,#0a0f14);border:1px solid var(--line)}
+
+.workshopGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}
+.panel{padding:28px;border-radius:22px;background:linear-gradient(180deg,#121920,#0d1318);border:1px solid var(--line)}
 .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
-.metric{padding:18px;border-radius:18px;background:#ffffff07;border:1px solid #ffffff0b}
-.metric strong{display:block;font-size:38px;letter-spacing:-.05em}
-.metric span{display:block;color:var(--muted);font-size:13px;line-height:1.5;margin-top:5px}
+.metric{padding:18px;border-radius:16px;background:#ffffff06;border:1px solid #ffffff0a}
+.metric strong{display:block;font-size:36px;letter-spacing:-.05em}
+.metric span{display:block;margin-top:5px;color:var(--muted);font-size:13px;line-height:1.5}
 .featureList{display:grid;gap:11px;margin-top:20px}
-.feature{padding:17px 18px;border-radius:18px;background:#ffffff07;border:1px solid #ffffff0b}
+.feature{padding:17px 18px;border-radius:16px;background:#ffffff06;border:1px solid #ffffff0a}
 .feature strong{display:block;font-size:15px;margin-bottom:4px}
 .feature span{display:block;color:var(--muted);font-size:13px;line-height:1.58}
-.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.review{padding:26px;border-radius:24px;background:linear-gradient(180deg,#0f161d,#0a0f14);border:1px solid var(--line)}
-.stars{color:#ffd84f;letter-spacing:.09em;font-size:14px}
-.review p{color:#dce5ea;font-size:14px;line-height:1.72;margin:14px 0 16px}
+
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.review{padding:24px;border-radius:20px;background:linear-gradient(180deg,#121920,#0d1318);border:1px solid var(--line)}
+.stars{color:#ffd75a;letter-spacing:.08em;font-size:13px}
+.review p{margin:14px 0 16px;color:#dce4e9;font-size:14px;line-height:1.72}
 .review strong{font-size:14px}
-.contact{padding:34px;border-radius:30px;background:radial-gradient(circle at 85% 0%,rgba(84,192,255,.11),transparent 28%),linear-gradient(180deg,#101821,#0b1117);border:1px solid var(--line);display:grid;grid-template-columns:1fr .95fr;gap:28px;box-shadow:var(--shadow)}
+
+.contact{
+  padding:34px;border-radius:24px;
+  background:linear-gradient(180deg,#121a22,#0e141a);
+  border:1px solid var(--line);
+  display:grid;grid-template-columns:1fr .95fr;gap:28px;box-shadow:var(--shadow)
+}
 .contactGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.contactCard{padding:18px;border-radius:18px;background:#ffffff07;border:1px solid #ffffff0b}
-.contactCard small{display:block;text-transform:uppercase;letter-spacing:.15em;font-size:10px;color:#b8d1df;margin-bottom:8px}
+.contactCard{padding:18px;border-radius:16px;background:#ffffff06;border:1px solid #ffffff0a}
+.contactCard small{display:block;text-transform:uppercase;letter-spacing:.15em;font-size:10px;color:#abc2cf;margin-bottom:8px}
 .contactCard strong{display:block;font-size:18px;margin-bottom:4px}
 .contactCard span{display:block;color:var(--muted);font-size:13px;line-height:1.5}
-footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
+
+footer{padding:28px 0 36px;color:#7e8a92;font-size:12px}
 .footerin{padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
-@media(max-width:1180px){
-  .heroContent{grid-template-columns:1fr}.heroCopy{padding:54px 42px 32px}.machine{min-height:610px}.heroStage{min-height:auto}
-  .sectionHead,.split,.contact{grid-template-columns:1fr}.serviceGrid{grid-template-columns:repeat(2,1fr)}.reviews{grid-template-columns:1fr}
+@media(max-width:1100px){
+  .heroCopy{width:64%}
+  .sectionHead,.workshopGrid,.contact{grid-template-columns:1fr}
+  .serviceGrid{grid-template-columns:repeat(2,1fr)}
+  .reviews{grid-template-columns:1fr}
 }
-@media(max-width:920px){
+@media(max-width:900px){
   .navlinks,.navcta .phone{display:none}.menu{display:grid;place-items:center}
-  .mobileMenu{position:fixed;z-index:999;top:80px;left:16px;right:16px;padding:16px;border-radius:20px;background:rgba(8,12,17,.97);border:1px solid var(--line);box-shadow:var(--shadow)}
-  .mobileMenu.open{display:grid;gap:10px}.mobileMenu a{padding:14px;border-radius:14px;background:#ffffff07;border:1px solid #ffffff0b;font-weight:750}
-  .systemCard{right:5%;width:38%}.brake{width:34%}
+  .mobileMenu{position:fixed;z-index:999;top:78px;left:16px;right:16px;padding:16px;border-radius:18px;background:rgba(8,12,17,.97);border:1px solid var(--line);box-shadow:var(--shadow)}
+  .mobileMenu.open{display:grid;gap:10px}
+  .mobileMenu a{padding:14px;border-radius:13px;background:#ffffff06;border:1px solid #ffffff0a;font-weight:750}
+  .heroCopy{width:78%}
+  .stripGrid{grid-template-columns:repeat(2,1fr)}
+  .stripItem:nth-child(2){border-right:0}
+  .stripItem:nth-child(-n+2){border-bottom:1px solid var(--line)}
 }
-@media(max-width:700px){
-  .wrap{width:min(calc(100% - 24px),var(--max))}.navin{height:72px}.brand{font-size:11px;letter-spacing:.11em}.mark{width:34px;height:34px;font-size:20px}
-  .hero{padding-top:92px}.heroStage{border-radius:24px}.heroCopy{padding:34px 22px 26px}.hero h1{font-size:54px}.trustRow{grid-template-columns:1fr}
-  .machine{min-height:520px}.carPlate{left:3%;right:3%;top:8%;bottom:18%}.systemCard{left:14px;right:14px;top:auto;bottom:14px;width:auto;min-width:0}.systemCard .system:nth-of-type(n+4){display:none}
-  .brake{width:36%;right:3%;bottom:22%}.badge{left:14px;bottom:22%}
-  .serviceGrid,.metrics,.contactGrid{grid-template-columns:1fr}.section{padding:72px 0}.sectionHead{gap:20px}.contact{padding:24px}.mobileMenu{top:72px}
+@media(max-width:680px){
+  .wrap{width:min(calc(100% - 24px),var(--max))}
+  .navin{height:70px}.brand{font-size:11px;letter-spacing:.11em}.mark{width:34px;height:34px;font-size:20px}
+  .hero{padding-top:70px}.heroMedia,.heroInner{min-height:610px}
+  .heroMedia:before{background-position:58% 50%}
+  .heroMedia:after{background:
+    linear-gradient(180deg,rgba(5,8,11,.72) 0%,rgba(5,8,11,.46) 34%,rgba(5,8,11,.34) 58%,rgba(5,8,11,.76) 100%),
+    linear-gradient(90deg,rgba(5,8,11,.78),rgba(5,8,11,.28))}
+  .heroCopy{width:100%;padding:42px 0}
+  .hero h1{font-size:58px}
+  .hero p{font-size:16px}
+  .heroTrust{gap:18px}
+  .heroLabel{display:none}
+  .serviceGrid,.metrics,.contactGrid{grid-template-columns:1fr}
+  .section{padding:70px 0}.sectionHead{gap:20px}
+  .contact{padding:24px}
+  .mobileMenu{top:70px}
 }
 </style>
 </head>
 <body>
 <nav class="nav">
   <div class="wrap navin">
-    <a class="brand" href="#top" aria-label="Nextech Auto Repairs home"><span class="mark">×</span><span>NEX<b>TECH</b> AUTO REPAIRS</span></a>
-    <div class="navlinks"><a href="#top">Home</a><a href="#services">Services</a><a href="#why">Why Us</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div>
+    <a class="brand" href="#top" aria-label="Nextech Auto Repairs home">
+      <span class="mark">×</span><span>NEX<b>TECH</b> AUTO REPAIRS</span>
+    </a>
+    <div class="navlinks">
+      <a href="#top">Home</a><a href="#services">Services</a><a href="#why">Why Us</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a>
+    </div>
     <div class="navcta">
       <a class="btn phone" href="tel:0883412199">08 8341 2199</a>
       <a class="btn primary" href="#contact">Book a Service →</a>
@@ -146,123 +204,58 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     </div>
   </div>
 </nav>
+
 <div class="mobileMenu" id="mobileMenu">
   <a href="#top">Home</a><a href="#services">Services</a><a href="#why">Why Us</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a><a href="tel:0883412199">Call 08 8341 2199</a>
 </div>
 
 <main>
 <section class="hero" id="top">
-  <div class="wrap">
-    <div class="heroStage">
-      <div class="heroContent">
-        <div class="heroCopy">
-          <div class="ey">Queenstown · Adelaide</div>
-          <h1>Drive higher.<span>Service smarter.</span></h1>
-          <p>Nextech Auto Repairs delivers diagnostics, servicing, brake work, suspension and mechanical repairs with a premium workshop experience built around trust and clear communication.</p>
-          <div class="actions">
-            <a class="btn primary" href="#contact">Book a Service</a>
-            <a class="btn" href="#services">Explore Services</a>
-          </div>
-          <div class="trustRow">
-            <div class="trust"><strong>5.0★</strong><span>Strong customer rating</span></div>
-            <div class="trust"><strong>All-in-one</strong><span>Diagnostics to repairs</span></div>
-            <div class="trust"><strong>Queenstown</strong><span>113–115 Port Rd</span></div>
-          </div>
+  <div class="heroMedia">
+    <div class="wrap heroInner">
+      <div class="heroCopy">
+        <div class="ey">Queenstown · Adelaide</div>
+        <h1>Reliable repairs.<span>Done properly.</span></h1>
+        <p>Servicing, diagnostics, brakes, suspension and mechanical repairs from a local workshop focused on honest advice, quality work and getting you back on the road.</p>
+        <div class="heroActions">
+          <a class="btn primary" href="#contact">Book a Service</a>
+          <a class="btn" href="#services">View Services</a>
         </div>
-
-        <div class="machine" aria-label="Premium automotive diagnostics visual">
-          <div class="machineGlow"></div>
-          <div class="carPlate">
-            <div class="scanLine"></div>
-            <svg class="carSvg" viewBox="0 0 760 460" aria-hidden="true">
-              <defs>
-                <linearGradient id="body" x1="0" x2="1">
-                  <stop offset="0" stop-color="#121a21"/>
-                  <stop offset=".45" stop-color="#2a3640"/>
-                  <stop offset=".72" stop-color="#11181f"/>
-                  <stop offset="1" stop-color="#090d11"/>
-                </linearGradient>
-                <linearGradient id="glass" x1="0" x2="1">
-                  <stop offset="0" stop-color="#0d1b25"/>
-                  <stop offset="1" stop-color="#2a4656"/>
-                </linearGradient>
-              </defs>
-              <ellipse cx="385" cy="390" rx="290" ry="30" fill="rgba(0,0,0,.44)"/>
-              <path d="M110 304 L154 232 Q190 184 260 165 L467 156 Q536 158 582 206 L645 286 Q664 309 650 337 L620 365 L138 365 Q102 352 93 326 Z" fill="url(#body)" stroke="#5b6b76" stroke-width="3"/>
-              <path d="M220 216 Q258 177 315 171 L451 166 Q497 168 539 207 L559 236 L202 236 Z" fill="url(#glass)" stroke="#355368" stroke-width="3"/>
-              <path d="M155 288 Q235 255 352 252 Q514 250 621 291" fill="none" stroke="#6bc6ff" stroke-width="5" opacity=".68"/>
-              <path d="M138 306 Q276 288 396 292 Q526 296 640 322" fill="none" stroke="#1b242c" stroke-width="12"/>
-              <circle cx="225" cy="348" r="58" fill="#080b0e" stroke="#2a333a" stroke-width="7"/>
-              <circle cx="225" cy="348" r="30" fill="#151d23" stroke="#59646c" stroke-width="5"/>
-              <circle cx="548" cy="348" r="58" fill="#080b0e" stroke="#2a333a" stroke-width="7"/>
-              <circle cx="548" cy="348" r="30" fill="#151d23" stroke="#59646c" stroke-width="5"/>
-              <path d="M119 304 L165 299 L177 326 L116 330 Z" fill="#8edcff" opacity=".95"/>
-              <path d="M596 295 L638 306 L646 330 L592 324 Z" fill="#8edcff" opacity=".9"/>
-              <rect x="330" y="317" width="96" height="27" rx="6" fill="#090d10" stroke="#3f4b54"/>
-              <text x="378" y="336" text-anchor="middle" fill="#cceefe" font-size="15" font-family="Arial" font-weight="700">NEXTECH</text>
-            </svg>
-          </div>
-
-          <div class="systemCard">
-            <small>Diagnostics · live systems</small>
-            <div class="system"><span>Engine</span><i class="dot"></i></div>
-            <div class="system"><span>Transmission</span><i class="dot"></i></div>
-            <div class="system"><span>ABS / Braking</span><i class="dot"></i></div>
-            <div class="system"><span>Suspension</span><i class="dot"></i></div>
-            <div class="system"><span>Electrical</span><i class="dot"></i></div>
-          </div>
-
-          <div class="brake" aria-hidden="true">
-            <svg viewBox="0 0 340 340">
-              <defs>
-                <radialGradient id="rotor" cx=".42" cy=".38">
-                  <stop offset="0" stop-color="#d6dde2"/>
-                  <stop offset=".38" stop-color="#9ca6ad"/>
-                  <stop offset=".7" stop-color="#4f5961"/>
-                  <stop offset="1" stop-color="#222930"/>
-                </radialGradient>
-                <linearGradient id="cal" x1="0" x2="1">
-                  <stop offset="0" stop-color="#ff5147"/>
-                  <stop offset=".55" stop-color="#d62922"/>
-                  <stop offset="1" stop-color="#7b100d"/>
-                </linearGradient>
-              </defs>
-              <circle cx="170" cy="170" r="142" fill="#090c0f" stroke="#1f272d" stroke-width="9"/>
-              <circle cx="170" cy="170" r="118" fill="url(#rotor)" stroke="#d0d7db" stroke-width="3"/>
-              <circle cx="170" cy="170" r="55" fill="#1a2025" stroke="#89939a" stroke-width="7"/>
-              <circle cx="170" cy="170" r="18" fill="#0b0f12"/>
-              <g fill="#252c31">
-                <circle cx="170" cy="96" r="6"/><circle cx="224" cy="116" r="6"/><circle cx="244" cy="170" r="6"/><circle cx="224" cy="224" r="6"/><circle cx="170" cy="244" r="6"/><circle cx="116" cy="224" r="6"/><circle cx="96" cy="170" r="6"/><circle cx="116" cy="116" r="6"/>
-              </g>
-              <g fill="#889198">
-                <circle cx="170" cy="133" r="7"/><circle cx="205" cy="151" r="7"/><circle cx="205" cy="190" r="7"/><circle cx="170" cy="207" r="7"/><circle cx="135" cy="190" r="7"/><circle cx="135" cy="151" r="7"/>
-              </g>
-              <path d="M238 85 Q295 104 304 162 L300 228 Q282 260 248 264 L219 244 L226 109 Z" fill="url(#cal)" stroke="#ff6a60" stroke-width="4"/>
-              <path d="M255 116 L281 128 M251 142 L284 156 M249 168 L284 184" stroke="#6b0f0c" stroke-width="8" stroke-linecap="round"/>
-            </svg>
-          </div>
-
-          <div class="badge"><small>Performance servicing</small><strong>Precision · Performance · Trust</strong></div>
+        <div class="heroTrust">
+          <div class="heroTrustItem"><strong>5.0★</strong><span>Customer rating</span></div>
+          <div class="heroTrustItem"><strong>Local</strong><span>Queenstown workshop</span></div>
+          <div class="heroTrustItem"><strong>All-in-one</strong><span>Servicing to repairs</span></div>
         </div>
       </div>
     </div>
+    <div class="heroLabel">Diagnostics · Brakes · Servicing · Repairs</div>
+  </div>
+</section>
+
+<section class="serviceStrip">
+  <div class="wrap stripGrid">
+    <div class="stripItem"><small>01</small><strong>Logbook Servicing</strong></div>
+    <div class="stripItem"><small>02</small><strong>Diagnostics</strong></div>
+    <div class="stripItem"><small>03</small><strong>Brakes & Clutch</strong></div>
+    <div class="stripItem"><small>04</small><strong>Steering & Suspension</strong></div>
   </div>
 </section>
 
 <section class="section" id="services">
   <div class="wrap">
     <div class="sectionHead">
-      <div><div class="ey">Workshop capability</div><h2>Serious mechanical work, presented properly.</h2></div>
-      <p>Visitors should understand Nextech in seconds: what you do, why they can trust you, and how to book. The design now feels like a premium automotive workshop instead of a generic template.</p>
+      <div><div class="ey">Services</div><h2>Everything you need from one workshop.</h2></div>
+      <p>Clear mechanical services without the gimmicks. Nextech is positioned as a trusted local workshop for everyday servicing, fault finding and repairs.</p>
     </div>
+
     <div class="serviceGrid">
-      <article class="card"><span class="k">01 · Scheduled care</span><h3>Logbook Servicing</h3><p>Manufacturer-aligned maintenance for everyday and performance vehicles.</p></article>
-      <article class="card"><span class="k">02 · Vehicle systems</span><h3>Diagnostics</h3><p>Modern fault finding, engine diagnosis and system analysis.</p></article>
-      <article class="card"><span class="k">03 · Safety</span><h3>Brakes & Clutch</h3><p>Inspection and repair where stopping confidence matters most.</p></article>
-      <article class="card"><span class="k">04 · Ride & handling</span><h3>Steering & Suspension</h3><p>Restore road feel, handling and ride quality.</p></article>
-      <article class="card"><span class="k">05 · Driveline</span><h3>Transmission</h3><p>Transmission service and repair with specialist attention.</p></article>
-      <article class="card"><span class="k">06 · Road contact</span><h3>Tyres</h3><p>Tyres, balancing and related road-contact work.</p></article>
-      <article class="card"><span class="k">07 · Workshop</span><h3>General Repairs</h3><p>Mechanical repairs across key vehicle systems and components.</p></article>
+      <article class="card"><span class="k">01 · Scheduled care</span><h3>Logbook Servicing</h3><p>Manufacturer-aligned maintenance for everyday vehicles and ongoing reliability.</p></article>
+      <article class="card"><span class="k">02 · Fault finding</span><h3>Diagnostics</h3><p>Modern system scanning, engine diagnosis and practical fault finding.</p></article>
+      <article class="card"><span class="k">03 · Safety</span><h3>Brakes & Clutch</h3><p>Inspection, repair and replacement work where stopping confidence matters.</p></article>
+      <article class="card"><span class="k">04 · Ride & handling</span><h3>Steering & Suspension</h3><p>Repairs that restore comfort, handling and proper road feel.</p></article>
+      <article class="card"><span class="k">05 · Driveline</span><h3>Transmission</h3><p>Transmission servicing and repair with careful inspection and diagnosis.</p></article>
+      <article class="card"><span class="k">06 · Road contact</span><h3>Tyres</h3><p>Tyres, balancing and related road-contact maintenance.</p></article>
+      <article class="card"><span class="k">07 · Mechanical</span><h3>General Repairs</h3><p>Practical mechanical repairs across major vehicle systems and components.</p></article>
       <article class="card"><span class="k">08 · Electrical</span><h3>Batteries & Charging</h3><p>Battery, starting and charging system checks and replacement.</p></article>
     </div>
   </div>
@@ -271,25 +264,27 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 <section class="section" id="why">
   <div class="wrap">
     <div class="sectionHead">
-      <div><div class="ey">Why Nextech</div><h2>Built around trust, not gimmicks.</h2></div>
-      <p>The site now combines a strong premium look with practical workshop credibility: clear services, direct booking actions and local trust signals.</p>
+      <div><div class="ey">Why Nextech</div><h2>A workshop people can trust.</h2></div>
+      <p>The site should feel professional because the workshop is professional — not because it is pretending to be a luxury supercar brand.</p>
     </div>
-    <div class="split">
+
+    <div class="workshopGrid">
       <div class="panel">
         <div class="ey">Workshop strengths</div>
         <div class="metrics">
-          <div class="metric"><strong>5.0★</strong><span>Strong customer rating and local trust.</span></div>
-          <div class="metric"><strong>Local</strong><span>Queenstown workshop on Port Road.</span></div>
-          <div class="metric"><strong>Fast</strong><span>Clear information and booking path.</span></div>
-          <div class="metric"><strong>Premium</strong><span>Modern presentation without looking fake.</span></div>
+          <div class="metric"><strong>5.0★</strong><span>Strong customer trust and local reputation.</span></div>
+          <div class="metric"><strong>Local</strong><span>Convenient Queenstown location on Port Road.</span></div>
+          <div class="metric"><strong>Clear</strong><span>Straightforward service information and booking.</span></div>
+          <div class="metric"><strong>Practical</strong><span>Real mechanical work without unnecessary theatre.</span></div>
         </div>
       </div>
+
       <div class="panel">
         <div class="ey">Customer experience</div>
         <div class="featureList">
-          <div class="feature"><strong>Easy booking</strong><span>Phone and booking actions stay visible without cluttering the page.</span></div>
-          <div class="feature"><strong>Clear services</strong><span>Customers can instantly see whether Nextech handles their repair.</span></div>
-          <div class="feature"><strong>Responsive design</strong><span>The layout stays premium across desktop, tablet and mobile.</span></div>
+          <div class="feature"><strong>Easy to book</strong><span>Phone and booking actions remain visible throughout the site.</span></div>
+          <div class="feature"><strong>Easy to understand</strong><span>Customers can quickly see whether Nextech handles the work they need.</span></div>
+          <div class="feature"><strong>Built for every screen</strong><span>The layout stays clean and practical on desktop, tablet and mobile.</span></div>
         </div>
       </div>
     </div>
@@ -299,9 +294,10 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 <section class="section" id="reviews">
   <div class="wrap">
     <div class="sectionHead">
-      <div><div class="ey">Reviews</div><h2>Confidence before the first call.</h2></div>
-      <p>Automotive work depends on trust. Reviews are positioned as real reassurance rather than decorative filler.</p>
+      <div><div class="ey">Reviews</div><h2>Local trust matters.</h2></div>
+      <p>Automotive customers want reassurance before they hand over their vehicle. Reviews are shown simply and clearly.</p>
     </div>
+
     <div class="reviews">
       <article class="review"><div class="stars">★★★★★</div><p>“All about the customer and satisfaction. Friendly service and a workshop I would happily recommend.”</p><strong>Lyn Collins</strong></article>
       <article class="review"><div class="stars">★★★★★</div><p>“One of the best workshops in Adelaide. The service is outstanding and the experience feels professional.”</p><strong>Jalawar Singh</strong></article>
@@ -314,11 +310,15 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   <div class="wrap">
     <div class="contact">
       <div>
-        <div class="ey">Ready for service</div>
-        <h2>Book with Nextech.</h2>
-        <p style="margin:14px 0 0;color:var(--muted);line-height:1.75;max-width:640px">Call, email or visit the workshop in Queenstown. The site keeps the next step simple.</p>
-        <div class="actions"><a class="btn primary" href="tel:0883412199">Call 08 8341 2199</a><a class="btn" href="mailto:nextechautorepairs@gmail.com">Email Workshop</a></div>
+        <div class="ey">Book a service</div>
+        <h2>Ready to get it sorted?</h2>
+        <p style="margin:14px 0 0;color:var(--muted);line-height:1.75;max-width:620px">Call the workshop, send an email or visit Nextech in Queenstown.</p>
+        <div class="heroActions">
+          <a class="btn primary" href="tel:0883412199">Call 08 8341 2199</a>
+          <a class="btn" href="mailto:nextechautorepairs@gmail.com">Email Workshop</a>
+        </div>
       </div>
+
       <div class="contactGrid">
         <div class="contactCard"><small>Address</small><strong>113–115 Port Rd</strong><span>Queenstown SA 5014</span></div>
         <div class="contactCard"><small>Hours</small><strong>Mon–Fri 8am–5pm</strong><span>Saturday 8am–2pm · Sunday Closed</span></div>
@@ -330,7 +330,12 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 </section>
 </main>
 
-<footer><div class="wrap footerin"><span>NEXTECH AUTO REPAIRS</span><span>Queenstown · Adelaide</span></div></footer>
+<footer>
+  <div class="wrap footerin">
+    <span>NEXTECH AUTO REPAIRS</span>
+    <span>Queenstown · Adelaide</span>
+  </div>
+</footer>
 
 <script>
 const menuBtn=document.getElementById('menuBtn');
