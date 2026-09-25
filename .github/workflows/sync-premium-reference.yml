@@ -23,8 +23,9 @@ jobs:
       - name: Verify downloaded page
         run: |
           test -s index.html
-          grep -q "NEXTECH AUTO REPAIRS" index.html
-          echo "Downloaded $(wc -c < index.html) bytes"
+          BYTES=$(wc -c < index.html)
+          echo "Downloaded $BYTES bytes"
+          test "$BYTES" -gt 100000
 
       - name: Commit synced build
         run: |
