@@ -62,6 +62,15 @@ linear-gradient(180deg,transparent 72%,rgba(2,4,6,.48));
 .storyMeta{display:flex;gap:24px;flex-wrap:wrap;margin-top:30px;padding-top:22px;border-top:1px solid rgba(255,255,255,.09)}
 .storyMeta strong{display:block;font-size:22px;letter-spacing:-.04em}
 .storyMeta span{display:block;margin-top:4px;color:#8ea0ac;font-size:12px}
+.serviceSync{display:grid;gap:9px;margin-top:22px;max-width:560px}
+.serviceStep{display:grid;grid-template-columns:48px 1fr;gap:13px;align-items:center;padding:12px 14px;border-radius:15px;border:1px solid rgba(255,255,255,.08);background:rgba(7,12,16,.42);backdrop-filter:blur(10px);opacity:.48;transform:translateX(0);transition:opacity .28s ease,transform .28s ease,border-color .28s ease,background .28s ease}
+.serviceStep.active{opacity:1;transform:translateX(6px);background:rgba(10,18,24,.72);border-color:rgba(85,197,255,.42);box-shadow:0 12px 32px rgba(0,0,0,.18)}
+.serviceStepNum{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);font-size:11px;font-weight:900;letter-spacing:.14em;color:#a8c8d9;transition:.28s}
+.serviceStep.active .serviceStepNum{background:#fff;color:#081017;border-color:#fff}
+.serviceStepText strong{display:block;font-size:14px;line-height:1.25;margin-bottom:3px}
+.serviceStepText span{display:block;font-size:11px;line-height:1.4;color:#91a2ad}
+.serviceProgress{height:2px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin-top:12px}
+.serviceProgress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--blue2));box-shadow:0 0 12px rgba(85,197,255,.55);transition:width .12s linear}
 
 /* 3D VIEWPORT */
 .viewport3d{position:relative;height:78%;min-height:520px;transform-style:preserve-3d;opacity:0;pointer-events:none}
@@ -209,6 +218,7 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .scrollExperience{height:330vh}.stage{top:70px;height:calc(100vh - 70px);min-height:730px}
   .stageInner{display:block;padding-top:30px}.storyTitle{font-size:56px}.storyText{font-size:15px}.storyMeta{gap:16px;margin-top:22px}
   .viewport3d{position:absolute;left:0;right:0;bottom:22px;height:43%;min-height:320px}.sceneLabel,.scrollHint{display:none}
+  .serviceSync{margin-top:16px;gap:7px}.serviceStep{grid-template-columns:42px 1fr;padding:10px 11px}.serviceStepNum{width:35px;height:35px;font-size:10px}
   .diagPanel{left:14px;right:14px;top:auto;bottom:8px;width:auto;min-width:0}.diagPanel .system:nth-of-type(n+4){display:none}
   .serviceGrid,.metrics,.contactGrid{grid-template-columns:1fr}.section{padding:72px 0}.sectionHead{gap:20px}.contact{padding:24px}.mobileMenu{top:70px}
 }
@@ -233,7 +243,7 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 <main id="top">
 <section class="scrollExperience" id="experience">
   <div class="stage">
-    <video class="heroVideo" autoplay muted loop playsinline preload="auto">
+    <video class="heroVideo" id="heroVideo" autoplay muted loop playsinline preload="auto">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/hf_20260925_033124_8b4797b6-966e-47b8-9dd9-aeb21c7cbb40.mp4" type="video/mp4">
     </video>
     <div class="wrap stageInner">
@@ -244,6 +254,21 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
         <div class="storyActions">
           <a class="btn primary" href="#contact">Book a Service</a>
           <a class="btn" href="#services">View Services</a>
+        </div>
+        <div class="serviceSync" id="serviceSync" aria-label="Current workshop service">
+          <div class="serviceStep active" data-step="0">
+            <div class="serviceStepNum">01</div>
+            <div class="serviceStepText"><strong>Workshop & Vehicle Check</strong><span>Arrival, inspection and service bay</span></div>
+          </div>
+          <div class="serviceStep" data-step="1">
+            <div class="serviceStepNum">02</div>
+            <div class="serviceStepText"><strong>Oil & Engine Service</strong><span>Oil, filters and engine-bay servicing</span></div>
+          </div>
+          <div class="serviceStep" data-step="2">
+            <div class="serviceStepNum">03</div>
+            <div class="serviceStepText"><strong>Brakes & Diagnostics</strong><span>Brake inspection and vehicle scan</span></div>
+          </div>
+          <div class="serviceProgress" aria-hidden="true"><i id="serviceProgressBar"></i></div>
         </div>
         <div class="storyMeta">
           <div><strong>5.0★</strong><span>Customer rating</span></div>
@@ -406,63 +431,89 @@ menuBtn?.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
 mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.remove('open')));
 
 const exp=document.getElementById('experience');
-const world=document.getElementById('mechanicalWorld');
-const scenes=[
-  document.getElementById('sceneCar'),
-  document.getElementById('sceneOil'),
-  document.getElementById('sceneBrake'),
-  document.getElementById('sceneDiag')
-];
+const heroVideo=document.getElementById('heroVideo');
 const title=document.getElementById('storyTitle');
 const textEl=document.getElementById('storyText');
 const ey=document.getElementById('storyEy');
-const copy=[
-  {ey:'Queenstown · Adelaide',title:'Real workshop.<span>Real mechanical work.</span>',text:'A premium mechanic website should still feel like a mechanic workshop — cars, servicing, oil, brakes and diagnostics, all brought to life with motion as you scroll.'},
-  {ey:'Service 01 · Oil & engine',title:'Keep it serviced.<span>Keep it reliable.</span>',text:'Oil, filters and scheduled maintenance presented as actual mechanical work — not a generic services list.'},
-  {ey:'Service 02 · Braking',title:'Stopping power.<span>Checked properly.</span>',text:'Brake inspections, pads and rotors get their own visual chapter as the page moves with your scroll.'},
-  {ey:'Service 03 · Diagnostics',title:'Find the fault.<span>Fix the cause.</span>',text:'Modern vehicle diagnostics finishes the sequence with a clean scan visual and live-system treatment.'}
+const serviceSteps=[...document.querySelectorAll('.serviceStep')];
+const serviceProgressBar=document.getElementById('serviceProgressBar');
+
+const videoScenes=[
+  {
+    start:0,end:2.7,step:0,
+    ey:'Queenstown · Adelaide',
+    title:'Real workshop.<span>Real mechanical work.</span>',
+    text:'Your service starts with a proper vehicle check in the workshop — clear advice, real inspection and practical mechanical care.'
+  },
+  {
+    start:2.7,end:5.25,step:1,
+    ey:'Service 01 · Oil & engine',
+    title:'Keep it serviced.<span>Keep it reliable.</span>',
+    text:'Oil, filters and engine-bay servicing are handled as the core maintenance work that keeps everyday cars reliable.'
+  },
+  {
+    start:5.25,end:8.2,step:2,
+    ey:'Service 02 · Brakes & diagnostics',
+    title:'Check the system.<span>Fix it properly.</span>',
+    text:'Brake inspection and modern diagnostics help find the cause, confirm the repair and keep the vehicle safe.'
+  }
 ];
 
-function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
-function lerp(a,b,t){return a+(b-a)*t}
+let currentVideoScene=-1;
 
-function update(){
-  const rect=exp.getBoundingClientRect();
-  const total=exp.offsetHeight-window.innerHeight;
-  const progress=clamp(-rect.top/Math.max(total,1),0,1);
-  const scaled=progress*3;
-  const idx=Math.min(3,Math.floor(scaled+0.001));
-  const local=scaled-idx;
-
-  scenes.forEach((s,i)=>{
-    const dist=Math.abs(i-scaled);
-    const opacity=clamp(1-dist*1.8,0,1);
-    s.style.opacity=opacity.toFixed(3);
-    const z=lerp(-80,30,opacity);
-    const y=(i-scaled)*34;
-    const ry=(i-scaled)*7;
-    s.style.transform=`translate3d(0,${y}px,${z}px) rotateY(${ry}deg)`;
-  });
-
-  world.style.transform=`rotateX(${lerp(2,-3,progress)}deg) rotateY(${lerp(-3,4,progress)}deg)`;
-
-  const active=Math.round(scaled);
-  const c=copy[Math.min(3,Math.max(0,active))];
-  if(title.dataset.active!==String(active)){
-    title.dataset.active=String(active);
-    title.style.opacity='.25'; textEl.style.opacity='.25'; ey.style.opacity='.25';
+function setActiveVideoScene(scene){
+  if(!scene) return;
+  if(currentVideoScene!==scene.step){
+    currentVideoScene=scene.step;
+    serviceSteps.forEach((el,i)=>el.classList.toggle('active',i===scene.step));
+    title.style.opacity='.18';
+    textEl.style.opacity='.18';
+    ey.style.opacity='.18';
     requestAnimationFrame(()=>{
-      title.innerHTML=c.title;textEl.textContent=c.text;ey.textContent=c.ey;
-      title.style.opacity='1';textEl.style.opacity='1';ey.style.opacity='1';
+      title.innerHTML=scene.title;
+      textEl.textContent=scene.text;
+      ey.textContent=scene.ey;
+      title.style.opacity='1';
+      textEl.style.opacity='1';
+      ey.style.opacity='1';
     });
   }
 }
+
+function syncToVideo(){
+  if(!heroVideo) return;
+  const duration=heroVideo.duration||8.2;
+  const t=heroVideo.currentTime||0;
+  const scene=videoScenes.find(s=>t>=s.start&&t<s.end)||videoScenes[videoScenes.length-1];
+  setActiveVideoScene(scene);
+  if(serviceProgressBar){
+    const loopProgress=Math.max(0,Math.min(1,t/duration));
+    serviceProgressBar.style.width=(loopProgress*100).toFixed(1)+'%';
+  }
+}
+
+function parallax(){
+  if(!exp) return;
+  const r=exp.getBoundingClientRect();
+  const amount=Math.max(-1,Math.min(1,-r.top/window.innerHeight));
+  if(heroVideo) heroVideo.style.transform='scale(1.035) translate3d(0,'+(amount*10)+'px,0)';
+}
+
 title.style.transition='opacity .22s ease';
 textEl.style.transition='opacity .22s ease';
 ey.style.transition='opacity .22s ease';
-addEventListener('scroll',update,{passive:true});
-addEventListener('resize',update);
-update();
+
+if(heroVideo){
+  heroVideo.addEventListener('loadedmetadata',syncToVideo);
+  heroVideo.addEventListener('timeupdate',syncToVideo);
+  heroVideo.addEventListener('play',syncToVideo);
+  heroVideo.addEventListener('seeked',syncToVideo);
+  setInterval(()=>{if(!heroVideo.paused)syncToVideo()},180);
+}
+addEventListener('scroll',parallax,{passive:true});
+addEventListener('resize',parallax);
+syncToVideo();
+parallax();
 </script>
 </body>
 </html>
