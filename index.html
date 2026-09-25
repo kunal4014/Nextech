@@ -209,7 +209,7 @@ border:2px solid rgba(255,255,255,.2);box-shadow:inset 0 0 0 20px rgba(0,0,0,.14
 .journeyCaption{position:absolute;left:28px;right:28px;bottom:24px}
 .journeyCaption small{display:block;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#b8d8e7;margin-bottom:8px}
 .journeyCaption strong{display:block;font-size:clamp(30px,3.2vw,48px);line-height:.98;letter-spacing:-.045em;max-width:720px}
-.journeySteps{display:grid;gap:10px}
+.journeySteps{display:grid;gap:10px}.journeyFollow{padding:2px 3px 6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#718590}
 .journeyStep{width:100%;display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:center;text-align:left;padding:18px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,#0f161d,#0a1015);color:var(--text);cursor:pointer;transition:.22s}
 .journeyStep:hover{transform:translateX(3px);border-color:rgba(255,255,255,.16)}
 .journeyStep.active{border-color:rgba(85,197,255,.42);background:linear-gradient(180deg,#111d25,#0b1319);box-shadow:inset 3px 0 0 var(--blue)}
@@ -395,33 +395,34 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 
     <div class="journeyFeature">
       <div class="journeyMedia">
-        <video class="journeyVideo" id="journeyVideo" muted playsinline preload="metadata">
+        <video class="journeyVideo" id="journeyVideo" autoplay muted loop playsinline preload="auto">
           <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/hf_20260925_033124_8b4797b6-966e-47b8-9dd9-aeb21c7cbb40.mp4" type="video/mp4">
         </video>
         <div class="journeyShade"></div>
         <div class="journeyCount" id="journeyCount">01 / 04</div>
         <div class="journeyCaption">
-          <small id="journeyKicker">Vehicle check-in</small>
+          <small id="journeyKicker">Workshop & vehicle</small>
           <strong id="journeyHeadline">Start with the right inspection.</strong>
         </div>
       </div>
 
       <div class="journeySteps" id="journeySteps">
-        <button class="journeyStep active" type="button" data-step="0" data-time="0.6">
+        <div class="journeyFollow">Automatically follows the workshop footage</div>
+        <button class="journeyStep active" type="button" data-step="0" data-time="0.4">
           <span>01</span>
-          <div><strong>Vehicle check-in</strong><small>Arrival, inspection and service bay</small></div>
+          <div><strong>Workshop & vehicle</strong><small>Car arrival and service-bay inspection</small></div>
         </button>
-        <button class="journeyStep" type="button" data-step="1" data-time="3.1">
+        <button class="journeyStep" type="button" data-step="1" data-time="5.1">
           <span>02</span>
-          <div><strong>Service & maintenance</strong><small>Oil, filters and scheduled servicing</small></div>
+          <div><strong>Oil & engine service</strong><small>Oil pour, filters and engine-bay work</small></div>
         </button>
-        <button class="journeyStep" type="button" data-step="2" data-time="5.6">
+        <button class="journeyStep" type="button" data-step="2" data-time="6.6">
           <span>03</span>
-          <div><strong>Brakes & diagnostics</strong><small>Safety checks and fault finding</small></div>
+          <div><strong>Brakes & safety</strong><small>Brake rotor and caliper inspection</small></div>
         </button>
-        <button class="journeyStep" type="button" data-step="3" data-time="7.2">
+        <button class="journeyStep" type="button" data-step="3" data-time="7.55">
           <span>04</span>
-          <div><strong>Clear handover</strong><small>What was done and what comes next</small></div>
+          <div><strong>Diagnostics & final checks</strong><small>Scan tool, system checks and fault finding</small></div>
         </button>
       </div>
     </div>
@@ -606,27 +607,49 @@ const journeySteps=[...document.querySelectorAll('.journeyStep')];
 const journeyCount=document.getElementById('journeyCount');
 const journeyKicker=document.getElementById('journeyKicker');
 const journeyHeadline=document.getElementById('journeyHeadline');
+
 const journeyCopy=[
-  {k:'Vehicle check-in',h:'Start with the right inspection.'},
-  {k:'Service & maintenance',h:'Look after the things that keep it reliable.'},
-  {k:'Brakes & diagnostics',h:'Find the problem before replacing parts.'},
-  {k:'Clear handover',h:'Know what was done and what comes next.'}
+  {k:'Workshop & vehicle',h:'Start with the right inspection.'},
+  {k:'Oil & engine service',h:'Maintain the things that keep it reliable.'},
+  {k:'Brakes & safety',h:'Inspect the parts you rely on to stop.'},
+  {k:'Diagnostics & final checks',h:'Find faults properly and confirm the repair.'}
 ];
 
-function setJourneyStep(i){
-  const btn=journeySteps[i];
-  if(!btn||!journeyVideo)return;
+const journeyTimes=[0.4,5.1,6.6,7.55];
+
+function paintJourney(i){
+  i=Math.max(0,Math.min(3,i));
   journeySteps.forEach((el,n)=>el.classList.toggle('active',n===i));
   journeyCount.textContent=String(i+1).padStart(2,'0')+' / 04';
   journeyKicker.textContent=journeyCopy[i].k;
   journeyHeadline.textContent=journeyCopy[i].h;
-  const seek=Number(btn.dataset.time||0);
-  const doSeek=()=>{try{journeyVideo.currentTime=seek;journeyVideo.pause()}catch(e){}};
-  if(journeyVideo.readyState>=1) doSeek();
-  else journeyVideo.addEventListener('loadedmetadata',doSeek,{once:true});
 }
-journeySteps.forEach((btn,i)=>btn.addEventListener('click',()=>setJourneyStep(i)));
-setJourneyStep(0);
+
+function chapterFromTime(t){
+  if(t>=7.35) return 3;
+  if(t>=6.25) return 2;
+  if(t>=4.55) return 1;
+  return 0;
+}
+
+journeySteps.forEach((btn,i)=>{
+  btn.addEventListener('click',()=>{
+    if(!journeyVideo)return;
+    const seek=journeyTimes[i];
+    try{
+      journeyVideo.currentTime=seek;
+      journeyVideo.play().catch(()=>{});
+    }catch(e){}
+    paintJourney(i);
+  });
+});
+
+if(journeyVideo){
+  journeyVideo.addEventListener('timeupdate',()=>paintJourney(chapterFromTime(journeyVideo.currentTime||0)));
+  journeyVideo.addEventListener('loadedmetadata',()=>paintJourney(chapterFromTime(journeyVideo.currentTime||0)));
+  journeyVideo.play().catch(()=>{});
+}
+paintJourney(0);
 </script>
 </body>
 </html>
