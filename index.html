@@ -225,7 +225,36 @@ border:2px solid rgba(255,255,255,.2);box-shadow:inset 0 0 0 20px rgba(0,0,0,.14
 .chapterVisual{position:relative;overflow:hidden;background:
 radial-gradient(circle at 50% 40%,rgba(85,197,255,.12),transparent 28%),
 linear-gradient(145deg,#0b1116,#060a0e)}
-.chapterVisual:before{content:"";position:absolute;inset:0;background:
+.servicePhoto{background-size:cover;background-position:center;isolation:isolate}
+.servicePhoto:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(3,6,9,.04),rgba(3,6,9,.12) 48%,rgba(3,6,9,.62));pointer-events:none}
+.servicePhoto:after{content:"";position:absolute;inset:-3%;z-index:0;background:inherit;background-size:cover;background-position:center;transform:scale(1.03);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.serviceChapter:hover .servicePhoto:after{transform:scale(1.085)}
+.oilPhoto{background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2017/03/services-item-img02.jpg');background-position:center}
+.brakePhoto{background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2020/03/pexels-cottonbro-studio-4489749-1.jpg');background-position:62% center}
+.diagPhoto{background-image:linear-gradient(145deg,#111920,#060a0e)}
+.diagPhoto:after{background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2020/04/service-tab.png');background-size:88% auto;background-repeat:no-repeat;background-position:45% 54%;filter:drop-shadow(0 24px 34px rgba(0,0,0,.42));transform:scale(1)}
+.serviceChapter:hover .diagPhoto:after{transform:scale(1.035)}
+.suspensionPhoto{background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2020/03/pexels-anna-shvets-4315574.jpg');background-position:center 48%}
+.photoBadge{position:absolute;z-index:3;left:22px;bottom:22px;padding:12px 14px;border-radius:14px;background:rgba(6,10,13,.72);border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(12px)}
+.photoBadge span{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#acd2e5;margin-bottom:4px}
+.photoBadge strong{display:block;font-size:15px}
+.photoLine{position:absolute;z-index:3;left:18%;right:12%;top:54%;height:1px;background:linear-gradient(90deg,transparent,#d79a2a,transparent);box-shadow:0 0 14px rgba(215,154,42,.5);animation:photoSweep 3s ease-in-out infinite}
+@keyframes photoSweep{0%,100%{top:38%;opacity:.2}50%{top:73%;opacity:1}}
+.photoFocus{position:absolute;z-index:3;width:110px;height:110px;border-radius:50%;border:1px solid rgba(255,95,82,.75);box-shadow:0 0 0 12px rgba(255,75,66,.08),0 0 30px rgba(255,75,66,.22)}
+.brakeFocus{right:14%;top:18%;animation:focusPulse 2.2s ease-in-out infinite}
+@keyframes focusPulse{0%,100%{transform:scale(.94);opacity:.65}50%{transform:scale(1.04);opacity:1}}
+.diagOverlay{position:absolute;z-index:4;right:5%;top:12%;width:31%;padding:16px;border-radius:16px;background:rgba(6,11,15,.78);border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(12px)}
+.diagOverlay small{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#b8d8e8;margin-bottom:8px}
+.diagOverlay i{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);font-style:normal;font-size:11px}
+.diagOverlay i:last-child{border-bottom:0}
+.diagOverlay b{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(104,240,170,.65)}
+.diagLaser{position:absolute;z-index:3;left:8%;right:38%;height:1px;top:24%;background:linear-gradient(90deg,transparent,var(--blue),transparent);box-shadow:0 0 18px rgba(85,197,255,.8);animation:diagPhotoSweep 3.6s ease-in-out infinite}
+@keyframes diagPhotoSweep{0%,100%{top:26%;opacity:.2}50%{top:72%;opacity:1}}
+.suspensionPoints{position:absolute;z-index:3;left:10%;right:10%;top:20%;bottom:18%}
+.suspensionPoints i{position:absolute;width:15px;height:15px;border-radius:50%;background:var(--blue);border:3px solid rgba(7,12,16,.9);box-shadow:0 0 0 7px rgba(85,197,255,.12),0 0 20px rgba(85,197,255,.45);animation:pointPulse 2.2s ease-in-out infinite}
+.suspensionPoints i:nth-child(1){left:32%;top:36%}.suspensionPoints i:nth-child(2){left:58%;top:51%;animation-delay:.4s}.suspensionPoints i:nth-child(3){left:72%;top:28%;animation-delay:.8s}
+@keyframes pointPulse{0%,100%{transform:scale(.85);opacity:.6}50%{transform:scale(1.1);opacity:1}}
+.chapterVisual>div{position:relative}.chapterVisual:before{content:"";position:absolute;inset:0;background:
 linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
 linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:42px 42px;opacity:.45}
 .engineScene,.brakeScene2,.diagScene2,.suspScene2{position:absolute;inset:0}
@@ -469,27 +498,22 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     <div class="servicesIntro">
       <div>
         <div class="ey">Services</div>
-        <h2>Different work. Different visual story.</h2>
+        <h2>Mechanical services that keep you moving.</h2>
       </div>
-      <p>The home-page film stays unique. From here, each core service gets its own mechanical scene, motion and character instead of repeating the same footage.</p>
+      <p>From routine servicing to brakes, diagnostics and suspension repairs, Nextech handles the everyday work that keeps your vehicle safe, reliable and ready for the road.</p>
     </div>
 
     <div class="serviceChapters">
       <article class="serviceChapter serviceOil">
         <div class="chapterCopy">
           <span>01 · Scheduled care</span>
-          <h3>Logbook servicing & oil</h3>
-          <p>Fresh oil, filters, fluids and scheduled checks designed to keep everyday vehicles reliable.</p>
+          <h3>Logbook servicing & oil changes</h3>
+          <p>Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to help keep your vehicle running reliably.</p>
           <a href="#contact">Book servicing →</a>
         </div>
-        <div class="chapterVisual">
-          <div class="engineScene">
-            <div class="engineBlock2"></div>
-            <div class="engineCover2">SERVICE</div>
-            <div class="oilBottle2"><b>5W-30</b></div>
-            <div class="oilPour2"></div>
-            <div class="engineGlow2"></div>
-          </div>
+        <div class="chapterVisual servicePhoto oilPhoto" role="img" aria-label="Oil filter being replaced during engine servicing">
+          <div class="photoBadge"><span>Oil & filter</span><strong>Scheduled servicing</strong></div>
+          <div class="photoLine"></div>
         </div>
       </article>
 
@@ -497,37 +521,31 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
         <div class="chapterCopy">
           <span>02 · Safety systems</span>
           <h3>Brakes & clutch</h3>
-          <p>Pads, rotors, clutch components and stopping performance inspected properly before parts are replaced.</p>
+          <p>Brake pads, rotors, clutch wear and stopping performance checked properly so your vehicle stays safe and responsive.</p>
           <a href="#contact">Book a brake check →</a>
         </div>
-        <div class="chapterVisual">
-          <div class="brakeScene2">
-            <div class="disc2"></div>
-            <div class="hub2"></div>
-            <div class="caliper2">NEXTECH</div>
-            <div class="brakeSweep2"></div>
-          </div>
+        <div class="chapterVisual servicePhoto brakePhoto" role="img" aria-label="Mechanic working on the wheel and brake area of a vehicle on a hoist">
+          <div class="photoBadge"><span>Brake inspection</span><strong>Safety first</strong></div>
+          <div class="photoFocus brakeFocus"></div>
         </div>
       </article>
 
       <article class="serviceChapter serviceDiag2">
         <div class="chapterCopy">
           <span>03 · Fault finding</span>
-          <h3>Diagnostics</h3>
-          <p>Modern scanning and system checks help locate the cause of a fault instead of guessing at the repair.</p>
+          <h3>Vehicle diagnostics</h3>
+          <p>Advanced scanning and fault finding to identify the real issue before unnecessary parts are replaced.</p>
           <a href="#contact">Book diagnostics →</a>
         </div>
-        <div class="chapterVisual">
-          <div class="diagScene2">
-            <div class="diagCar2"></div>
-            <div class="diagScan2"></div>
-            <div class="diagRows2">
-              <i><span>Engine</span><b></b></i>
-              <i><span>Transmission</span><b></b></i>
-              <i><span>ABS / Braking</span><b></b></i>
-              <i><span>Electrical</span><b></b></i>
-            </div>
+        <div class="chapterVisual servicePhoto diagPhoto" role="img" aria-label="Vehicle cutaway used to represent diagnostic system checks">
+          <div class="diagOverlay">
+            <small>Vehicle systems</small>
+            <i><span>Engine</span><b></b></i>
+            <i><span>Transmission</span><b></b></i>
+            <i><span>ABS / Braking</span><b></b></i>
+            <i><span>Electrical</span><b></b></i>
           </div>
+          <div class="diagLaser"></div>
         </div>
       </article>
 
@@ -535,16 +553,12 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
         <div class="chapterCopy">
           <span>04 · Ride & handling</span>
           <h3>Steering & suspension</h3>
-          <p>Struts, springs, steering components and road feel checked to restore comfort and handling.</p>
+          <p>Inspection and repair of steering and suspension components to improve comfort, handling and control.</p>
           <a href="#contact">Book suspension inspection →</a>
         </div>
-        <div class="chapterVisual">
-          <div class="suspScene2">
-            <div class="strut2"><i></i><i></i><i></i><i></i><i></i></div>
-            <div class="spring2"></div>
-            <div class="arm2"></div>
-            <div class="wheelGhost2"></div>
-          </div>
+        <div class="chapterVisual servicePhoto suspensionPhoto" role="img" aria-label="Mechanic inspecting components in an engine bay">
+          <div class="photoBadge"><span>Steering & suspension</span><strong>Ride & handling</strong></div>
+          <div class="suspensionPoints"><i></i><i></i><i></i></div>
         </div>
       </article>
     </div>
@@ -564,8 +578,8 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 <section class="section trustSection" id="journey">
   <div class="wrap">
     <div class="sectionHead">
-      <div><div class="ey">What to expect</div><h2>Clear process. No repeated video.</h2></div>
-      <p>Once the cinematic service chapters finish, the page calms down and focuses on what customers actually care about: trust, communication and knowing what happens next.</p>
+      <div><div class="ey">What to expect</div><h2>A straightforward workshop process.</h2></div>
+      <p>From the first inspection to the final handover, customers know what is being checked, what needs attention and what happens next.</p>
     </div>
 
     <div class="processLine">
