@@ -1,4 +1,3 @@
-<style>
 :root{
   --bg:#05080b;--bg2:#0a0f14;--panel:#0d141a;--panel2:#111a22;
   --text:#f6f8fa;--muted:#9aa8b3;--blue:#55c5ff;--blue2:#b8e9ff;
@@ -361,248 +360,197 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .diagPanel{left:14px;right:14px;top:auto;bottom:8px;width:auto;min-width:0}.diagPanel .system:nth-of-type(n+4){display:none}
   .serviceGrid,.metrics,.contactGrid,.formRow{grid-template-columns:1fr}.journeyMedia{min-height:430px}.journeyCaption{left:20px;right:20px;bottom:18px}.journeySteps{grid-template-columns:1fr}.section{padding:72px 0}.sectionHead{gap:20px}.contact{padding:24px}.mobileMenu{top:104px}
 }
-</style>
 
-/* ================================
-   FULL CINEMATIC DIAGNOSTICS SCENE
-================================ */
+/* =========================================
+   SERVICE SECTION CONTRAST + FULL DIAGNOSTICS
+========================================= */
+.servicesCinema,
+.servicesCinema h2,
+.servicesCinema h3,
+.servicesCinema strong,
+.servicesCinema a { color: var(--text); }
 
-.serviceDiag2 {
+.servicesIntro p,
+.chapterCopy p { color:#b7c4cc; }
+
+.chapterCopy>span,
+.moreServicesHead span { color:#9ed7ee; }
+
+.moreServicesHead strong { color:#f6f8fa; }
+
+/* Diagnostics becomes one full cinematic scene */
+.serviceDiag2.diagFull{
   display:block !important;
-  min-height:640px;
+  min-height:680px;
   padding:0;
   overflow:hidden;
+  border-radius:28px;
 }
 
-.serviceDiag2 .chapterCopy {
-  display:none;
-}
-
-.serviceDiag2 .chapterVisual {
+.serviceDiag2.diagFull .chapterVisual{
+  min-height:680px;
   width:100%;
-  min-height:640px;
   border-radius:28px;
   overflow:hidden;
   position:relative;
   background:
-    radial-gradient(circle at 70% 45%,rgba(85,197,255,.18),transparent 30%),
-    linear-gradient(145deg,#111820,#05080b);
+    radial-gradient(circle at 72% 45%,rgba(85,197,255,.14),transparent 30%),
+    linear-gradient(145deg,#101820,#05080b);
 }
 
-
-/* Large vehicle diagnostic visual */
-.serviceDiag2 .diagPhoto {
-  background:
-    radial-gradient(circle at 70% 50%,rgba(85,197,255,.12),transparent 30%),
-    linear-gradient(145deg,#111820,#05080b);
-}
-
-
-.serviceDiag2 .diagPhoto:after {
+.serviceDiag2.diagFull .diagPhoto:before{
   content:"";
   position:absolute;
   inset:0;
+  z-index:2;
+  background:
+    linear-gradient(90deg,rgba(3,6,9,.80) 0%,rgba(3,6,9,.42) 30%,rgba(3,6,9,.08) 58%,rgba(3,6,9,.20) 100%),
+    linear-gradient(180deg,rgba(3,6,9,.06) 0%,rgba(3,6,9,.03) 50%,rgba(3,6,9,.78) 100%);
+  pointer-events:none;
+}
+
+.serviceDiag2.diagFull .diagPhoto:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
   background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2020/04/service-tab.png');
   background-repeat:no-repeat;
-  background-size:75% auto;
-  background-position:center;
-  filter:
-    drop-shadow(0 40px 60px rgba(0,0,0,.55));
-  transform:scale(1.15);
-  z-index:1;
+  background-size:84% auto;
+  background-position:58% 52%;
+  filter:drop-shadow(0 34px 46px rgba(0,0,0,.48));
+  transform:scale(1.08);
 }
 
+.serviceDiag2.diagFull:hover .diagPhoto:after{
+  transform:scale(1.11);
+}
 
-/* Dark cinematic overlay */
-.serviceDiag2 .diagPhoto:before {
-  content:"";
+.diagSceneShade{
   position:absolute;
   inset:0;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(3,6,9,.75),
-      transparent 45%,
-      rgba(3,6,9,.35)
-    ),
-    linear-gradient(
-      0deg,
-      rgba(3,6,9,.85),
-      transparent 55%
-    );
-  z-index:2;
+  z-index:3;
+  pointer-events:none;
+  background:radial-gradient(circle at 68% 48%,rgba(85,197,255,.08),transparent 27%);
 }
 
-
-/* Floating diagnostic panel */
-.serviceDiag2 .diagOverlay {
+.serviceDiag2.diagFull .diagOverlay{
   position:absolute;
-  z-index:5;
-  right:40px;
-  top:40px;
+  z-index:6;
+  top:34px;
+  right:34px;
   width:300px;
-  padding:22px;
-  border-radius:22px;
-
-  background:
-    rgba(8,13,17,.78);
-
-  border:
-    1px solid rgba(255,255,255,.12);
-
-  backdrop-filter:
-    blur(18px);
-
-  box-shadow:
-    0 30px 70px rgba(0,0,0,.4);
+  padding:20px;
+  border-radius:20px;
+  background:rgba(7,12,16,.78);
+  border:1px solid rgba(255,255,255,.11);
+  backdrop-filter:blur(16px);
+  box-shadow:0 24px 55px rgba(0,0,0,.34);
 }
 
-
-.serviceDiag2 .diagOverlay small {
+.serviceDiag2.diagFull .diagOverlay small{
+  display:block;
+  margin-bottom:10px;
   color:#b9dbea;
   text-transform:uppercase;
-  letter-spacing:.18em;
+  letter-spacing:.16em;
   font-size:10px;
-  display:block;
-  margin-bottom:14px;
 }
 
-
-.serviceDiag2 .diagOverlay i {
+.serviceDiag2.diagFull .diagOverlay i{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-
-  padding:12px 0;
-
-  border-bottom:
-    1px solid rgba(255,255,255,.08);
-
+  justify-content:space-between;
+  padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
   font-style:normal;
+  font-size:13px;
+  color:#eef4f7;
+}
+
+.serviceDiag2.diagFull .diagOverlay i:last-child{border-bottom:0}
+
+.serviceDiag2.diagFull .diagOverlay b{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px rgba(104,240,170,.7);
+}
+
+.serviceDiag2.diagFull .diagLaser{
+  position:absolute;
+  z-index:5;
+  left:10%;
+  right:10%;
+  height:2px;
+  top:26%;
+  background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  box-shadow:0 0 22px rgba(85,197,255,.85);
+  animation:diagWideSweep 3.6s ease-in-out infinite;
+}
+
+@keyframes diagWideSweep{
+  0%,100%{top:26%;opacity:.25}
+  50%{top:75%;opacity:1}
+}
+
+.serviceDiag2.diagFull .diagCaption{
+  position:absolute;
+  z-index:7;
+  left:46px;
+  bottom:40px;
+  max-width:620px;
+}
+
+.serviceDiag2.diagFull .diagCaption span{
+  display:block;
+  margin-bottom:10px;
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#b5d9e9;
+}
+
+.serviceDiag2.diagFull .diagCaption h3{
+  margin:0 0 12px;
+  font-size:clamp(44px,5vw,78px);
+  line-height:.92;
+  letter-spacing:-.06em;
+  color:#fff;
+}
+
+.serviceDiag2.diagFull .diagCaption p{
+  margin:0;
+  max-width:560px;
+  color:#c1cdd4;
+  font-size:15px;
+  line-height:1.68;
+}
+
+.serviceDiag2.diagFull .diagCaption a{
+  display:inline-block;
+  margin-top:20px;
+  color:#e4f4fb;
+  font-weight:800;
   font-size:14px;
 }
 
-
-.serviceDiag2 .diagOverlay b {
-  width:9px;
-  height:9px;
-
-  border-radius:50%;
-
-  background:#68f0aa;
-
-  box-shadow:
-    0 0 15px rgba(104,240,170,.8);
+@media(max-width:1180px){
+  .serviceDiag2.diagFull,
+  .serviceDiag2.diagFull .chapterVisual{min-height:590px}
+  .serviceDiag2.diagFull .diagPhoto:after{background-size:96% auto;background-position:60% 52%}
+  .serviceDiag2.diagFull .diagCaption{left:28px;bottom:28px}
+  .serviceDiag2.diagFull .diagOverlay{top:24px;right:24px;width:260px}
 }
 
-
-/* Scan beam */
-.serviceDiag2 .diagLaser {
-
-  position:absolute;
-
-  z-index:4;
-
-  left:12%;
-  right:12%;
-
-  height:2px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #55c5ff,
-      transparent
-    );
-
-  box-shadow:
-    0 0 25px rgba(85,197,255,.9);
-
-  animation:
-    diagnosticScan 3.5s ease-in-out infinite;
-}
-
-
-@keyframes diagnosticScan {
-
-  0%,100% {
-    top:25%;
-    opacity:.3;
-  }
-
-  50% {
-    top:75%;
-    opacity:1;
-  }
-
-}
-
-
-
-/* Bottom cinematic caption */
-
-.serviceDiag2 .chapterVisual:after {
-
-  content:
-  "Vehicle diagnostics";
-
-  position:absolute;
-
-  z-index:6;
-
-  left:45px;
-  bottom:45px;
-
-
-  color:white;
-
-  font-size:
-  clamp(42px,5vw,75px);
-
-  font-weight:800;
-
-  letter-spacing:-.06em;
-
-}
-
-
-
-/* Mobile */
 @media(max-width:700px){
-
-.serviceDiag2 .chapterVisual {
-
-  min-height:520px;
-
-}
-
-
-.serviceDiag2 .diagPhoto:after {
-
-  background-size:
-  115% auto;
-
-}
-
-
-.serviceDiag2 .diagOverlay {
-
-  top:20px;
-  right:20px;
-
-  width:240px;
-
-}
-
-
-.serviceDiag2 .chapterVisual:after {
-
-  left:20px;
-  bottom:25px;
-
-  font-size:42px;
-
-}
-
+  .serviceDiag2.diagFull,
+  .serviceDiag2.diagFull .chapterVisual{min-height:520px}
+  .serviceDiag2.diagFull .diagPhoto:after{background-size:118% auto;background-position:58% 56%}
+  .serviceDiag2.diagFull .diagOverlay{top:16px;right:16px;width:220px;padding:14px}
+  .serviceDiag2.diagFull .diagOverlay i{font-size:11px;padding:8px 0}
+  .serviceDiag2.diagFull .diagCaption{left:20px;right:20px;bottom:20px;max-width:none}
+  .serviceDiag2.diagFull .diagCaption h3{font-size:40px}
+  .serviceDiag2.diagFull .diagCaption p{font-size:13px;line-height:1.55}
 }
