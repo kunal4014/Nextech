@@ -246,7 +246,7 @@ linear-gradient(145deg,#0b1116,#060a0e)}
 .suspensionPoints i{position:absolute;width:15px;height:15px;border-radius:50%;background:var(--blue);border:3px solid rgba(7,12,16,.9);box-shadow:0 0 0 7px rgba(85,197,255,.12),0 0 20px rgba(85,197,255,.45);animation:pointPulse 2.2s ease-in-out infinite}
 .suspensionPoints i:nth-child(1){left:32%;top:36%}.suspensionPoints i:nth-child(2){left:58%;top:51%;animation-delay:.4s}.suspensionPoints i:nth-child(3){left:72%;top:28%;animation-delay:.8s}
 @keyframes pointPulse{0%,100%{transform:scale(.85);opacity:.6}50%{transform:scale(1.1);opacity:1}}
-.chapterVisual>div{position:relative}.chapterVisual:before{content:"";position:absolute;inset:0;background:
+.chapterVisual:before{content:"";position:absolute;inset:0;background:
 linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
 linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:42px 42px;opacity:.45}
 .engineScene,.brakeScene2,.diagScene2,.suspScene2{position:absolute;inset:0}
@@ -710,4 +710,84 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .serviceDiag2.diagFull .diagOverlay{top:16px;right:16px;width:215px;padding:14px}
   .serviceDiag2.diagFull .diagOverlay i{font-size:11px;padding:8px 0}
   .serviceDiag2.diagFull .diagPhoto:after{background-size:118% auto !important;background-position:58% 56% !important}
+}
+
+/* Fix cinematic service overlay positioning */
+.serviceChapter.serviceScene .sceneShade,
+.serviceChapter.serviceScene .sceneTag,
+.serviceChapter.serviceScene .sceneCaption,
+.serviceChapter.serviceScene .sceneHint,
+.serviceChapter.serviceScene .sceneSweep,
+.serviceChapter.serviceScene .sceneFocus,
+.serviceChapter.serviceScene .hotspot,
+.serviceChapter.serviceScene .diagSceneShade,
+.serviceChapter.serviceScene .diagOverlay,
+.serviceChapter.serviceScene .diagLaser,
+.serviceChapter.serviceScene .diagCaption{
+  position:absolute;
+}
+
+.serviceChapter.serviceScene .sceneShade,
+.serviceChapter.serviceScene .diagSceneShade{
+  inset:0;
+}
+
+.serviceChapter.serviceScene .sceneTag{
+  top:28px;
+  left:30px;
+}
+
+.serviceChapter.serviceScene .sceneHint{
+  top:30px;
+  right:30px;
+  left:auto;
+  width:auto;
+}
+
+.serviceChapter.serviceScene .sceneCaption{
+  left:44px;
+  right:auto;
+  bottom:38px;
+  top:auto;
+}
+
+.serviceChapter.serviceScene .sceneCaptionRight{
+  left:auto;
+  right:44px;
+}
+
+.serviceChapter.serviceScene .sceneSweep{
+  left:10%;
+  right:10%;
+}
+
+.serviceChapter.serviceScene .diagCaption{
+  left:44px;
+  bottom:38px;
+  top:auto;
+}
+
+@media(max-width:1180px){
+  .serviceChapter.serviceScene .sceneTag{top:22px;left:24px}
+  .serviceChapter.serviceScene .sceneHint{top:22px;right:24px}
+  .serviceChapter.serviceScene .sceneCaption,
+  .serviceChapter.serviceScene .diagCaption{
+    left:28px;
+    right:28px;
+    bottom:28px;
+  }
+  .serviceChapter.serviceScene .sceneCaptionRight{
+    left:28px;
+    right:28px;
+  }
+}
+
+@media(max-width:700px){
+  .serviceChapter.serviceScene .sceneTag{top:16px;left:16px}
+  .serviceChapter.serviceScene .sceneCaption,
+  .serviceChapter.serviceScene .diagCaption{
+    left:20px;
+    right:20px;
+    bottom:20px;
+  }
 }
