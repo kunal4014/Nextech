@@ -1725,3 +1725,135 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     display:none !important;
   }
 }
+
+/* =========================================
+   FAQ + MOBILE CONVERSION BAR
+========================================= */
+.faqSection{
+  padding-top:76px;
+}
+.faqHead{
+  margin-bottom:24px;
+}
+.faqGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.faqItem{
+  border-radius:18px;
+  background:linear-gradient(180deg,#0f161c,#0a1015);
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+.faqItem summary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:20px 22px;
+  font-weight:800;
+  font-size:16px;
+}
+.faqItem summary::-webkit-details-marker{display:none}
+.faqItem summary b{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+  background:#ffffff06;
+  border:1px solid #ffffff0a;
+  color:#9fd6ef;
+  font-size:18px;
+  font-weight:500;
+  transition:transform .2s ease,background .2s ease,color .2s ease;
+}
+.faqItem[open] summary b{
+  transform:rotate(45deg);
+  background:#fff;
+  color:#081017;
+}
+.faqItem p{
+  margin:0;
+  padding:0 22px 22px;
+  color:#9eadb6;
+  font-size:13px;
+  line-height:1.65;
+  max-width:760px;
+}
+
+.mobileActionBar{
+  display:none;
+}
+
+@media(max-width:800px){
+  .faqGrid{
+    grid-template-columns:1fr;
+  }
+
+  .faqItem summary{
+    padding:17px 18px;
+    font-size:15px;
+  }
+
+  .faqItem p{
+    padding:0 18px 18px;
+    font-size:12px;
+  }
+
+  .mobileActionBar{
+    position:fixed;
+    z-index:2600;
+    left:10px;
+    right:10px;
+    bottom:calc(10px + env(safe-area-inset-bottom));
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    padding:7px;
+    border-radius:18px;
+    background:rgba(7,11,15,.88);
+    border:1px solid rgba(255,255,255,.10);
+    backdrop-filter:blur(18px);
+    box-shadow:0 16px 40px rgba(0,0,0,.38);
+  }
+
+  .mobileActionBar a{
+    min-height:46px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    font-weight:850;
+    background:#ffffff07;
+    border:1px solid #ffffff0a;
+  }
+
+  .mobileActionBar a.primary{
+    background:#fff;
+    color:#081017;
+    border-color:#fff;
+  }
+
+  body{
+    padding-bottom:calc(76px + env(safe-area-inset-bottom));
+  }
+}
+
+@media(max-width:390px){
+  .mobileActionBar{
+    left:8px;
+    right:8px;
+    bottom:calc(8px + env(safe-area-inset-bottom));
+  }
+
+  .mobileActionBar a{
+    min-height:44px;
+    font-size:12px;
+  }
+}
