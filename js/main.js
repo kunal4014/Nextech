@@ -113,3 +113,57 @@ function updateProcessTimeline(){
 addEventListener('scroll',updateProcessTimeline,{passive:true});
 addEventListener('resize',updateProcessTimeline);
 updateProcessTimeline();
+
+/* Client-pitch polish */
+const siteNav=document.getElementById('siteNav');
+
+function updateNavState(){
+  siteNav?.classList.toggle('is-scrolled',window.scrollY>36);
+}
+addEventListener('scroll',updateNavState,{passive:true});
+updateNavState();
+
+/* Subtle one-time reveal for lower-page content. */
+const revealTargets=[
+  ...document.querySelectorAll(
+    '.sectionHead, .servicesIntro, .serviceChapter, .moreService, .whyProof, .whyReason, .reviewTrustBar, .review, .faqItem, .contact'
+  )
+];
+
+if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  revealTargets.forEach(el=>el.classList.add('revealItem'));
+  const revealObserver=new IntersectionObserver((entries,observer)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.08,rootMargin:'0px 0px -6% 0px'});
+  revealTargets.forEach(el=>revealObserver.observe(el));
+}else{
+  revealTargets.forEach(el=>el.classList.add('revealed'));
+}
+
+/* Concept form behaves like a real interaction without contacting Nextech. */
+const demoBookingForm=document.getElementById('demoBookingForm');
+const demoFormStatus=document.getElementById('demoFormStatus');
+
+demoBookingForm?.addEventListener('submit',e=>{
+  e.preventDefault();
+  if(!demoBookingForm.checkValidity()){
+    demoBookingForm.reportValidity();
+    return;
+  }
+  if(demoFormStatus){
+    demoFormStatus.textContent='Concept preview — the live version can securely send this booking request to the workshop.';
+    demoFormStatus.classList.add('show');
+  }
+  const submit=demoBookingForm.querySelector('.formSubmit');
+  if(submit){
+    const original=submit.textContent;
+    submit.textContent='Preview complete ✓';
+    setTimeout(()=>{submit.textContent=original},2200);
+  }
+});
+
