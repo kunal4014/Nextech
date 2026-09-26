@@ -203,21 +203,96 @@ if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: red
 const demoBookingForm=document.getElementById('demoBookingForm');
 const demoFormStatus=document.getElementById('demoFormStatus');
 
+
+
+
+
+/* =========================================
+   EA34117 conversion enhancements
+========================================= */
+
+/* Hero service cards are real controls: selecting one jumps the hero video
+   to the relevant workshop chapter without changing the established layout. */
+serviceSteps.forEach((step,index)=>{
+  step.setAttribute('role','button');
+  step.setAttribute('tabindex','0');
+  step.setAttribute('aria-label','Show '+(step.querySelector('strong')?.textContent||'service')+' scene');
+
+  const activateStep=()=>{
+    const scene=videoScenes[Math.min(index,videoScenes.length-1)];
+    if(!scene)return;
+    setActiveVideoScene(scene);
+    if(heroVideo && Number.isFinite(heroVideo.duration)){
+      heroVideo.currentTime=Math.max(0,scene.start+.08);
+      const playAttempt=heroVideo.play();
+      if(playAttempt?.catch) playAttempt.catch(()=>{});
+    }
+  };
+
+  step.addEventListener('click',activateStep);
+  step.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){
+      e.preventDefault();
+      activateStep();
+    }
+  });
+});
+
+/* Give the desktop review grid gentle movement without turning it into a carousel.
+   On phones the existing swipeable cards remain fully user-controlled. */
+const reviewCards=[...document.querySelectorAll('.review')];
+let reviewSpotlight=0;
+function updateReviewSpotlight(){
+  if(!reviewCards.length)return;
+  reviewCards.forEach((card,i)=>card.classList.toggle('reviewSpotlight',i===reviewSpotlight));
+}
+updateReviewSpotlight();
+if(reviewCards.length>1 && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  setInterval(()=>{
+    if(document.hidden||innerWidth<701)return;
+    reviewSpotlight=(reviewSpotlight+1)%reviewCards.length;
+    updateReviewSpotlight();
+  },4200);
+}
+
+/* Turn the concept booking form into a usable booking handoff.
+   It validates locally and opens a pre-filled email draft to the workshop;
+   nothing is sent without the visitor explicitly sending the email. */
 demoBookingForm?.addEventListener('submit',e=>{
   e.preventDefault();
   if(!demoBookingForm.checkValidity()){
     demoBookingForm.reportValidity();
     return;
   }
+
+  const formData=new FormData(demoBookingForm);
+  const value=name=>(formData.get(name)||'').toString().trim();
+  const subject='Nextech booking request — '+(value('Vehicle')||value('Name')||'website enquiry');
+  const lines=[
+    'Hi Nextech,',
+    '',
+    'I would like to request a service booking.',
+    '',
+    'Name: '+value('Name'),
+    'Phone: '+value('Phone'),
+    'Email: '+value('Email'),
+    'Vehicle: '+value('Vehicle'),
+    'Registration: '+value('Registration'),
+    'Service: '+value('Service'),
+    'Preferred date: '+value('Preferred date'),
+    'Preferred time: '+value('Preferred time'),
+    '',
+    'What I need looked at:',
+    value('Details')||'Not specified',
+    '',
+    'Please contact me to confirm availability.'
+  ];
+
   if(demoFormStatus){
-    demoFormStatus.textContent='Concept preview — the live version can securely send this booking request to the workshop.';
+    demoFormStatus.textContent='Your booking details are ready. Opening a pre-filled email to Nextech — review it, then send when you are happy.';
     demoFormStatus.classList.add('show');
   }
-  const submit=demoBookingForm.querySelector('.formSubmit');
-  if(submit){
-    const original=submit.textContent;
-    submit.textContent='Preview complete ✓';
-    setTimeout(()=>{submit.textContent=original},2200);
-  }
-});
 
+  const mailto='mailto:nextechautorepairs@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join('\n'));
+  setTimeout(()=>{ window.location.href=mailto; },180);
+});
