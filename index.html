@@ -38,9 +38,10 @@
     <video class="heroVideo" id="heroVideo" autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=1800">
       <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/hf_20260925_033124_8b4797b6-966e-47b8-9dd9-aeb21c7cbb40.mp4" type="video/mp4">
     </video>
-    <button class="videoPowerNotice" id="videoPowerNotice" type="button" aria-label="Start workshop video">
-      <span>Low Power Mode paused motion</span><strong>Tap once to start</strong>
-    </button>
+    <picture class="heroMotionFallback" id="heroMotionFallback" aria-hidden="true">
+      <source srcset="https://d8j0ntlcm91z4.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/hf_20260925_033124_8b4797b6-966e-47b8-9dd9-aeb21c7cbb40.mp4" type="video/mp4">
+      <img src="https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" fetchpriority="high">
+    </picture>
     <div class="wrap stageInner">
       <div class="storyCopy">
         <div class="ey" id="storyEy">Queenstown · Adelaide</div>
