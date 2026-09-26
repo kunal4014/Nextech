@@ -10,7 +10,8 @@ const textEl=document.getElementById('storyText');
 const ey=document.getElementById('storyEy');
 const serviceSteps=[...document.querySelectorAll('.serviceStep')];
 const serviceProgressBar=document.getElementById('serviceProgressBar');
-const videoPowerNotice=document.getElementById('videoPowerNotice');
+const heroMotionFallback=document.getElementById('heroMotionFallback');
+const heroStage=exp?.querySelector('.stage');
 
 const videoScenes=[
   {
@@ -71,6 +72,7 @@ function parallax(){
   const r=exp.getBoundingClientRect();
   const amount=Math.max(-1,Math.min(1,-r.top/window.innerHeight));
   if(heroVideo) heroVideo.style.transform='scale(1.035) translate3d(0,'+(amount*10)+'px,0)';
+  if(heroMotionFallback) heroMotionFallback.style.transform='scale(1.035) translate3d(0,'+(amount*10)+'px,0)';
 }
 
 title.style.transition='opacity .22s ease';
@@ -84,13 +86,36 @@ if(heroVideo){
   heroVideo.setAttribute('playsinline','');
   heroVideo.setAttribute('webkit-playsinline','');
 
-  const hidePowerNotice=()=>videoPowerNotice?.classList.remove('show');
-  const showPowerNotice=()=>videoPowerNotice?.classList.add('show');
+  let fallbackEpoch=0;
+  let fallbackActive=false;
+
+  const syncFallbackStory=()=>{
+    if(!fallbackActive)return;
+    const duration=8.2;
+    const t=((performance.now()-fallbackEpoch)/1000)%duration;
+    const scene=videoScenes.find(s=>t>=s.start&&t<s.end)||videoScenes[videoScenes.length-1];
+    setActiveVideoScene(scene);
+    if(serviceProgressBar){
+      serviceProgressBar.style.width=((t/duration)*100).toFixed(1)+'%';
+    }
+  };
+
+  const useAnimatedImageFallback=()=>{
+    if(fallbackActive)return;
+    fallbackActive=true;
+    fallbackEpoch=performance.now();
+    heroStage?.classList.add('motion-fallback');
+    syncFallbackStory();
+  };
 
   const tryHeroPlay=()=>{
     const attempt=heroVideo.play();
     if(attempt&&typeof attempt.then==='function'){
-      attempt.then(hidePowerNotice).catch(showPowerNotice);
+      attempt.then(()=>{
+        fallbackActive=false;
+        heroStage?.classList.remove('motion-fallback');
+        syncToVideo();
+      }).catch(useAnimatedImageFallback);
     }
   };
 
@@ -101,22 +126,15 @@ if(heroVideo){
   heroVideo.addEventListener('canplay',tryHeroPlay,{once:true});
   heroVideo.addEventListener('timeupdate',syncToVideo);
   heroVideo.addEventListener('play',()=>{
-    hidePowerNotice();
-    syncToVideo();
+    if(!fallbackActive) syncToVideo();
   });
   heroVideo.addEventListener('seeked',syncToVideo);
 
-  videoPowerNotice?.addEventListener('click',tryHeroPlay);
+  setInterval(()=>{
+    if(fallbackActive) syncFallbackStory();
+    else if(!heroVideo.paused) syncToVideo();
+  },180);
 
-  /* iOS Low Power Mode can reject autoplay. The first real touch is
-     a valid user gesture, so use it to start motion without a play icon. */
-  const resumeOnFirstGesture=()=>{
-    if(heroVideo.paused) tryHeroPlay();
-  };
-  exp?.addEventListener('touchstart',resumeOnFirstGesture,{passive:true,once:true});
-  exp?.addEventListener('pointerdown',resumeOnFirstGesture,{passive:true,once:true});
-
-  setInterval(()=>{if(!heroVideo.paused)syncToVideo()},180);
   tryHeroPlay();
 }
 addEventListener('scroll',parallax,{passive:true});
