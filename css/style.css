@@ -2057,3 +2057,70 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     transform:none !important;
   }
 }
+
+/* =========================================
+   iPHONE LOW POWER VIDEO FALLBACK
+========================================= */
+.stage{
+  background:
+    linear-gradient(90deg,rgba(3,6,9,.88),rgba(3,6,9,.42)),
+    url('https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=1800') center/cover no-repeat,
+    #05080b;
+}
+.videoPowerNotice{
+  position:absolute;
+  z-index:8;
+  right:22px;
+  bottom:22px;
+  display:none;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(6,10,13,.72);
+  color:#dce8ee;
+  backdrop-filter:blur(12px);
+  box-shadow:0 12px 28px rgba(0,0,0,.22);
+  font:inherit;
+  cursor:pointer;
+}
+.videoPowerNotice span{
+  color:#8fa5b1;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+.videoPowerNotice strong{
+  color:#fff;
+  font-size:11px;
+}
+.videoPowerNotice.show{
+  display:flex;
+}
+.videoPowerNotice:hover{
+  border-color:rgba(85,197,255,.30);
+}
+
+@media(max-width:700px){
+  .videoPowerNotice{
+    right:14px;
+    bottom:14px;
+    left:14px;
+    justify-content:center;
+    border-radius:14px;
+    padding:10px 12px;
+  }
+  .videoPowerNotice span{
+    display:none;
+  }
+  .videoPowerNotice strong{
+    font-size:12px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .videoPowerNotice{
+    display:none !important;
+  }
+}
