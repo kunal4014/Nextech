@@ -66,10 +66,11 @@
           </div>
           <div class="serviceProgress" aria-hidden="true"><i id="serviceProgressBar"></i></div>
         </div>
-        <div class="storyMeta">
-          <div><strong>5.0★</strong><span>Customer rating</span></div>
-          <div><strong>49+</strong><span>Google reviews</span></div>
-          <div><strong>Local</strong><span>Queenstown workshop</span></div>
+        <div class="storyMeta" aria-label="Nextech trust highlights">
+          <div><strong>5.0★</strong><span>Google rating</span></div>
+          <div><strong>49+</strong><span>Customer reviews</span></div>
+          <div><strong>30</strong><span>Years combined experience</span></div>
+          <div><strong>MTA</strong><span>Member workshop</span></div>
         </div>
       </div>
 
@@ -441,11 +442,26 @@
       </div>
       <form class="bookingForm" id="demoBookingForm">
         <div class="formRow">
-          <label><span>Name</span><input name="Name" required placeholder="Your name"></label>
-          <label><span>Phone</span><input name="Phone" required placeholder="Your phone"></label>
+          <label><span>Name</span><input name="Name" required autocomplete="name" placeholder="Your name"></label>
+          <label><span>Phone</span><input name="Phone" required autocomplete="tel" inputmode="tel" placeholder="Your phone"></label>
         </div>
         <div class="formRow">
-          <label><span>Vehicle</span><input name="Vehicle" placeholder="Make / model / year"></label>
+          <label><span>Email</span><input name="Email" type="email" autocomplete="email" placeholder="you@example.com"></label>
+          <label><span>Vehicle</span><input name="Vehicle" autocomplete="off" placeholder="Make / model / year"></label>
+        </div>
+        <div class="formRow">
+          <label><span>Preferred date</span><input name="Preferred date" type="date"></label>
+          <label><span>Preferred time</span>
+            <select name="Preferred time">
+              <option value="">Any time</option>
+              <option>Morning</option>
+              <option>Midday</option>
+              <option>Afternoon</option>
+            </select>
+          </label>
+        </div>
+        <div class="formRow">
+          <label><span>Registration</span><input name="Registration" autocomplete="off" placeholder="Optional"></label>
           <label><span>Service</span>
             <select name="Service">
               <option>Logbook servicing</option>
@@ -460,7 +476,7 @@
           </label>
         </div>
         <label><span>What do you need looked at?</span><textarea name="Details" rows="4" placeholder="Tell us what the car is doing or what service you need"></textarea></label>
-        <button class="btn primary formSubmit" type="submit">Request a booking →</button>
+        <button class="btn primary formSubmit" type="submit">Prepare booking request →</button>
         <p class="demoFormStatus" id="demoFormStatus" role="status" aria-live="polite"></p>
         <p class="formNote">Prefer to speak to someone? Call <a href="tel:0883412199">08 8341 2199</a>.</p>
       </form>
