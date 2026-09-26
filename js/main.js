@@ -376,3 +376,128 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     preferred_date:(fd.get('Preferred date')||'').toString()
   });
 },{capture:true});
+
+
+/* =========================================
+   INTERACTIVE SERVICE EXPLORER
+========================================= */
+(() => {
+  const explorer=document.getElementById('serviceExplorer');
+  if(!explorer)return;
+
+  const tabs=[...explorer.querySelectorAll('.serviceExplorerTab')];
+  const image=document.getElementById('serviceExplorerImage');
+  const mode=document.getElementById('serviceExplorerMode');
+  const kicker=document.getElementById('serviceExplorerKicker');
+  const title=document.getElementById('serviceExplorerTitle');
+  const copy=document.getElementById('serviceExplorerText');
+  const cta=document.getElementById('serviceExplorerCta');
+  const progress=[...explorer.querySelectorAll('.serviceExplorerProgress i')];
+  const hotspots=[...explorer.querySelectorAll('.explorerHotspot')];
+
+  const scenes={
+    servicing:{
+      mode:'01 · Scheduled care',
+      kicker:'Logbook servicing & maintenance',
+      title:'Keep it serviced. Keep it reliable.',
+      text:'Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to keep your vehicle running reliably.',
+      cta:'Book servicing →',
+      image:'https://images.pexels.com/photos/10490621/pexels-photo-10490621.jpeg?auto=compress&cs=tinysrgb&w=1800',
+      pos:'center 48%',
+      hotspots:['Engine','Oil & filter','Service point']
+    },
+    brakes:{
+      mode:'02 · Safety systems',
+      kicker:'Brakes & clutch',
+      title:'Stopping power checked properly.',
+      text:'Brake pads, rotors and stopping performance checked properly so your vehicle stays safe, predictable and responsive.',
+      cta:'Book a brake check →',
+      image:'https://images.pexels.com/photos/6870299/pexels-photo-6870299.jpeg?auto=compress&cs=tinysrgb&w=1800',
+      pos:'center 48%',
+      hotspots:['Rotor','Caliper','Inspection']
+    },
+    diagnostics:{
+      mode:'03 · Fault finding',
+      kicker:'Advanced vehicle diagnostics',
+      title:'Find the issue before replacing parts.',
+      text:'Modern scanning and fault finding helps identify the real problem before unnecessary parts are replaced.',
+      cta:'Book diagnostics →',
+      image:'https://nextechautorepairs.com.au/wp-content/uploads/2020/04/service-tab.png',
+      pos:'58% 52%',
+      hotspots:['Engine','Systems scan','Fault data']
+    },
+    suspension:{
+      mode:'04 · Ride & handling',
+      kicker:'Steering & suspension',
+      title:'Restore comfort, handling and control.',
+      text:'Inspection and repair of steering and suspension components to improve ride quality, steering feel and road control.',
+      cta:'Book suspension inspection →',
+      image:'https://images.pexels.com/photos/34277924/pexels-photo-34277924.jpeg?auto=compress&cs=tinysrgb&w=1800',
+      pos:'center 47%',
+      hotspots:['Strut','Hub','Mount']
+    },
+    transmission:{
+      mode:'05 · Driveline',
+      kicker:'Transmission service & repair',
+      title:'Smooth power delivery starts underneath.',
+      text:'Transmission and driveline servicing, diagnosis and repair to keep power delivery smooth and dependable.',
+      cta:'Book transmission service →',
+      image:'https://nextechautorepairs.com.au/wp-content/uploads/2023/07/1_0x0_790x520_0x520_bad-driving-habits-gearstick-1.jpg',
+      pos:'center',
+      hotspots:['Driveline','Transmission','Inspection']
+    },
+    tyres:{
+      mode:'06 · Road contact',
+      kicker:'Tyres & wheel care',
+      title:'Everything starts where the car meets the road.',
+      text:'Tyre replacement, wear checks and balancing help maintain grip, braking performance and a smoother drive.',
+      cta:'Book tyre service →',
+      image:'https://nextechautorepairs.com.au/wp-content/uploads/2020/03/pexels-anna-shvets-4315574.jpg',
+      pos:'center 48%',
+      hotspots:['Tyre','Wear','Balance']
+    }
+  };
+
+  let active='servicing';
+
+  function setScene(key,track=true){
+    const scene=scenes[key];
+    if(!scene||key===active&&track)return;
+
+    explorer.classList.add('is-switching');
+
+    setTimeout(()=>{
+      active=key;
+      explorer.dataset.mode=key;
+      image.style.backgroundImage='url("'+scene.image+'")';
+      image.style.backgroundPosition=scene.pos;
+      mode.textContent=scene.mode;
+      kicker.textContent=scene.kicker;
+      title.textContent=scene.title;
+      copy.textContent=scene.text;
+      cta.textContent=scene.cta;
+
+      tabs.forEach(tab=>{
+        const selected=tab.dataset.explorerMode===key;
+        tab.classList.toggle('active',selected);
+        tab.setAttribute('aria-selected',String(selected));
+      });
+
+      progress.forEach((bar,i)=>bar.classList.toggle('active',i===Object.keys(scenes).indexOf(key)));
+      hotspots.forEach((spot,i)=>{
+        const label=spot.querySelector('b');
+        if(label)label.textContent=scene.hotspots[i]||'';
+      });
+
+      explorer.classList.remove('is-switching');
+
+      if(track && typeof nextechTrack==='function'){
+        nextechTrack('service_explorer_select',{service:key});
+      }
+    },180);
+  }
+
+  tabs.forEach(tab=>tab.addEventListener('click',()=>setScene(tab.dataset.explorerMode)));
+
+  progress[0]?.classList.add('active');
+})();
