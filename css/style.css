@@ -2312,3 +2312,153 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     height:34px;
   }
 }
+
+
+/* =========================================
+   BUSINESS VALUE POLISH
+   Adds proof, navigation and conversion UX without redesigning ea34117.
+========================================= */
+
+/* Active navigation section */
+.navlinks a.active{
+  color:#fff;
+}
+.navlinks a.active::after{
+  right:0;
+  box-shadow:0 0 12px rgba(85,197,255,.50);
+}
+
+/* Review rotation controls */
+.reviewControls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:14px;
+  color:#71838e;
+  font-size:10px;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+.reviewDot{
+  width:8px;
+  height:8px;
+  padding:0;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.22);
+  background:transparent;
+  cursor:pointer;
+  transition:.25s ease;
+}
+.reviewDot.active{
+  width:24px;
+  border-radius:99px;
+  background:var(--blue);
+  border-color:var(--blue);
+  box-shadow:0 0 12px rgba(85,197,255,.42);
+}
+.reviewControls span{
+  margin-left:5px;
+}
+
+/* Location section */
+.locationSection{
+  padding-top:80px;
+}
+.locationGrid{
+  display:grid;
+  grid-template-columns:minmax(0,1.45fr) minmax(320px,.55fr);
+  gap:16px;
+  align-items:stretch;
+}
+.mapCard{
+  min-height:470px;
+  overflow:hidden;
+  border-radius:26px;
+  border:1px solid var(--line);
+  background:#0b1015;
+  box-shadow:var(--shadow);
+}
+.mapCard iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:470px;
+  border:0;
+  filter:grayscale(.8) invert(.90) contrast(.86) brightness(.72) saturate(.55);
+}
+.locationInfo{
+  padding:30px;
+  border-radius:26px;
+  border:1px solid var(--line);
+  background:
+    radial-gradient(circle at 85% 0%,rgba(85,197,255,.11),transparent 27%),
+    linear-gradient(180deg,#101820,#0a1015);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.locationBadge{
+  width:max-content;
+  padding:9px 12px;
+  border-radius:999px;
+  border:1px solid rgba(85,197,255,.20);
+  color:#a9dbf1;
+  background:rgba(85,197,255,.05);
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.locationInfo h3{
+  margin:18px 0 4px;
+  font-size:36px;
+  letter-spacing:-.045em;
+}
+.locationInfo>p{
+  margin:0;
+  color:#9cacb5;
+}
+.locationHours{
+  margin-top:24px;
+  display:grid;
+  gap:0;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.locationHours>div{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding:13px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  font-size:13px;
+}
+.locationHours span{color:#80919c}
+.locationHours strong{font-weight:750}
+
+/* Conversion form clearer on completion */
+.bookingForm.formPrepared{
+  border-color:rgba(104,240,170,.22);
+  box-shadow:0 0 0 3px rgba(104,240,170,.035);
+}
+
+@media(max-width:1000px){
+  .locationGrid{
+    grid-template-columns:1fr;
+  }
+  .mapCard,.mapCard iframe{
+    min-height:390px;
+  }
+}
+@media(max-width:700px){
+  .reviewControls{
+    display:none;
+  }
+  .mapCard,.mapCard iframe{
+    min-height:320px;
+  }
+  .locationInfo{
+    padding:22px;
+  }
+  .locationInfo h3{
+    font-size:30px;
+  }
+}
