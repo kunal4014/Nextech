@@ -10,6 +10,7 @@ const textEl=document.getElementById('storyText');
 const ey=document.getElementById('storyEy');
 const serviceSteps=[...document.querySelectorAll('.serviceStep')];
 const serviceProgressBar=document.getElementById('serviceProgressBar');
+const videoPowerNotice=document.getElementById('videoPowerNotice');
 
 const videoScenes=[
   {
@@ -77,11 +78,46 @@ textEl.style.transition='opacity .22s ease';
 ey.style.transition='opacity .22s ease';
 
 if(heroVideo){
-  heroVideo.addEventListener('loadedmetadata',syncToVideo);
+  heroVideo.muted=true;
+  heroVideo.defaultMuted=true;
+  heroVideo.setAttribute('muted','');
+  heroVideo.setAttribute('playsinline','');
+  heroVideo.setAttribute('webkit-playsinline','');
+
+  const hidePowerNotice=()=>videoPowerNotice?.classList.remove('show');
+  const showPowerNotice=()=>videoPowerNotice?.classList.add('show');
+
+  const tryHeroPlay=()=>{
+    const attempt=heroVideo.play();
+    if(attempt&&typeof attempt.then==='function'){
+      attempt.then(hidePowerNotice).catch(showPowerNotice);
+    }
+  };
+
+  heroVideo.addEventListener('loadedmetadata',()=>{
+    syncToVideo();
+    tryHeroPlay();
+  });
+  heroVideo.addEventListener('canplay',tryHeroPlay,{once:true});
   heroVideo.addEventListener('timeupdate',syncToVideo);
-  heroVideo.addEventListener('play',syncToVideo);
+  heroVideo.addEventListener('play',()=>{
+    hidePowerNotice();
+    syncToVideo();
+  });
   heroVideo.addEventListener('seeked',syncToVideo);
+
+  videoPowerNotice?.addEventListener('click',tryHeroPlay);
+
+  /* iOS Low Power Mode can reject autoplay. The first real touch is
+     a valid user gesture, so use it to start motion without a play icon. */
+  const resumeOnFirstGesture=()=>{
+    if(heroVideo.paused) tryHeroPlay();
+  };
+  exp?.addEventListener('touchstart',resumeOnFirstGesture,{passive:true,once:true});
+  exp?.addEventListener('pointerdown',resumeOnFirstGesture,{passive:true,once:true});
+
   setInterval(()=>{if(!heroVideo.paused)syncToVideo()},180);
+  tryHeroPlay();
 }
 addEventListener('scroll',parallax,{passive:true});
 addEventListener('resize',parallax);
