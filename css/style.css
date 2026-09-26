@@ -2262,3 +2262,53 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     transform:none;
   }
 }
+
+
+/* Make conversion upgrades clearly visible inside the first viewport */
+.serviceControlLabel{
+  margin-top:17px;
+  margin-bottom:7px;
+  color:#7e929e;
+  font-size:9px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.storyActions + .storyMeta{
+  margin-top:13px;
+}
+@media(min-width:901px){
+  .storyMeta{
+    padding:8px 10px;
+  }
+  .storyMeta>div{
+    padding:0 11px;
+  }
+  .serviceSync{
+    margin-top:0;
+  }
+}
+@media(max-height:850px) and (min-width:901px){
+  .storyTitle{
+    font-size:clamp(48px,5.2vw,78px);
+    margin:12px 0 12px;
+  }
+  .storyText{
+    line-height:1.55;
+  }
+  .storyActions{
+    margin-top:17px;
+  }
+  .storyMeta{
+    margin-top:11px;
+  }
+  .serviceControlLabel{
+    margin-top:12px;
+  }
+  .serviceStep{
+    padding:8px 11px;
+  }
+  .serviceStepNum{
+    width:34px;
+    height:34px;
+  }
+}
