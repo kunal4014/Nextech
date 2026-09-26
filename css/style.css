@@ -1125,3 +1125,596 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .whyProofStats{grid-template-columns:1fr}
   .whyReason{min-height:0}
 }
+
+/* =========================================
+   RESPONSIVE / DYNAMIC MOBILE SIZING
+   Keeps desktop unchanged; scales phone/tablet by viewport
+========================================= */
+
+/* Tablet / small laptop */
+@media (max-width: 1024px){
+  :root{
+    --mobile-pad:clamp(14px,3vw,28px);
+  }
+
+  .wrap{
+    width:min(calc(100% - (var(--mobile-pad) * 2)),var(--max));
+  }
+
+  .navin{
+    padding-inline:0;
+  }
+
+  .brandLogo{
+    width:clamp(145px,20vw,180px);
+    max-height:58px;
+  }
+
+  .btn{
+    padding:clamp(10px,1.5vw,13px) clamp(14px,2vw,18px);
+    font-size:clamp(13px,1.5vw,15px);
+  }
+
+  .section,
+  .servicesCinema{
+    padding-top:clamp(58px,8vw,82px);
+    padding-bottom:clamp(58px,8vw,82px);
+  }
+
+  .sectionHead,
+  .servicesIntro{
+    gap:clamp(18px,3vw,32px);
+  }
+
+  .section h2,
+  .servicesIntro h2{
+    font-size:clamp(38px,6vw,64px);
+  }
+
+  .serviceChapter.serviceScene,
+  .serviceChapter.serviceScene .chapterVisual{
+    min-height:clamp(500px,66vw,590px);
+  }
+
+  .sceneCaption h3,
+  .serviceDiag2.diagFull .diagCaption h3{
+    font-size:clamp(38px,5.8vw,58px);
+  }
+
+  .whyProof{
+    padding:clamp(22px,3vw,30px);
+  }
+}
+
+/* Phone / compact tablet */
+@media (max-width: 700px){
+  html{
+    scroll-padding-top:104px;
+  }
+
+  body{
+    font-size:clamp(14px,3.8vw,16px);
+  }
+
+  .wrap{
+    width:calc(100% - clamp(24px,6vw,36px));
+  }
+
+  /* Top utility bar */
+  .utilityBar{
+    height:34px;
+  }
+
+  .utilityIn{
+    height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-inline:6px;
+  }
+
+  .utilityItem.phone{
+    font-size:clamp(10px,2.9vw,12px);
+  }
+
+  .utilityItem.hours,
+  .utilityItem.address{
+    display:none;
+  }
+
+  /* Main mobile nav */
+  .nav{
+    inset:34px 0 auto;
+  }
+
+  .navin{
+    height:70px;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:10px;
+  }
+
+  .brandLogo{
+    width:clamp(122px,37vw,155px);
+    max-width:100%;
+    height:auto;
+  }
+
+  .navcta{
+    gap:8px;
+  }
+
+  .navcta .btn.primary{
+    display:none;
+  }
+
+  .menu{
+    display:grid;
+    place-items:center;
+    width:clamp(42px,11vw,48px);
+    height:clamp(42px,11vw,48px);
+  }
+
+  .mobileMenu{
+    top:104px;
+    left:12px;
+    right:12px;
+    max-height:calc(100dvh - 116px);
+    overflow:auto;
+  }
+
+  /* Hero adapts to both phone width AND phone height */
+  .scrollExperience{
+    height:clamp(115dvh,140dvh,150dvh);
+  }
+
+  .stage{
+    top:104px;
+    height:calc(100dvh - 104px);
+    min-height:0;
+  }
+
+  .stageInner{
+    height:100%;
+    padding-top:clamp(10px,2.5dvh,20px);
+  }
+
+  .storyCopy{
+    width:100%;
+    max-width:100%;
+    padding:clamp(10px,2dvh,18px) 0 14px;
+  }
+
+  .ey{
+    font-size:clamp(9px,2.5vw,11px);
+    letter-spacing:.17em;
+  }
+
+  .ey:before{
+    width:clamp(24px,8vw,34px);
+  }
+
+  .storyTitle{
+    max-width:min(92vw,560px);
+    font-size:clamp(42px,12vw,58px);
+    line-height:.91;
+    margin:clamp(10px,2dvh,16px) 0 clamp(10px,2dvh,16px);
+  }
+
+  .storyText{
+    max-width:92vw;
+    font-size:clamp(13px,3.7vw,16px);
+    line-height:1.55;
+  }
+
+  .storyActions{
+    margin-top:clamp(14px,2.2dvh,20px);
+    gap:8px;
+  }
+
+  .storyActions .btn{
+    padding:11px 15px;
+    font-size:13px;
+  }
+
+  .serviceSync{
+    width:100%;
+    max-width:100%;
+    margin-top:clamp(12px,2dvh,16px);
+    gap:6px;
+  }
+
+  .serviceStep{
+    grid-template-columns:38px minmax(0,1fr);
+    gap:10px;
+    padding:9px 10px;
+    border-radius:12px;
+  }
+
+  .serviceStepNum{
+    width:34px;
+    height:34px;
+    font-size:9px;
+  }
+
+  .serviceStepText strong{
+    font-size:clamp(12px,3.4vw,14px);
+  }
+
+  .serviceStepText span{
+    font-size:clamp(9px,2.8vw,11px);
+  }
+
+  .scrollHint{
+    display:none;
+  }
+
+  /* Service introduction */
+  .servicesIntro,
+  .sectionHead{
+    display:block;
+  }
+
+  .servicesIntro h2,
+  .section h2{
+    font-size:clamp(38px,11vw,52px);
+    line-height:.94;
+    margin-top:10px;
+  }
+
+  .servicesIntro p,
+  .sectionHead>p{
+    margin-top:18px;
+    font-size:14px;
+    line-height:1.62;
+  }
+
+  /* Full service scenes */
+  .serviceChapters{
+    gap:16px;
+    margin-top:24px;
+  }
+
+  .serviceChapter.serviceScene,
+  .serviceChapter.serviceScene .chapterVisual,
+  .serviceDiag2.diagFull,
+  .serviceDiag2.diagFull .chapterVisual{
+    min-height:clamp(430px,118vw,540px);
+    border-radius:20px;
+  }
+
+  .serviceChapter.serviceScene .chapterVisual:after{
+    transform:scale(1.02);
+  }
+
+  .sceneTag{
+    top:14px !important;
+    left:14px !important;
+    max-width:calc(100% - 28px);
+    padding:8px 10px;
+    font-size:8px;
+  }
+
+  .sceneCaption,
+  .serviceChapter.serviceScene .sceneCaption,
+  .serviceDiag2.diagFull .diagCaption{
+    left:18px !important;
+    right:18px !important;
+    bottom:18px !important;
+    max-width:none;
+  }
+
+  .sceneCaption h3,
+  .serviceDiag2.diagFull .diagCaption h3{
+    font-size:clamp(34px,10vw,44px);
+    line-height:.94;
+    margin-bottom:9px;
+  }
+
+  .sceneCaption p,
+  .serviceDiag2.diagFull .diagCaption p{
+    font-size:clamp(12px,3.5vw,14px);
+    line-height:1.55;
+  }
+
+  .sceneCaption a,
+  .serviceDiag2.diagFull .diagCaption a{
+    margin-top:14px;
+    font-size:13px;
+  }
+
+  .serviceDiag2.diagFull .diagOverlay{
+    top:14px;
+    right:14px;
+    width:min(48vw,205px);
+    padding:11px 12px;
+    border-radius:14px;
+  }
+
+  .serviceDiag2.diagFull .diagOverlay small{
+    font-size:8px;
+    margin-bottom:5px;
+  }
+
+  .serviceDiag2.diagFull .diagOverlay i{
+    padding:6px 0;
+    font-size:10px;
+  }
+
+  .hotspot{
+    font-size:8px;
+  }
+
+  .hotspot span{
+    display:none;
+  }
+
+  /* More services */
+  .moreServices{
+    margin-top:24px;
+    padding-top:18px;
+  }
+
+  .moreServicesHead{
+    display:block;
+    margin-bottom:12px;
+  }
+
+  .moreServicesHead strong{
+    display:block;
+    margin-top:5px;
+    font-size:18px;
+  }
+
+  .moreServicesGrid{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+
+  .moreService{
+    padding:14px;
+    border-radius:14px;
+  }
+
+  /* Process timeline */
+  .processSection{
+    padding-top:clamp(44px,10vw,58px);
+    padding-bottom:clamp(52px,12vw,68px);
+  }
+
+  .processSection .processHead{
+    margin-bottom:18px;
+  }
+
+  .processTimeline{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .processStage{
+    padding:20px 18px 18px 72px;
+    border-radius:16px;
+  }
+
+  .processMarker{
+    left:16px;
+    top:17px;
+  }
+
+  .processMarker span{
+    width:34px;
+    height:34px;
+  }
+
+  .processIcon{
+    width:36px;
+    height:36px;
+  }
+
+  .processStage strong{
+    font-size:19px;
+  }
+
+  .processStage p{
+    font-size:12px;
+    line-height:1.52;
+  }
+
+  /* Why Nextech */
+  .whySection{
+    padding-top:clamp(52px,12vw,70px);
+  }
+
+  .whyLayout{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .whyProof{
+    min-height:0;
+    padding:20px;
+    border-radius:20px;
+  }
+
+  .whyRating{
+    font-size:clamp(54px,18vw,78px);
+  }
+
+  .whyProofTop p{
+    font-size:13px;
+  }
+
+  .whyProofStats{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:7px;
+    margin:20px 0;
+  }
+
+  .whyProofStats>div{
+    padding:11px 9px;
+    min-width:0;
+  }
+
+  .whyProofStats strong{
+    font-size:clamp(20px,6vw,26px);
+  }
+
+  .whyProofStats span{
+    font-size:9px;
+  }
+
+  .whyReasons{
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+
+  .whyReason{
+    min-height:0;
+    grid-template-columns:42px minmax(0,1fr);
+    gap:12px;
+    padding:18px 16px;
+    border-radius:16px;
+  }
+
+  .whyReasonIcon{
+    width:40px;
+    height:40px;
+    border-radius:11px;
+    font-size:17px;
+  }
+
+  .whyReason h3{
+    padding-right:22px;
+    font-size:18px;
+    line-height:1.15;
+    margin-bottom:7px;
+  }
+
+  .whyReason p{
+    font-size:12px;
+    line-height:1.55;
+  }
+
+  /* Reviews */
+  .reviews{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .review{
+    padding:20px;
+    border-radius:18px;
+  }
+
+  /* Booking/contact */
+  .contact{
+    grid-template-columns:1fr;
+    gap:20px;
+    padding:20px;
+    border-radius:20px;
+  }
+
+  .bookingForm{
+    padding:16px;
+    border-radius:16px;
+  }
+
+  .formRow{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .bookingForm input,
+  .bookingForm select,
+  .bookingForm textarea{
+    font-size:16px; /* prevents iOS zoom on focus */
+    padding:13px;
+  }
+
+  .formSubmit{
+    width:100%;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 390px){
+  .wrap{
+    width:calc(100% - 20px);
+  }
+
+  .brandLogo{
+    width:118px;
+  }
+
+  .storyTitle{
+    font-size:clamp(38px,11.8vw,46px);
+  }
+
+  .storyActions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .storyActions .btn{
+    width:100%;
+    padding-inline:10px;
+  }
+
+  .serviceStep{
+    grid-template-columns:34px minmax(0,1fr);
+  }
+
+  .serviceStepNum{
+    width:30px;
+    height:30px;
+  }
+
+  .whyProofStats{
+    grid-template-columns:1fr;
+  }
+
+  .serviceDiag2.diagFull .diagOverlay{
+    width:180px;
+  }
+}
+
+/* Short landscape phones */
+@media (max-width: 900px) and (max-height: 520px) and (orientation: landscape){
+  .utilityBar{
+    display:none;
+  }
+
+  .nav{
+    inset:0 0 auto;
+  }
+
+  .navin{
+    height:60px;
+  }
+
+  .brandLogo{
+    width:125px;
+    max-height:48px;
+  }
+
+  .stage{
+    top:60px;
+    height:calc(100dvh - 60px);
+  }
+
+  .scrollExperience{
+    height:120dvh;
+  }
+
+  .storyTitle{
+    font-size:clamp(34px,7vw,50px);
+  }
+
+  .storyText{
+    font-size:12px;
+    max-width:52vw;
+  }
+
+  .serviceSync{
+    max-width:50vw;
+  }
+}
