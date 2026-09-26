@@ -1882,7 +1882,6 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   border-bottom-color:rgba(255,255,255,.10);
   box-shadow:0 14px 38px rgba(0,0,0,.22);
 }
-.nav.is-scrolled .navin{height:68px}
 .nav.is-scrolled .brandLogo{
   width:168px;
   max-height:55px;
@@ -1985,7 +1984,6 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 }
 
 @media(max-width:900px){
-  .nav.is-scrolled .navin{height:64px}
   .nav.is-scrolled .brandLogo{
     width:145px;
     max-height:50px;
@@ -2008,7 +2006,6 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 }
 
 @media(max-width:700px){
-  .nav.is-scrolled .navin{height:62px}
   .nav.is-scrolled .brandLogo{width:132px}
 
   .reviewTrustBar{
