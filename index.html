@@ -140,6 +140,70 @@
   </div>
 </section>
 
+
+<section class="section serviceExplorerSection" id="service-explorer">
+  <div class="wrap">
+    <div class="serviceExplorerHead">
+      <div>
+        <div class="ey">Explore the workshop</div>
+        <h2>Choose a system.<br>See what we work on.</h2>
+      </div>
+      <p>Tap a service to change the vehicle view. Each mode highlights the kind of work Nextech can inspect, service or repair in the workshop.</p>
+    </div>
+
+    <div class="serviceExplorer" id="serviceExplorer" data-mode="servicing">
+      <div class="serviceExplorerNav" role="tablist" aria-label="Explore Nextech services">
+        <button class="serviceExplorerTab active" type="button" role="tab" aria-selected="true" data-explorer-mode="servicing">
+          <span>01</span><div><strong>Servicing</strong><small>Oil · filters · scheduled care</small></div>
+        </button>
+        <button class="serviceExplorerTab" type="button" role="tab" aria-selected="false" data-explorer-mode="brakes">
+          <span>02</span><div><strong>Brakes</strong><small>Pads · rotors · stopping performance</small></div>
+        </button>
+        <button class="serviceExplorerTab" type="button" role="tab" aria-selected="false" data-explorer-mode="diagnostics">
+          <span>03</span><div><strong>Diagnostics</strong><small>Fault finding · system scan</small></div>
+        </button>
+        <button class="serviceExplorerTab" type="button" role="tab" aria-selected="false" data-explorer-mode="suspension">
+          <span>04</span><div><strong>Suspension</strong><small>Ride · steering · control</small></div>
+        </button>
+        <button class="serviceExplorerTab" type="button" role="tab" aria-selected="false" data-explorer-mode="transmission">
+          <span>05</span><div><strong>Transmission</strong><small>Driveline · service · repair</small></div>
+        </button>
+        <button class="serviceExplorerTab" type="button" role="tab" aria-selected="false" data-explorer-mode="tyres">
+          <span>06</span><div><strong>Tyres</strong><small>Road contact · balancing · wear</small></div>
+        </button>
+      </div>
+
+      <div class="serviceExplorerStage">
+        <div class="serviceExplorerImage" id="serviceExplorerImage"></div>
+        <div class="serviceExplorerShade"></div>
+        <div class="serviceExplorerScan" aria-hidden="true"></div>
+
+        <div class="serviceExplorerTop">
+          <span class="serviceExplorerMode" id="serviceExplorerMode">01 · Scheduled care</span>
+          <span class="serviceExplorerStatus"><i></i> Workshop capability</span>
+        </div>
+
+        <div class="serviceExplorerHotspots" aria-hidden="true">
+          <span class="explorerHotspot eh1"><i></i><b>Engine</b></span>
+          <span class="explorerHotspot eh2"><i></i><b>Inspection</b></span>
+          <span class="explorerHotspot eh3"><i></i><b>Service point</b></span>
+        </div>
+
+        <div class="serviceExplorerCopy">
+          <small id="serviceExplorerKicker">Logbook servicing & maintenance</small>
+          <h3 id="serviceExplorerTitle">Keep it serviced. Keep it reliable.</h3>
+          <p id="serviceExplorerText">Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to keep your vehicle running reliably.</p>
+          <a href="#contact" id="serviceExplorerCta" data-track="explorer_book">Book servicing →</a>
+        </div>
+
+        <div class="serviceExplorerProgress" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="servicesCinema" id="services">
   <div class="wrap">
     <div class="servicesIntro">
