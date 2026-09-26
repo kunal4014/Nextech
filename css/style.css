@@ -2462,3 +2462,360 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     font-size:30px;
   }
 }
+
+
+/* =========================================
+   INTERACTIVE SERVICE EXPLORER
+========================================= */
+.serviceExplorerSection{
+  padding:104px 0 112px;
+  background:
+    radial-gradient(circle at 80% 12%,rgba(85,197,255,.07),transparent 24%),
+    linear-gradient(180deg,#05080b,#080d11 48%,#06090d);
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.serviceExplorerHead{
+  display:grid;
+  grid-template-columns:.92fr 1.08fr;
+  gap:58px;
+  align-items:end;
+  margin-bottom:36px;
+}
+.serviceExplorerHead h2{
+  margin:14px 0 0;
+  font-size:clamp(44px,5.6vw,78px);
+  line-height:.92;
+  letter-spacing:-.062em;
+}
+.serviceExplorerHead>p{
+  margin:0;
+  max-width:700px;
+  color:#9dabb4;
+  font-size:16px;
+  line-height:1.75;
+}
+.serviceExplorer{
+  display:grid;
+  grid-template-columns:minmax(260px,.38fr) minmax(0,1.62fr);
+  gap:14px;
+  min-height:660px;
+}
+.serviceExplorerNav{
+  display:grid;
+  gap:8px;
+  align-content:stretch;
+}
+.serviceExplorerTab{
+  width:100%;
+  display:grid;
+  grid-template-columns:42px 1fr;
+  gap:13px;
+  align-items:center;
+  text-align:left;
+  padding:15px 16px;
+  border-radius:17px;
+  border:1px solid rgba(255,255,255,.075);
+  background:linear-gradient(180deg,#0e151b,#090e12);
+  color:#f2f6f8;
+  cursor:pointer;
+  transition:transform .22s ease,border-color .22s ease,background .22s ease,opacity .22s ease;
+  opacity:.62;
+}
+.serviceExplorerTab:hover{
+  opacity:.9;
+  transform:translateX(3px);
+  border-color:rgba(255,255,255,.14);
+}
+.serviceExplorerTab.active{
+  opacity:1;
+  transform:translateX(6px);
+  border-color:rgba(85,197,255,.42);
+  background:linear-gradient(180deg,#101c24,#0a1218);
+  box-shadow:inset 3px 0 0 var(--blue),0 16px 38px rgba(0,0,0,.22);
+}
+.serviceExplorerTab>span{
+  width:38px;height:38px;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.09);
+  background:#ffffff05;
+  color:#91a9b6;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+.serviceExplorerTab.active>span{
+  background:#fff;
+  color:#081017;
+  border-color:#fff;
+}
+.serviceExplorerTab strong{
+  display:block;
+  margin-bottom:4px;
+  font-size:14px;
+}
+.serviceExplorerTab small{
+  display:block;
+  color:#80929d;
+  font-size:10px;
+  line-height:1.4;
+}
+
+.serviceExplorerStage{
+  position:relative;
+  min-height:660px;
+  border-radius:28px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.085);
+  background:#070b0f;
+  box-shadow:0 30px 80px rgba(0,0,0,.36);
+  isolation:isolate;
+}
+.serviceExplorerImage{
+  position:absolute;
+  inset:-2%;
+  background-image:url('https://images.pexels.com/photos/10490621/pexels-photo-10490621.jpeg?auto=compress&cs=tinysrgb&w=1800');
+  background-size:cover;
+  background-position:center;
+  filter:saturate(.92) contrast(1.05) brightness(.82);
+  transform:scale(1.03);
+  transition:
+    opacity .34s ease,
+    transform 1.1s cubic-bezier(.2,.8,.2,1),
+    filter .5s ease;
+}
+.serviceExplorerStage:hover .serviceExplorerImage{
+  transform:scale(1.065);
+}
+.serviceExplorerShade{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(3,6,9,.70) 0%,rgba(3,6,9,.20) 50%,rgba(3,6,9,.08) 100%),
+    linear-gradient(180deg,rgba(3,6,9,.06) 0%,rgba(3,6,9,.08) 48%,rgba(3,6,9,.86) 100%);
+}
+.serviceExplorerScan{
+  position:absolute;
+  z-index:2;
+  left:8%;right:8%;
+  height:1px;
+  top:25%;
+  opacity:0;
+  background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  box-shadow:0 0 22px rgba(85,197,255,.8);
+}
+.serviceExplorer[data-mode="diagnostics"] .serviceExplorerScan{
+  opacity:1;
+  animation:explorerScan 3.4s ease-in-out infinite;
+}
+@keyframes explorerScan{
+  0%,100%{top:25%;opacity:.2}
+  50%{top:76%;opacity:1}
+}
+
+.serviceExplorerTop{
+  position:absolute;
+  z-index:5;
+  top:20px;left:20px;right:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+}
+.serviceExplorerMode,.serviceExplorerStatus{
+  padding:10px 13px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(5,9,12,.62);
+  backdrop-filter:blur(10px);
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#d4e6ee;
+}
+.serviceExplorerStatus{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.serviceExplorerStatus i{
+  width:7px;height:7px;border-radius:50%;
+  background:#68f0aa;
+  box-shadow:0 0 10px rgba(104,240,170,.7);
+}
+.serviceExplorerCopy{
+  position:absolute;
+  z-index:5;
+  left:36px;
+  right:34px;
+  bottom:44px;
+  max-width:680px;
+}
+.serviceExplorerCopy small{
+  display:block;
+  margin-bottom:9px;
+  color:#b3d7e7;
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.serviceExplorerCopy h3{
+  margin:0 0 13px;
+  font-size:clamp(42px,4.7vw,68px);
+  line-height:.93;
+  letter-spacing:-.06em;
+}
+.serviceExplorerCopy p{
+  margin:0;
+  max-width:610px;
+  color:#c3cfd5;
+  font-size:15px;
+  line-height:1.68;
+}
+.serviceExplorerCopy a{
+  display:inline-block;
+  margin-top:20px;
+  color:#e8f6fc;
+  font-size:14px;
+  font-weight:850;
+}
+.serviceExplorerCopy a::after{
+  content:"";
+  display:block;
+  width:0;
+  height:1px;
+  margin-top:5px;
+  background:var(--blue);
+  transition:width .25s ease;
+}
+.serviceExplorerCopy a:hover::after{width:100%}
+
+.serviceExplorerHotspots{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
+}
+.explorerHotspot{
+  position:absolute;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#d9edf5;
+  font-size:9px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.85;
+  transition:opacity .3s ease,transform .3s ease;
+}
+.explorerHotspot i{
+  width:12px;height:12px;
+  border-radius:50%;
+  border:1px solid rgba(85,197,255,.9);
+  box-shadow:0 0 0 8px rgba(85,197,255,.08),0 0 20px rgba(85,197,255,.24);
+  position:relative;
+}
+.explorerHotspot i::after{
+  content:"";
+  position:absolute;
+  width:3px;height:3px;
+  border-radius:50%;
+  background:var(--blue);
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+}
+.explorerHotspot b{
+  padding:6px 8px;
+  border-radius:9px;
+  background:rgba(5,9,12,.65);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(8px);
+  font-weight:700;
+}
+.eh1{left:58%;top:33%}
+.eh2{left:72%;top:50%}
+.eh3{left:48%;top:57%}
+
+.serviceExplorerProgress{
+  position:absolute;
+  z-index:5;
+  left:36px;
+  right:36px;
+  bottom:20px;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:7px;
+}
+.serviceExplorerProgress i{
+  height:2px;
+  border-radius:99px;
+  background:rgba(255,255,255,.13);
+  transition:background .3s ease,box-shadow .3s ease;
+}
+.serviceExplorerProgress i.active{
+  background:var(--blue);
+  box-shadow:0 0 10px rgba(85,197,255,.45);
+}
+
+.serviceExplorer.is-switching .serviceExplorerImage{
+  opacity:.15;
+  transform:scale(1.01);
+}
+
+@media(max-width:1050px){
+  .serviceExplorer{
+    grid-template-columns:1fr;
+    min-height:0;
+  }
+  .serviceExplorerNav{
+    grid-template-columns:repeat(3,1fr);
+  }
+  .serviceExplorerTab{
+    transform:none!important;
+  }
+  .serviceExplorerStage{
+    min-height:570px;
+  }
+}
+@media(max-width:700px){
+  .serviceExplorerSection{padding:76px 0}
+  .serviceExplorerHead{
+    grid-template-columns:1fr;
+    gap:20px;
+    margin-bottom:26px;
+  }
+  .serviceExplorerNav{
+    display:flex;
+    overflow-x:auto;
+    gap:8px;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    padding-bottom:3px;
+  }
+  .serviceExplorerNav::-webkit-scrollbar{display:none}
+  .serviceExplorerTab{
+    flex:0 0 220px;
+    scroll-snap-align:start;
+  }
+  .serviceExplorerStage{
+    min-height:500px;
+    border-radius:22px;
+  }
+  .serviceExplorerTop{
+    top:14px;left:14px;right:14px;
+  }
+  .serviceExplorerStatus{display:none}
+  .serviceExplorerCopy{
+    left:20px;right:20px;bottom:37px;
+  }
+  .serviceExplorerCopy h3{
+    font-size:38px;
+  }
+  .serviceExplorerHotspots{
+    display:none;
+  }
+  .serviceExplorerProgress{
+    left:20px;right:20px;bottom:16px;
+  }
+}
