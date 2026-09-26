@@ -2156,3 +2156,109 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 .videoPowerNotice{
   display:none !important;
 }
+
+
+/* =========================================
+   EA34117 CONVERSION POLISH
+   Keeps the established visual direction.
+========================================= */
+
+/* Immediate trust proof without crowding the hero */
+.storyMeta{
+  display:grid;
+  grid-template-columns:repeat(4,max-content);
+  gap:0;
+  width:max-content;
+  max-width:100%;
+  margin-top:16px;
+  padding:10px 12px;
+  border-radius:15px;
+  background:rgba(5,10,14,.42);
+  border:1px solid rgba(255,255,255,.075);
+  backdrop-filter:blur(10px);
+}
+.storyMeta>div{
+  padding:0 13px;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+.storyMeta>div:first-child{padding-left:2px}
+.storyMeta>div:last-child{border-right:0;padding-right:2px}
+.storyMeta strong{font-size:15px;line-height:1;color:#f4f9fb}
+.storyMeta span{font-size:9px;margin-top:4px;letter-spacing:.08em;text-transform:uppercase;color:#7f929d}
+
+/* Hero service controls now read as controls rather than static cards */
+.serviceStep{
+  cursor:pointer;
+  user-select:none;
+}
+.serviceStep:hover{
+  opacity:.78;
+  border-color:rgba(85,197,255,.20);
+}
+.serviceStep:focus-visible{
+  outline:2px solid rgba(85,197,255,.75);
+  outline-offset:2px;
+}
+.serviceStep.active{
+  box-shadow:0 13px 34px rgba(0,0,0,.22),inset 2px 0 0 rgba(85,197,255,.78);
+}
+.serviceStep.active .serviceStepText strong{
+  color:#f5fbfe;
+}
+
+/* Reviews keep the existing layout but get a subtle moving spotlight */
+.review{
+  opacity:.66;
+  transform:scale(.985);
+  transition:opacity .45s ease,transform .45s ease,border-color .45s ease,box-shadow .45s ease;
+}
+.review.reviewSpotlight{
+  opacity:1;
+  transform:translateY(-5px) scale(1);
+  border-color:rgba(85,197,255,.26);
+  box-shadow:0 24px 58px rgba(0,0,0,.22),0 0 0 1px rgba(85,197,255,.05) inset;
+}
+
+/* Booking form communicates the next action more clearly */
+.bookingForm::before{
+  content:"Booking request";
+  display:block;
+  font-size:10px;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  color:#9fd6ef;
+  margin-bottom:-2px;
+}
+.formSubmit{
+  min-width:220px;
+}
+.bookingForm input[type="date"]{
+  color-scheme:dark;
+}
+
+@media(max-width:900px){
+  .storyMeta{
+    grid-template-columns:repeat(2,1fr);
+    width:100%;
+    gap:7px;
+    padding:8px;
+  }
+  .storyMeta>div{
+    border:0;
+    padding:8px 9px !important;
+    border-radius:10px;
+    background:rgba(255,255,255,.035);
+  }
+}
+
+@media(max-width:700px){
+  .storyMeta{
+    margin-top:14px;
+  }
+  .storyMeta strong{font-size:14px}
+  .storyMeta span{font-size:8px}
+  .review{opacity:1;transform:none}
+  .review.reviewSpotlight{
+    transform:none;
+  }
+}
