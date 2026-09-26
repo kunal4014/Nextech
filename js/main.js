@@ -296,3 +296,83 @@ demoBookingForm?.addEventListener('submit',e=>{
   const mailto='mailto:nextechautorepairs@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join('\n'));
   setTimeout(()=>{ window.location.href=mailto; },180);
 });
+
+
+/* =========================================
+   BUSINESS VALUE POLISH
+========================================= */
+
+/* Active section indicator in the main navigation */
+const trackedNavLinks=[...document.querySelectorAll('.navlinks a[href^="#"]')];
+const sectionTargets=trackedNavLinks
+  .map(link=>({link,id:link.getAttribute('href').slice(1)}))
+  .map(item=>({...item,section:document.getElementById(item.id)}))
+  .filter(item=>item.section);
+
+if('IntersectionObserver' in window){
+  const navObserver=new IntersectionObserver(entries=>{
+    const visible=entries
+      .filter(e=>e.isIntersecting)
+      .sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if(!visible)return;
+    trackedNavLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+visible.target.id));
+  },{rootMargin:'-34% 0px -54% 0px',threshold:[0,.1,.25,.5]});
+  sectionTargets.forEach(item=>navObserver.observe(item.section));
+}
+
+/* Review controls + pause on hover */
+const reviewWrap=document.querySelector('#reviews .reviews');
+const reviewDots=[...document.querySelectorAll('.reviewDot')];
+let reviewPaused=false;
+reviewWrap?.addEventListener('mouseenter',()=>reviewPaused=true);
+reviewWrap?.addEventListener('mouseleave',()=>reviewPaused=false);
+
+reviewDots.forEach((dot,i)=>dot.addEventListener('click',()=>{
+  reviewSpotlight=i;
+  updateReviewSpotlight();
+  reviewDots.forEach((d,idx)=>d.classList.toggle('active',idx===i));
+  reviewCards[i]?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}));
+
+if(reviewCards.length>1 && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  setInterval(()=>{
+    if(reviewPaused||document.hidden||innerWidth<701)return;
+    reviewSpotlight=(reviewSpotlight+1)%reviewCards.length;
+    updateReviewSpotlight();
+    reviewDots.forEach((d,idx)=>d.classList.toggle('active',idx===reviewSpotlight));
+  },4600);
+}
+
+/* Lightweight analytics hooks.
+   If GA/gtag is connected later these fire automatically; dataLayer also works with GTM. */
+function nextechTrack(eventName,detail={}){
+  const payload={event:eventName,...detail};
+  window.dataLayer=window.dataLayer||[];
+  window.dataLayer.push(payload);
+  if(typeof window.gtag==='function'){
+    window.gtag('event',eventName,detail);
+  }
+  window.dispatchEvent(new CustomEvent('nextech:conversion',{detail:payload}));
+}
+
+document.querySelectorAll('[data-track]').forEach(el=>{
+  el.addEventListener('click',()=>nextechTrack(el.dataset.track,{label:(el.textContent||'').trim()}));
+});
+
+serviceSteps.forEach((step,i)=>{
+  step.addEventListener('click',()=>nextechTrack('hero_service_preview',{
+    service:(step.querySelector('strong')?.textContent||'').trim(),
+    step:i+1
+  }));
+});
+
+/* Extend booking email with contact preferences and record the intent locally. */
+const bookingFormForTracking=document.getElementById('demoBookingForm');
+bookingFormForTracking?.addEventListener('submit',()=>{
+  bookingFormForTracking.classList.add('formPrepared');
+  const fd=new FormData(bookingFormForTracking);
+  nextechTrack('booking_request_prepared',{
+    service:(fd.get('Service')||'').toString(),
+    preferred_date:(fd.get('Preferred date')||'').toString()
+  });
+},{capture:true});
