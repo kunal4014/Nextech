@@ -1,4 +1,3 @@
-<script>
 const menuBtn=document.getElementById('menuBtn');
 const mobileMenu=document.getElementById('mobileMenu');
 menuBtn?.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
@@ -89,5 +88,28 @@ addEventListener('resize',parallax);
 syncToVideo();
 parallax();
 
+/* Workshop process timeline */
+const processTimeline=document.getElementById('processTimeline');
+const processStages=[...document.querySelectorAll('.processStage')];
 
-</script>
+function updateProcessTimeline(){
+  if(!processTimeline||!processStages.length)return;
+
+  const r=processTimeline.getBoundingClientRect();
+  const vh=window.innerHeight||document.documentElement.clientHeight;
+  const start=vh*.84;
+  const end=vh*.30;
+  const raw=(start-r.top)/(start-end+Math.max(0,r.height*.12));
+  const p=Math.max(0,Math.min(1,raw));
+
+  processTimeline.style.setProperty('--process-progress',p.toFixed(3));
+
+  const thresholds=[.06,.30,.54,.78];
+  processStages.forEach((el,i)=>{
+    el.classList.toggle('is-active',p>=thresholds[i]);
+  });
+}
+
+addEventListener('scroll',updateProcessTimeline,{passive:true});
+addEventListener('resize',updateProcessTimeline);
+updateProcessTimeline();
