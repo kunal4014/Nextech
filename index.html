@@ -48,8 +48,8 @@
         <h1 class="storyTitle" id="storyTitle">Reliable repairs.<span>Done properly.</span></h1>
         <p class="storyText" id="storyText">Servicing, diagnostics, brakes and mechanical repairs in Queenstown — with clear advice, quality workmanship and an easier way to book.</p>
         <div class="storyActions">
-          <a class="btn primary" href="#contact">Book a Service</a>
-          <a class="btn" href="#services">View Services</a>
+          <a class="btn primary" href="#contact" data-track="hero_book_service">Book a Service</a>
+          <a class="btn" href="#services" data-track="hero_view_services">View Services</a>
         </div>
         <div class="storyMeta" aria-label="Nextech trust highlights">
           <div><strong>5.0★</strong><span>Google rating</span></div>
@@ -399,6 +399,12 @@
       <article class="review"><div class="stars">★★★★★</div><p>“One of the best workshops in Adelaide. The service is outstanding and the experience feels professional.”</p><strong>Jalawar Singh</strong></article>
       <article class="review"><div class="stars">★★★★★</div><p>“Excellent customer service and a quick, well-handled service to my car. Would definitely come back.”</p><strong>Ronak Sanghani</strong></article>
     </div>
+    <div class="reviewControls" aria-label="Review navigation">
+      <button type="button" class="reviewDot active" aria-label="Show review 1"></button>
+      <button type="button" class="reviewDot" aria-label="Show review 2"></button>
+      <button type="button" class="reviewDot" aria-label="Show review 3"></button>
+      <span>Reviews rotate automatically · hover to pause</span>
+    </div>
   </div>
 </section>
 
@@ -433,6 +439,39 @@
   </div>
 </section>
 
+
+<section class="section locationSection" id="location">
+  <div class="wrap">
+    <div class="sectionHead locationHead">
+      <div><div class="ey">Find the workshop</div><h2>Easy to find on Port Road.</h2></div>
+      <p>113–115 Port Rd, Queenstown SA 5014. Open Monday to Friday 8am–5pm and Saturday 8am–2pm.</p>
+    </div>
+    <div class="locationGrid">
+      <div class="mapCard">
+        <iframe
+          title="Nextech Auto Repairs location"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=113-115%20Port%20Rd%2C%20Queenstown%20SA%205014&output=embed"></iframe>
+      </div>
+      <aside class="locationInfo">
+        <div class="locationBadge">Queenstown · Adelaide</div>
+        <h3>113–115 Port Rd</h3>
+        <p>Queenstown SA 5014</p>
+        <div class="locationHours">
+          <div><span>Mon–Fri</span><strong>8am–5pm</strong></div>
+          <div><span>Saturday</span><strong>8am–2pm</strong></div>
+          <div><span>Sunday</span><strong>Closed</strong></div>
+        </div>
+        <div class="storyActions">
+          <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=113-115%20Port%20Rd%2C%20Queenstown%20SA%205014" target="_blank" rel="noopener" data-track="open_maps">Open in Maps ↗</a>
+          <a class="btn" href="tel:0883412199" data-track="location_call">Call workshop</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="contact">
   <div class="wrap">
     <div class="contact">
@@ -440,7 +479,7 @@
         <div class="ey">Book a service</div>
         <h2>Ready to get it sorted?</h2>
         <p style="margin:14px 0 0;color:var(--muted);line-height:1.75;max-width:620px">Call the workshop, send an email or visit Nextech in Queenstown.</p>
-        <div class="storyActions"><a class="btn primary" href="tel:0883412199">Call 08 8341 2199</a><a class="btn" href="mailto:nextechautorepairs@gmail.com">Email Workshop</a></div>
+        <div class="storyActions"><a class="btn primary" href="tel:0883412199" data-track="contact_call">Call 08 8341 2199</a><a class="btn" href="mailto:nextechautorepairs@gmail.com" data-track="contact_email">Email Workshop</a></div>
       </div>
       <form class="bookingForm" id="demoBookingForm">
         <div class="formRow">
@@ -474,6 +513,22 @@
               <option>Tyres</option>
               <option>Battery / electrical</option>
               <option>General repair</option>
+            </select>
+          </label>
+        </div>
+        <div class="formRow">
+          <label><span>Preferred contact</span>
+            <select name="Preferred contact">
+              <option>Phone</option>
+              <option>Email</option>
+            </select>
+          </label>
+          <label><span>Best time to contact</span>
+            <select name="Best contact time">
+              <option>Any time</option>
+              <option>Morning</option>
+              <option>Midday</option>
+              <option>Afternoon</option>
             </select>
           </label>
         </div>
