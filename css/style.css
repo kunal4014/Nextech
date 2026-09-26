@@ -602,15 +602,15 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 .serviceChapter.serviceScene:hover .chapterVisual:after{transform:scale(1.065)}
 
 .oilScene .chapterVisual:after{
-  background-image:url('https://images.pexels.com/photos/10490621/pexels-photo-10490621.jpeg?cs=srgb&dl=pexels-fatih-erden-141946798-10490621.jpg&fm=jpg');
+  background-image:url('https://images.pexels.com/photos/10490621/pexels-photo-10490621.jpeg?auto=compress&cs=tinysrgb&w=1600');
   background-position:center 48%
 }
 .brakeScene .chapterVisual:after{
-  background-image:url('https://images.pexels.com/photos/6870299/pexels-photo-6870299.jpeg?cs=srgb&dl=pexels-gustavo-fring-6870299.jpg&fm=jpg');
+  background-image:url('https://images.pexels.com/photos/6870299/pexels-photo-6870299.jpeg?auto=compress&cs=tinysrgb&w=1600');
   background-position:center 48%
 }
 .suspensionScene .chapterVisual:after{
-  background-image:url('https://images.pexels.com/photos/34277924/pexels-photo-34277924.jpeg?cs=srgb&dl=pexels-introspectivedsgn-34277924.jpg&fm=jpg');
+  background-image:url('https://images.pexels.com/photos/34277924/pexels-photo-34277924.jpeg?auto=compress&cs=tinysrgb&w=1600');
   background-position:center 47%
 }
 .serviceDiag2.diagFull .chapterVisual:after{
@@ -1855,5 +1855,208 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .mobileActionBar a{
     min-height:44px;
     font-size:12px;
+  }
+}
+
+/* =========================================
+   CLIENT PITCH POLISH
+========================================= */
+
+/* Header compresses subtly after the hero starts moving */
+.nav,
+.navin,
+.brandLogo,
+.navlinks,
+.navcta .btn{
+  transition:
+    height .28s ease,
+    width .28s ease,
+    max-height .28s ease,
+    padding .28s ease,
+    background .28s ease,
+    border-color .28s ease,
+    box-shadow .28s ease;
+}
+.nav.is-scrolled{
+  background:rgba(4,7,10,.95);
+  border-bottom-color:rgba(255,255,255,.10);
+  box-shadow:0 14px 38px rgba(0,0,0,.22);
+}
+.nav.is-scrolled .navin{height:68px}
+.nav.is-scrolled .brandLogo{
+  width:168px;
+  max-height:55px;
+}
+.nav.is-scrolled .navcta .btn{
+  padding:10px 16px;
+}
+
+/* Trust proof above testimonials */
+.reviewTrustBar{
+  display:grid;
+  grid-template-columns:auto 1px auto minmax(260px,1fr);
+  align-items:center;
+  gap:22px;
+  margin:0 0 14px;
+  padding:18px 22px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 92% 0%,rgba(85,197,255,.07),transparent 25%),
+    linear-gradient(180deg,#0f161d,#0a1015);
+}
+.reviewTrustBar>div{
+  display:flex;
+  align-items:baseline;
+  gap:9px;
+  white-space:nowrap;
+}
+.reviewTrustBar strong{
+  font-size:25px;
+  letter-spacing:-.04em;
+}
+.reviewTrustBar span{
+  color:#8397a2;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.10em;
+}
+.reviewTrustBar i{
+  width:1px;
+  height:28px;
+  background:rgba(255,255,255,.10);
+}
+.reviewTrustBar p{
+  margin:0;
+  color:#9aaab4;
+  font-size:12px;
+  line-height:1.5;
+  justify-self:end;
+  max-width:440px;
+}
+.review{
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+.review:hover{
+  transform:translateY(-4px);
+  border-color:rgba(85,197,255,.20);
+  box-shadow:0 20px 45px rgba(0,0,0,.18);
+}
+
+/* Demo form interaction */
+.demoFormStatus{
+  display:none;
+  margin:0;
+  padding:12px 14px;
+  border-radius:12px;
+  background:rgba(104,240,170,.07);
+  border:1px solid rgba(104,240,170,.18);
+  color:#bdf5d5;
+  font-size:12px;
+  line-height:1.5;
+}
+.demoFormStatus.show{
+  display:block;
+}
+
+/* Discreet pitch disclaimer */
+.conceptNote{
+  max-width:680px;
+  text-align:right;
+  color:#63737d;
+}
+
+/* Progressive enhancement: content remains visible without JS */
+.revealItem{
+  opacity:0;
+  transform:translateY(22px);
+  transition:
+    opacity .65s cubic-bezier(.2,.8,.2,1),
+    transform .65s cubic-bezier(.2,.8,.2,1);
+}
+.revealItem.revealed{
+  opacity:1;
+  transform:none;
+}
+
+/* Keep oil/service visual grounded: scanning belongs to diagnostics only */
+.oilScene .sceneSweep{
+  display:none !important;
+}
+
+@media(max-width:900px){
+  .nav.is-scrolled .navin{height:64px}
+  .nav.is-scrolled .brandLogo{
+    width:145px;
+    max-height:50px;
+  }
+
+  .reviewTrustBar{
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .reviewTrustBar>i{display:none}
+  .reviewTrustBar p{
+    grid-column:1/-1;
+    justify-self:start;
+  }
+
+  .conceptNote{
+    max-width:none;
+    text-align:left;
+  }
+}
+
+@media(max-width:700px){
+  .nav.is-scrolled .navin{height:62px}
+  .nav.is-scrolled .brandLogo{width:132px}
+
+  .reviewTrustBar{
+    padding:14px;
+    border-radius:16px;
+  }
+  .reviewTrustBar strong{font-size:22px}
+  .reviewTrustBar span{font-size:9px}
+  .reviewTrustBar p{font-size:11px}
+
+  /* Swipeable review preview on phone */
+  .reviews{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    padding-bottom:4px;
+  }
+  .reviews::-webkit-scrollbar{display:none}
+  .review{
+    flex:0 0 min(86vw,360px);
+    scroll-snap-align:start;
+  }
+
+  .footerin{
+    display:grid;
+    gap:8px;
+    padding-bottom:10px;
+  }
+  .conceptNote{
+    font-size:10px;
+    line-height:1.5;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .revealItem,
+  .review,
+  .nav,
+  .navin,
+  .brandLogo,
+  .navcta .btn{
+    transition:none !important;
+  }
+  .revealItem{
+    opacity:1 !important;
+    transform:none !important;
   }
 }
