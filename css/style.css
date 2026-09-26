@@ -554,3 +554,160 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .serviceDiag2.diagFull .diagCaption h3{font-size:40px}
   .serviceDiag2.diagFull .diagCaption p{font-size:13px;line-height:1.55}
 }
+
+/* =========================================
+   UNIFIED FULL-WIDTH SERVICE SCENES
+========================================= */
+.serviceChapters{display:grid;gap:28px;margin-top:34px}
+.serviceChapter.serviceScene{
+  display:block !important;
+  min-height:660px;
+  border-radius:28px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#071016;
+  box-shadow:0 28px 70px rgba(0,0,0,.28)
+}
+.serviceChapter.serviceScene .chapterVisual{
+  position:relative;
+  min-height:660px;
+  width:100%;
+  overflow:hidden;
+  border-radius:28px;
+  background:#071016;
+  isolation:isolate
+}
+.serviceChapter.serviceScene .chapterVisual:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background:
+    linear-gradient(90deg,rgba(3,6,9,.82) 0%,rgba(3,6,9,.56) 25%,rgba(3,6,9,.14) 54%,rgba(3,6,9,.18) 100%),
+    linear-gradient(180deg,rgba(3,6,9,.04) 0%,rgba(3,6,9,.02) 50%,rgba(3,6,9,.76) 100%);
+  pointer-events:none
+}
+.serviceChapter.serviceScene .chapterVisual:after{
+  content:"";
+  position:absolute;
+  inset:-2%;
+  z-index:1;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  transform:scale(1.025);
+  transition:transform 1.25s cubic-bezier(.2,.8,.2,1),filter .5s ease;
+  filter:saturate(.92) contrast(1.04) brightness(.82)
+}
+.serviceChapter.serviceScene:hover .chapterVisual:after{transform:scale(1.065)}
+
+.oilScene .chapterVisual:after{
+  background-image:url('https://images.pexels.com/photos/10490621/pexels-photo-10490621.jpeg?cs=srgb&dl=pexels-fatih-erden-141946798-10490621.jpg&fm=jpg');
+  background-position:center 48%
+}
+.brakeScene .chapterVisual:after{
+  background-image:url('https://images.pexels.com/photos/6870299/pexels-photo-6870299.jpeg?cs=srgb&dl=pexels-gustavo-fring-6870299.jpg&fm=jpg');
+  background-position:center 48%
+}
+.suspensionScene .chapterVisual:after{
+  background-image:url('https://images.pexels.com/photos/34277924/pexels-photo-34277924.jpeg?cs=srgb&dl=pexels-introspectivedsgn-34277924.jpg&fm=jpg');
+  background-position:center 47%
+}
+.serviceDiag2.diagFull .chapterVisual:after{
+  background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2020/04/service-tab.png') !important;
+  background-size:84% auto !important;
+  background-position:58% 52% !important;
+  filter:drop-shadow(0 34px 46px rgba(0,0,0,.48)) !important;
+  transform:scale(1.08) !important
+}
+.serviceDiag2.diagFull:hover .chapterVisual:after{transform:scale(1.11) !important}
+
+.sceneShade{position:absolute;inset:0;z-index:3;pointer-events:none}
+.sceneTag{
+  position:absolute;z-index:6;top:28px;left:30px;
+  padding:10px 13px;border-radius:999px;
+  background:rgba(5,9,12,.62);border:1px solid rgba(255,255,255,.10);
+  backdrop-filter:blur(10px);
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#d0e5ef
+}
+.sceneCaption{
+  position:absolute;z-index:7;left:44px;bottom:38px;
+  max-width:610px
+}
+.sceneCaptionRight{left:auto;right:44px;text-align:left;max-width:560px}
+.sceneCaption small,.diagCaption small{
+  display:block;margin-bottom:9px;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:#b9dbea
+}
+.sceneCaption h3,.serviceDiag2.diagFull .diagCaption h3{
+  margin:0 0 12px;font-size:clamp(44px,5vw,76px);line-height:.92;
+  letter-spacing:-.06em;color:#fff
+}
+.sceneCaption p,.serviceDiag2.diagFull .diagCaption p{
+  margin:0;max-width:560px;color:#c5d0d6;font-size:15px;line-height:1.68
+}
+.sceneCaption a,.serviceDiag2.diagFull .diagCaption a{
+  display:inline-block;margin-top:20px;color:#e7f5fb;font-weight:800;font-size:14px
+}
+
+.sceneHint{
+  position:absolute;z-index:6;right:30px;top:30px;padding:11px 14px;
+  border-radius:14px;background:rgba(6,10,13,.68);
+  border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(10px);
+  font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#d7e8f0
+}
+.sceneSweep{
+  position:absolute;z-index:5;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,#d59a2a,transparent);
+  box-shadow:0 0 18px rgba(213,154,42,.55);animation:oilSceneSweep 3.2s ease-in-out infinite
+}
+@keyframes oilSceneSweep{0%,100%{top:28%;opacity:.2}50%{top:72%;opacity:1}}
+
+.sceneFocus{
+  position:absolute;z-index:6;width:150px;height:150px;border-radius:50%;
+  border:1px solid rgba(255,95,82,.76);
+  box-shadow:0 0 0 14px rgba(255,75,66,.08),0 0 34px rgba(255,75,66,.28);
+  animation:serviceFocus 2.2s ease-in-out infinite
+}
+.brakeRing{left:18%;top:22%}
+@keyframes serviceFocus{0%,100%{transform:scale(.92);opacity:.58}50%{transform:scale(1.04);opacity:1}}
+
+.hotspot{position:absolute;z-index:7;display:flex;align-items:center;gap:8px;color:#d7edf8;font-size:10px;text-transform:uppercase;letter-spacing:.13em}
+.hotspot i{
+  display:block;width:14px;height:14px;border-radius:50%;background:var(--blue);
+  border:3px solid rgba(7,12,16,.92);
+  box-shadow:0 0 0 7px rgba(85,197,255,.12),0 0 20px rgba(85,197,255,.48);
+  animation:hotspotPulse 2.2s ease-in-out infinite
+}
+.hotspot span{padding:7px 9px;border-radius:10px;background:rgba(6,10,13,.68);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(8px)}
+.hs1{left:49%;top:29%}.hs2{left:38%;top:62%}.hs3{left:63%;top:43%}
+.hs2 i{animation-delay:.4s}.hs3 i{animation-delay:.8s}
+@keyframes hotspotPulse{0%,100%{transform:scale(.82);opacity:.62}50%{transform:scale(1.08);opacity:1}}
+
+.serviceDiag2.diagFull .diagCaption{left:44px;bottom:38px;max-width:620px}
+.serviceDiag2.diagFull .diagOverlay{top:30px;right:30px;width:290px}
+.serviceDiag2.diagFull .diagLaser{left:8%;right:8%}
+.serviceDiag2.diagFull .sceneTag{left:30px;top:28px}
+
+@media(max-width:1180px){
+  .serviceChapter.serviceScene,.serviceChapter.serviceScene .chapterVisual{min-height:590px}
+  .sceneCaption,.serviceDiag2.diagFull .diagCaption{left:28px;right:28px;bottom:28px;max-width:600px}
+  .sceneCaptionRight{left:28px;right:28px}
+  .sceneTag{top:22px;left:24px}
+  .sceneHint{top:22px;right:24px}
+  .serviceDiag2.diagFull .diagOverlay{top:22px;right:22px;width:260px}
+}
+@media(max-width:700px){
+  .serviceChapter.serviceScene,.serviceChapter.serviceScene .chapterVisual{min-height:520px}
+  .sceneCaption,.serviceDiag2.diagFull .diagCaption{left:20px;right:20px;bottom:20px}
+  .sceneCaption h3,.serviceDiag2.diagFull .diagCaption h3{font-size:40px}
+  .sceneCaption p,.serviceDiag2.diagFull .diagCaption p{font-size:13px;line-height:1.55}
+  .sceneTag{top:16px;left:16px}
+  .sceneHint{display:none}
+  .brakeRing{width:105px;height:105px;left:14%;top:25%}
+  .hotspot span{display:none}
+  .hs1{left:50%;top:29%}.hs2{left:34%;top:63%}.hs3{left:68%;top:45%}
+  .serviceDiag2.diagFull .diagOverlay{top:16px;right:16px;width:215px;padding:14px}
+  .serviceDiag2.diagFull .diagOverlay i{font-size:11px;padding:8px 0}
+  .serviceDiag2.diagFull .diagPhoto:after{background-size:118% auto !important;background-position:58% 56% !important}
+}
