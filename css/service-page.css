@@ -228,3 +228,22 @@ footer{padding:30px 0 42px;color:#78868f;font-size:11px}
   .helpCard{min-height:0}.sectionIntro{gap:18px}.panel{padding:22px}
   .ctaPanel{padding:24px}.ctaButtons{display:grid}.ctaButtons a{width:100%}
 }
+
+
+/* =========================================
+   SUPPLIED NEXTECH LOGO
+========================================= */
+.brandLogo{
+  display:block;
+  width:193px;
+  height:auto;
+  max-height:58px;
+  object-fit:contain;
+  object-position:left center;
+}
+@media(max-width:600px){
+  .brandLogo{
+    width:156px;
+    max-height:48px;
+  }
+}
