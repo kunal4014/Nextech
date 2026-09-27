@@ -2644,3 +2644,8 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .serviceExplorerCopy a{font-size:13px}
   .serviceExplorerProgress{left:20px;right:20px}
 }
+
+/* Consistent outline icons in the utility bar and workshop benefits. */
+.utilityIcon svg{display:block;width:16px;height:16px}
+.whyReasonIcon svg{display:block;width:25px;height:25px}
+@media(max-width:700px){.whyReasonIcon svg{width:22px;height:22px}}
