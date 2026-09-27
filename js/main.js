@@ -405,11 +405,12 @@ bookingFormForTracking?.addEventListener('submit',()=>{
 
 
 /* =========================================
-   INTERACTIVE SERVICE EXPLORER
+   PREMIUM SCROLL-DRIVEN SERVICE EXPLORER
 ========================================= */
 (() => {
   const explorer=document.getElementById('serviceExplorer');
-  if(!explorer)return;
+  const scrollStory=document.getElementById('serviceExplorerScroll');
+  if(!explorer||!scrollStory)return;
 
   const tabs=[...explorer.querySelectorAll('.serviceExplorerTab')];
   const photos=[...explorer.querySelectorAll('.serviceExplorerPhoto')];
@@ -419,66 +420,34 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   const copy=document.getElementById('serviceExplorerText');
   const cta=document.getElementById('serviceExplorerCta');
   const progress=[...explorer.querySelectorAll('.serviceExplorerProgress i')];
+  const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
 
   const scenes={
-    servicing:{
-      mode:'01 · Scheduled care',
-      kicker:'Logbook servicing & maintenance',
-      title:'Keep it serviced. Keep it reliable.',
-      text:'Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to keep your vehicle running reliably.',
-      cta:'Book servicing →'
-    },
-    brakes:{
-      mode:'02 · Safety systems',
-      kicker:'Brakes & clutch',
-      title:'Stopping power checked properly.',
-      text:'Brake pads, rotors and stopping performance checked properly so your vehicle stays safe, predictable and responsive.',
-      cta:'Book a brake check →'
-    },
-    diagnostics:{
-      mode:'03 · Fault finding',
-      kicker:'Advanced vehicle diagnostics',
-      title:'Find the issue before replacing parts.',
-      text:'Modern scanning and fault finding helps identify the real problem before unnecessary parts are replaced.',
-      cta:'Book diagnostics →'
-    },
-    suspension:{
-      mode:'04 · Ride & handling',
-      kicker:'Steering & suspension',
-      title:'Restore comfort, handling and control.',
-      text:'Inspection and repair of steering and suspension components to improve ride quality, steering feel and road control.',
-      cta:'Book suspension inspection →'
-    },
-    transmission:{
-      mode:'05 · Driveline',
-      kicker:'Transmission service & repair',
-      title:'Smooth power delivery starts underneath.',
-      text:'Transmission and driveline servicing, diagnosis and repair to keep power delivery smooth and dependable.',
-      cta:'Book transmission service →'
-    },
-    tyres:{
-      mode:'06 · Road contact',
-      kicker:'Tyres & wheel care',
-      title:'Everything starts where the car meets the road.',
-      text:'Tyre replacement, wear checks and balancing help maintain grip, braking performance and a smoother drive.',
-      cta:'Book tyre service →'
-    }
+    servicing:{mode:'01 · Scheduled care',kicker:'Logbook servicing & maintenance',title:'Keep it serviced. Keep it reliable.',text:'Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to keep your vehicle running reliably.',cta:'Book servicing →'},
+    brakes:{mode:'02 · Safety systems',kicker:'Brakes & clutch',title:'Stopping power checked properly.',text:'Brake pads, rotors and stopping performance checked properly so your vehicle stays safe, predictable and responsive.',cta:'Book a brake check →'},
+    diagnostics:{mode:'03 · Fault finding',kicker:'Advanced vehicle diagnostics',title:'Find the issue before replacing parts.',text:'Modern scanning and fault finding helps identify the real problem before unnecessary parts are replaced.',cta:'Book diagnostics →'},
+    suspension:{mode:'04 · Ride & handling',kicker:'Steering & suspension',title:'Restore comfort, handling and control.',text:'Inspection and repair of steering and suspension components to improve ride quality, steering feel and road control.',cta:'Book suspension inspection →'},
+    transmission:{mode:'05 · Driveline',kicker:'Transmission service & repair',title:'Smooth power delivery starts underneath.',text:'Transmission and driveline servicing, diagnosis and repair to keep power delivery smooth and dependable.',cta:'Book transmission service →'},
+    tyres:{mode:'06 · Road contact',kicker:'Tyres & wheel care',title:'Everything starts where the car meets the road.',text:'Tyre replacement, wear checks and balancing help maintain grip, braking performance and a smoother drive.',cta:'Book tyre service →'}
   };
 
   const sceneKeys=Object.keys(scenes);
   let active='servicing';
+  let ticking=false;
 
-  function renderScene(key,track=true){
+  function stickyTop(){
+    return innerWidth<=700?108:innerWidth<=1179?118:130;
+  }
+
+  function renderScene(key,track=false){
     const scene=scenes[key];
     if(!scene)return;
 
+    const changed=key!==active;
     active=key;
     explorer.dataset.mode=key;
 
-    photos.forEach(photo=>{
-      photo.classList.toggle('active',photo.dataset.explorerPhoto===key);
-    });
-
+    photos.forEach(photo=>photo.classList.toggle('active',photo.dataset.explorerPhoto===key));
     mode.textContent=scene.mode;
     kicker.textContent=scene.kicker;
     title.textContent=scene.title;
@@ -491,26 +460,86 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       tab.setAttribute('aria-selected',String(selected));
     });
 
-    progress.forEach((bar,i)=>bar.classList.toggle('active',i===sceneKeys.indexOf(key)));
+    if(changed&&!reducedMotion.matches){
+      explorer.classList.remove('scene-enter');
+      void explorer.offsetWidth;
+      explorer.classList.add('scene-enter');
+    }
 
-    requestAnimationFrame(()=>explorer.classList.remove('is-switching'));
-
-    if(track && typeof nextechTrack==='function'){
+    if(track&&typeof nextechTrack==='function'){
       nextechTrack('service_explorer_select',{service:key});
     }
   }
 
-  function setScene(key){
-    if(!scenes[key]||key===active)return;
-    explorer.classList.add('is-switching');
-    renderScene(key,true);
+  function updateProgress(overall,index){
+    const scaled=Math.max(0,Math.min(sceneKeys.length,overall*sceneKeys.length));
+    const local=Math.max(0,Math.min(1,scaled-index));
+
+    progress.forEach((bar,i)=>{
+      const fill=i<index?1:i===index?local:0;
+      bar.style.setProperty('--service-fill',fill.toFixed(3));
+      bar.classList.toggle('active',i===index);
+      bar.classList.toggle('complete',i<index);
+    });
+
+    explorer.style.setProperty('--service-depth',((local-.5)*-7).toFixed(2));
   }
 
-  tabs.forEach(tab=>{
-    tab.addEventListener('click',()=>setScene(tab.dataset.explorerMode));
-  });
+  function updateFromScroll(){
+    ticking=false;
 
-  progress[0]?.classList.add('active');
+    if(reducedMotion.matches){
+      updateProgress(0,sceneKeys.indexOf(active));
+      return;
+    }
+
+    const rect=scrollStory.getBoundingClientRect();
+    const top=stickyTop();
+    const travel=Math.max(1,rect.height-innerHeight+top);
+    const overall=Math.max(0,Math.min(1,(top-rect.top)/travel));
+    const scaled=Math.min(sceneKeys.length-.0001,overall*sceneKeys.length);
+    const index=Math.min(sceneKeys.length-1,Math.floor(scaled));
+
+    renderScene(sceneKeys[index],false);
+    updateProgress(overall,index);
+  }
+
+  function requestUpdate(){
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(updateFromScroll);
+  }
+
+  function scrollToScene(index){
+    if(reducedMotion.matches){
+      renderScene(sceneKeys[index],true);
+      updateProgress(index/sceneKeys.length,index);
+      return;
+    }
+
+    const rect=scrollStory.getBoundingClientRect();
+    const absoluteTop=scrollY+rect.top;
+    const top=stickyTop();
+    const travel=Math.max(1,scrollStory.offsetHeight-innerHeight+top);
+    const target=(index+.20)/sceneKeys.length;
+    const destination=absoluteTop-top+(travel*target);
+
+    scrollTo({top:Math.max(0,destination),behavior:'smooth'});
+
+    if(typeof nextechTrack==='function'){
+      nextechTrack('service_explorer_select',{service:sceneKeys[index]});
+    }
+  }
+
+  tabs.forEach((tab,index)=>tab.addEventListener('click',()=>scrollToScene(index)));
+
+  addEventListener('scroll',requestUpdate,{passive:true});
+  addEventListener('resize',requestUpdate,{passive:true});
+  reducedMotion.addEventListener?.('change',requestUpdate);
+
+  renderScene(sceneKeys[0],false);
+  updateProgress(0,0);
+  updateFromScroll();
 })();
 
 /* =========================================
@@ -575,58 +604,3 @@ bookingFormForTracking?.addEventListener('submit',()=>{
 })();
 
 
-/* =========================================
-   PREMIUM SERVICE SECTION REVEAL
-========================================= */
-(() => {
-  const section=document.getElementById('service-explorer');
-  const explorer=document.getElementById('serviceExplorer');
-  if(!section||!explorer)return;
-
-  const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
-  if(reduceMotion.matches)return;
-
-  section.classList.add('service-premium-ready');
-
-  const reveal=()=>{
-    section.classList.add('is-visible');
-  };
-
-  if('IntersectionObserver' in window){
-    const observer=new IntersectionObserver(entries=>{
-      if(entries.some(entry=>entry.isIntersecting)){
-        reveal();
-        observer.disconnect();
-      }
-    },{
-      rootMargin:'0px 0px -12% 0px',
-      threshold:.12
-    });
-    observer.observe(section);
-  }else{
-    reveal();
-  }
-
-  let ticking=false;
-  function updateServiceDepth(){
-    ticking=false;
-    const rect=section.getBoundingClientRect();
-    const vh=innerHeight||document.documentElement.clientHeight;
-    if(rect.bottom<0||rect.top>vh)return;
-
-    const center=rect.top+(rect.height/2);
-    const viewportCenter=vh/2;
-    const normalized=Math.max(-1,Math.min(1,(center-viewportCenter)/vh));
-    explorer.style.setProperty('--service-parallax',(normalized*-9).toFixed(2));
-  }
-
-  function requestServiceDepth(){
-    if(ticking)return;
-    ticking=true;
-    requestAnimationFrame(updateServiceDepth);
-  }
-
-  addEventListener('scroll',requestServiceDepth,{passive:true});
-  addEventListener('resize',requestServiceDepth,{passive:true});
-  updateServiceDepth();
-})();

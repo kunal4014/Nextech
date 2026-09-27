@@ -2464,102 +2464,108 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 
 
 
+
+
 /* =========================================
-   PREMIUM SERVICE REVEAL
-   Keeps the normal selector; adds motion only when JS opts in.
+   PREMIUM SCROLL-DRIVEN SERVICES
+   Same clean selector, shorter sticky sequence.
 ========================================= */
-.serviceExplorerSection.service-premium-ready .serviceExplorerHead{
-  opacity:0;
-  transform:translateY(18px);
+.serviceExplorerScroll{
+  position:relative;
+  height:330vh;
+  min-height:2500px;
 }
-.serviceExplorerSection.service-premium-ready .serviceExplorerTab{
-  opacity:0;
-  transform:translateX(-18px);
+.serviceExplorerSticky{
+  position:sticky;
+  top:130px;
 }
-.serviceExplorerSection.service-premium-ready .serviceExplorerStage{
-  opacity:0;
-  transform:translateY(18px) scale(.985);
+.serviceExplorerSticky .serviceExplorer{
+  width:100%;
 }
-.serviceExplorerSection.service-premium-ready .serviceExplorerHead,
-.serviceExplorerSection.service-premium-ready .serviceExplorerTab,
-.serviceExplorerSection.service-premium-ready .serviceExplorerStage{
-  transition:
-    opacity .62s cubic-bezier(.2,.75,.2,1),
-    transform .72s cubic-bezier(.2,.75,.2,1),
-    border-color .22s ease,
-    background .22s ease,
-    box-shadow .22s ease;
+.serviceExplorerSticky .serviceExplorerStage{
+  height:min(700px,calc(100vh - 154px));
+  min-height:560px;
+  max-height:700px;
+}
+.serviceExplorerPhoto{
   will-change:opacity,transform;
 }
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerHead{
-  opacity:1;
-  transform:none;
+.serviceExplorerPhoto.active{
+  transform:translate3d(0,calc(var(--service-depth,0) * 1px),0) scale(1.02);
 }
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab{
-  opacity:.66;
-  transform:none;
+.serviceExplorer.scene-enter .serviceExplorerCopy{
+  animation:premiumServiceCopy .38s cubic-bezier(.2,.8,.2,1) both;
 }
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab.active{
-  opacity:1;
+.serviceExplorer.scene-enter .serviceExplorerMode{
+  animation:premiumServiceMode .32s ease both;
 }
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerStage{
-  opacity:1;
-  transform:none;
+@keyframes premiumServiceCopy{
+  from{opacity:.18;transform:translateY(13px)}
+  to{opacity:1;transform:translateY(0)}
 }
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(1){transition-delay:.05s}
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(2){transition-delay:.10s}
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(3){transition-delay:.15s}
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(4){transition-delay:.20s}
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(5){transition-delay:.25s}
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(6){transition-delay:.30s}
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerStage{transition-delay:.12s}
-
-/* Tiny premium depth while scrolling through the section. */
-.serviceExplorerSection.service-premium-ready .serviceExplorerPhoto.active{
-  transform:translate3d(0,calc(var(--service-parallax,0) * 1px),0) scale(1.018);
+@keyframes premiumServiceMode{
+  from{opacity:.28;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}
 }
-@media(hover:hover) and (pointer:fine){
-  .serviceExplorerSection.service-premium-ready .serviceExplorerStage:hover .serviceExplorerPhoto.active{
-    transform:translate3d(0,calc(var(--service-parallax,0) * 1px),0) scale(1.032);
-  }
+.serviceExplorerProgress i{
+  position:relative;
+  overflow:hidden;
+  background:rgba(255,255,255,.13);
+  box-shadow:none;
 }
-
-/* Thin brand pulse on entry, then settles. */
-.serviceExplorerSection.service-premium-ready .serviceExplorerStage::after{
+.serviceExplorerProgress i::after{
   content:"";
   position:absolute;
-  z-index:6;
-  left:0;
-  top:0;
-  bottom:0;
-  width:2px;
-  background:linear-gradient(180deg,transparent,var(--red) 35%,var(--red) 65%,transparent);
-  opacity:0;
-  transform:scaleY(.3);
-  transform-origin:center;
-  pointer-events:none;
+  inset:0;
+  background:var(--red);
+  box-shadow:0 0 10px rgba(229,59,56,.42);
+  transform:scaleX(var(--service-fill,0));
+  transform-origin:left center;
+  transition:transform .08s linear;
 }
-.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerStage::after{
-  animation:serviceEntryPulse 1.15s .18s cubic-bezier(.2,.75,.2,1) both;
+.serviceExplorerProgress i.active{
+  background:rgba(255,255,255,.13);
+  box-shadow:none;
 }
-@keyframes serviceEntryPulse{
-  0%{opacity:0;transform:scaleY(.25)}
-  35%{opacity:.85;transform:scaleY(1)}
-  100%{opacity:.15;transform:scaleY(.72)}
+.serviceExplorerProgress i.complete::after{
+  transform:scaleX(1);
 }
-
+.serviceExplorerTab.active{
+  transform:translateX(3px);
+}
+@media(hover:hover) and (pointer:fine){
+  .serviceExplorerSticky .serviceExplorerStage:hover .serviceExplorerPhoto.active{
+    transform:translate3d(0,calc(var(--service-depth,0) * 1px),0) scale(1.032);
+  }
+}
+@media(max-width:1179px){
+  .serviceExplorerScroll{
+    height:350vh;
+    min-height:2400px;
+  }
+  .serviceExplorerSticky{top:118px}
+  .serviceExplorerSticky .serviceExplorerStage{
+    height:min(640px,calc(100vh - 140px));
+    min-height:540px;
+  }
+}
+@media(max-width:700px){
+  .serviceExplorerScroll{
+    height:390vh;
+    min-height:2550px;
+  }
+  .serviceExplorerSticky{top:108px}
+  .serviceExplorerSticky .serviceExplorerStage{
+    height:min(570px,calc(100vh - 122px));
+    min-height:500px;
+  }
+  .serviceExplorerTab.active{transform:none}
+}
 @media(prefers-reduced-motion:reduce){
-  .serviceExplorerSection.service-premium-ready .serviceExplorerHead,
-  .serviceExplorerSection.service-premium-ready .serviceExplorerTab,
-  .serviceExplorerSection.service-premium-ready .serviceExplorerStage{
-    opacity:1!important;
-    transform:none!important;
-    transition:none!important;
-  }
-  .serviceExplorerSection.service-premium-ready .serviceExplorerPhoto.active{
-    transform:scale(1.015)!important;
-  }
-  .serviceExplorerSection.service-premium-ready .serviceExplorerStage::after{
-    display:none!important;
-  }
+  .serviceExplorerScroll{height:auto;min-height:0}
+  .serviceExplorerSticky{position:relative;top:auto}
+  .serviceExplorerSticky .serviceExplorerStage{height:auto}
+  .serviceExplorerPhoto.active{transform:scale(1.015)!important}
+  .serviceExplorer.scene-enter .serviceExplorerCopy,
+  .serviceExplorer.scene-enter .serviceExplorerMode{animation:none!important}
 }
