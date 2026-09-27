@@ -2828,3 +2828,123 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 .serviceExplorer[data-mode="suspension"] .serviceExplorerImage{background-position:64% center!important}
 .serviceExplorer[data-mode="transmission"] .serviceExplorerImage{background-position:60% center!important}
 .serviceExplorer[data-mode="tyres"] .serviceExplorerImage{background-position:63% center!important}
+
+
+/* =========================================
+   SERVICE EXPLORER RESPONSIVE IMAGE FIT
+========================================= */
+.serviceExplorerStage{
+  min-height:clamp(500px,58vw,660px);
+  aspect-ratio:16 / 9;
+}
+.serviceExplorerImage{
+  inset:0;
+  background-repeat:no-repeat;
+  background-color:#05080c;
+  transform:scale(1.015);
+}
+.serviceExplorerStage:hover .serviceExplorerImage{
+  transform:scale(1.04);
+}
+
+/* Desktop fit rules by service */
+.serviceExplorer[data-mode="servicing"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:60% center!important;
+}
+.serviceExplorer[data-mode="brakes"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:58% center!important;
+}
+.serviceExplorer[data-mode="diagnostics"] .serviceExplorerImage{
+  background-size:contain!important;
+  background-position:center center!important;
+}
+.serviceExplorer[data-mode="suspension"] .serviceExplorerImage{
+  background-size:contain!important;
+  background-position:center center!important;
+}
+.serviceExplorer[data-mode="transmission"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:60% center!important;
+}
+.serviceExplorer[data-mode="tyres"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:62% center!important;
+}
+
+/* Keep copy readable when a contained technical image leaves empty space */
+.serviceExplorer[data-mode="diagnostics"] .serviceExplorerShade,
+.serviceExplorer[data-mode="suspension"] .serviceExplorerShade{
+  background:
+    linear-gradient(90deg,rgba(3,6,9,.82) 0%,rgba(3,6,9,.34) 46%,rgba(3,6,9,.10) 72%,rgba(3,6,9,.18) 100%),
+    linear-gradient(180deg,rgba(3,6,9,.04),rgba(3,6,9,.08) 48%,rgba(3,6,9,.82));
+}
+
+@media(max-width:1050px){
+  .serviceExplorerStage{
+    aspect-ratio:4 / 3;
+    min-height:clamp(480px,72vw,620px);
+  }
+}
+
+@media(max-width:700px){
+  .serviceExplorerStage{
+    min-height:72svh;
+    aspect-ratio:auto;
+  }
+  .serviceExplorerImage{
+    transform:none!important;
+  }
+
+  .serviceExplorer[data-mode="servicing"] .serviceExplorerImage{
+    background-size:cover!important;
+    background-position:67% center!important;
+  }
+  .serviceExplorer[data-mode="brakes"] .serviceExplorerImage{
+    background-size:cover!important;
+    background-position:64% center!important;
+  }
+  .serviceExplorer[data-mode="diagnostics"] .serviceExplorerImage{
+    background-size:contain!important;
+    background-position:center 36%!important;
+  }
+  .serviceExplorer[data-mode="suspension"] .serviceExplorerImage{
+    background-size:contain!important;
+    background-position:center 38%!important;
+  }
+  .serviceExplorer[data-mode="transmission"] .serviceExplorerImage{
+    background-size:cover!important;
+    background-position:64% center!important;
+  }
+  .serviceExplorer[data-mode="tyres"] .serviceExplorerImage{
+    background-size:cover!important;
+    background-position:68% center!important;
+  }
+
+  .serviceExplorerCopy{
+    left:18px;
+    right:18px;
+    bottom:36px;
+    max-width:none;
+  }
+  .serviceExplorerCopy h3{
+    font-size:clamp(34px,9vw,48px);
+    line-height:.95;
+  }
+  .serviceExplorerCopy p{
+    font-size:14px;
+    line-height:1.55;
+  }
+  .serviceExplorerTop{
+    left:14px;
+    right:14px;
+    top:14px;
+  }
+  .serviceExplorerMode{
+    max-width:70vw;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+}
