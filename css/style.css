@@ -1507,6 +1507,22 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   display:block;
 }
 
+.lowPowerHint{display:none}
+@media(max-width:700px){
+  .stage.motion-fallback .lowPowerHint{
+    display:inline-block;
+    max-width:100%;
+    margin:10px 0 0;
+    padding:7px 10px;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:9px;
+    background:rgba(5,10,14,.72);
+    color:#e5edf1;
+    font-size:11px;
+    line-height:1.35;
+  }
+}
+
 /* Old tap-to-play notice is no longer used. */
 .videoPowerNotice{
   display:none !important;
