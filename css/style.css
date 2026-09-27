@@ -3140,3 +3140,180 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 .serviceExplorer[data-mode="suspension"] .serviceExplorerImage{background-position:center 38%!important}
 .serviceExplorer[data-mode="transmission"] .serviceExplorerImage{background-position:64% center!important}
 .serviceExplorer[data-mode="tyres"] .serviceExplorerImage{background-position:68% center!important}
+
+
+/* =========================================
+   PHONE-MASTER SERVICES LAYOUT
+   The phone service design is the source of truth on EVERY device.
+   Breakpoints below only change scale, never composition.
+========================================= */
+.serviceExplorerSection{
+  padding:66px 0 76px!important;
+}
+.serviceExplorerHead{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:20px!important;
+  align-items:start!important;
+  margin-bottom:20px!important;
+}
+.serviceExplorerHead h2{
+  max-width:900px;
+}
+.serviceExplorerHead>p{
+  max-width:760px!important;
+}
+
+.serviceExplorer{
+  display:grid!important;
+  grid-template-columns:clamp(108px,13vw,168px) minmax(0,1fr)!important;
+  gap:clamp(8px,1vw,12px)!important;
+  align-items:stretch!important;
+  min-height:0!important;
+}
+
+.serviceExplorerNav{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:6px!important;
+  align-content:stretch!important;
+  overflow:visible!important;
+  padding:0!important;
+  scroll-snap-type:none!important;
+}
+
+.serviceExplorerTab{
+  width:100%!important;
+  min-width:0!important;
+  flex:none!important;
+  transform:none!important;
+  padding:clamp(9px,1vw,13px) clamp(8px,.9vw,12px)!important;
+  grid-template-columns:clamp(27px,2.6vw,36px) minmax(0,1fr)!important;
+  gap:clamp(7px,.8vw,10px)!important;
+  border-radius:13px!important;
+  scroll-snap-align:none!important;
+}
+.serviceExplorerTab:hover,
+.serviceExplorerTab.active{
+  transform:none!important;
+}
+.serviceExplorerTab>span{
+  width:clamp(27px,2.6vw,36px)!important;
+  height:clamp(27px,2.6vw,36px)!important;
+  border-radius:8px!important;
+  font-size:clamp(8px,.72vw,10px)!important;
+}
+.serviceExplorerTab strong{
+  font-size:clamp(10px,.88vw,13px)!important;
+  line-height:1.15!important;
+}
+.serviceExplorerTab small{
+  font-size:clamp(7px,.68vw,9px)!important;
+  line-height:1.25!important;
+}
+
+.serviceExplorerStage{
+  min-height:clamp(560px,55vw,720px)!important;
+  aspect-ratio:auto!important;
+  border-radius:18px!important;
+}
+.serviceExplorerImage{
+  inset:0!important;
+  transform:scale(1.015)!important;
+}
+.serviceExplorerStage:hover .serviceExplorerImage{
+  transform:scale(1.015)!important;
+}
+
+.serviceExplorerTop{
+  top:clamp(10px,1vw,16px)!important;
+  left:clamp(10px,1vw,16px)!important;
+  right:clamp(10px,1vw,16px)!important;
+}
+.serviceExplorerMode{
+  max-width:100%!important;
+  padding:clamp(7px,.7vw,10px) clamp(9px,.8vw,12px)!important;
+  font-size:clamp(7px,.62vw,9px)!important;
+}
+.serviceExplorerStatus{
+  display:none!important;
+}
+
+.serviceExplorerCopy{
+  left:clamp(14px,1.5vw,24px)!important;
+  right:clamp(14px,1.5vw,24px)!important;
+  bottom:clamp(29px,2.6vw,42px)!important;
+  max-width:min(640px,88%)!important;
+}
+.serviceExplorerCopy small{
+  font-size:clamp(7px,.7vw,10px)!important;
+  margin-bottom:clamp(6px,.6vw,9px)!important;
+}
+.serviceExplorerCopy h3{
+  font-size:clamp(24px,3.1vw,48px)!important;
+  line-height:.94!important;
+  margin-bottom:clamp(9px,.8vw,13px)!important;
+}
+.serviceExplorerCopy p{
+  font-size:clamp(11px,1vw,15px)!important;
+  line-height:1.45!important;
+  max-width:610px!important;
+}
+.serviceExplorerCopy a{
+  margin-top:clamp(13px,1.2vw,20px)!important;
+  font-size:clamp(11px,.95vw,14px)!important;
+}
+
+.serviceExplorerHotspots{
+  display:block!important;
+}
+.explorerHotspot{
+  transform:scale(clamp(.72, .05vw + .72, 1))!important;
+  transform-origin:left center!important;
+}
+
+.serviceExplorerProgress{
+  left:clamp(14px,1.5vw,24px)!important;
+  right:clamp(14px,1.5vw,24px)!important;
+  bottom:clamp(12px,1.2vw,18px)!important;
+  gap:4px!important;
+}
+
+/* Same service image + same focal point everywhere */
+.serviceExplorer[data-mode="servicing"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:67% center!important;
+}
+.serviceExplorer[data-mode="brakes"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:64% center!important;
+}
+.serviceExplorer[data-mode="diagnostics"] .serviceExplorerImage{
+  background-size:contain!important;
+  background-position:center 36%!important;
+}
+.serviceExplorer[data-mode="suspension"] .serviceExplorerImage{
+  background-size:contain!important;
+  background-position:center 38%!important;
+}
+.serviceExplorer[data-mode="transmission"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:64% center!important;
+}
+.serviceExplorer[data-mode="tyres"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:68% center!important;
+}
+
+/* Only scale down for very small phones — structure stays identical */
+@media(max-width:390px){
+  .serviceExplorer{
+    grid-template-columns:94px minmax(0,1fr)!important;
+  }
+  .serviceExplorerStage{
+    min-height:520px!important;
+  }
+  .serviceExplorerCopy h3{
+    font-size:23px!important;
+  }
+}
