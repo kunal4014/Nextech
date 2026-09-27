@@ -2948,3 +2948,185 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     text-overflow:ellipsis;
   }
 }
+
+
+/* =========================================
+   UNIFIED DESKTOP + MOBILE SERVICE EXPLORER
+   Same imagery, crop, order and styling on every device.
+   Only dimensions and type scale responsively.
+========================================= */
+.serviceExplorer[data-mode="servicing"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:60% center!important;
+}
+.serviceExplorer[data-mode="brakes"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:58% center!important;
+}
+.serviceExplorer[data-mode="diagnostics"] .serviceExplorerImage{
+  background-size:contain!important;
+  background-position:center center!important;
+}
+.serviceExplorer[data-mode="suspension"] .serviceExplorerImage{
+  background-size:contain!important;
+  background-position:center center!important;
+}
+.serviceExplorer[data-mode="transmission"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:60% center!important;
+}
+.serviceExplorer[data-mode="tyres"] .serviceExplorerImage{
+  background-size:cover!important;
+  background-position:62% center!important;
+}
+
+/* Tablet: same left service rail + right visual, just smaller */
+@media(max-width:1050px){
+  .serviceExplorer{
+    grid-template-columns:clamp(180px,27vw,260px) minmax(0,1fr)!important;
+    gap:12px;
+  }
+  .serviceExplorerNav{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    overflow:visible!important;
+  }
+  .serviceExplorerTab{
+    width:100%!important;
+    min-width:0!important;
+    flex:none!important;
+    transform:none!important;
+    padding:12px 13px;
+    grid-template-columns:36px 1fr;
+  }
+  .serviceExplorerTab>span{
+    width:33px;
+    height:33px;
+  }
+  .serviceExplorerTab strong{font-size:13px}
+  .serviceExplorerTab small{font-size:9px}
+  .serviceExplorerStage{
+    min-height:clamp(500px,62vw,620px);
+    aspect-ratio:16 / 10;
+  }
+}
+
+/* Phone: preserve the same side-rail composition instead of changing layouts */
+@media(max-width:700px){
+  .serviceExplorerSection{
+    padding:66px 0 76px;
+  }
+  .serviceExplorerHead{
+    margin-bottom:20px;
+  }
+  .serviceExplorer{
+    grid-template-columns:108px minmax(0,1fr)!important;
+    gap:8px!important;
+    align-items:stretch;
+  }
+  .serviceExplorerNav{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:6px!important;
+    overflow:visible!important;
+    padding:0!important;
+  }
+  .serviceExplorerTab{
+    min-width:0!important;
+    width:100%!important;
+    padding:9px 8px!important;
+    grid-template-columns:27px minmax(0,1fr)!important;
+    gap:7px!important;
+    border-radius:13px;
+  }
+  .serviceExplorerTab>span{
+    width:27px!important;
+    height:27px!important;
+    border-radius:8px;
+    font-size:8px;
+  }
+  .serviceExplorerTab strong{
+    font-size:10px!important;
+    line-height:1.15;
+  }
+  .serviceExplorerTab small{
+    font-size:7px!important;
+    line-height:1.25;
+  }
+  .serviceExplorerStage{
+    min-height:560px!important;
+    aspect-ratio:auto!important;
+    border-radius:18px;
+  }
+  .serviceExplorerImage{
+    transform:scale(1.015)!important;
+  }
+  .serviceExplorerTop{
+    top:10px!important;
+    left:10px!important;
+    right:10px!important;
+  }
+  .serviceExplorerMode{
+    max-width:100%!important;
+    padding:7px 9px;
+    font-size:7px;
+  }
+  .serviceExplorerStatus{
+    display:none!important;
+  }
+  .serviceExplorerCopy{
+    left:14px!important;
+    right:14px!important;
+    bottom:29px!important;
+  }
+  .serviceExplorerCopy small{
+    font-size:7px;
+    margin-bottom:6px;
+  }
+  .serviceExplorerCopy h3{
+    font-size:clamp(24px,7.4vw,34px)!important;
+    line-height:.94!important;
+    margin-bottom:9px;
+  }
+  .serviceExplorerCopy p{
+    font-size:11px!important;
+    line-height:1.45!important;
+  }
+  .serviceExplorerCopy a{
+    margin-top:13px;
+    font-size:11px;
+  }
+  .serviceExplorerHotspots{
+    display:block!important;
+  }
+  .explorerHotspot{
+    transform:scale(.72);
+    transform-origin:left center;
+  }
+  .serviceExplorerProgress{
+    left:14px!important;
+    right:14px!important;
+    bottom:12px!important;
+    gap:4px;
+  }
+}
+
+/* Very small phones: same design, scaled once more */
+@media(max-width:390px){
+  .serviceExplorer{
+    grid-template-columns:94px minmax(0,1fr)!important;
+  }
+  .serviceExplorerTab{
+    padding:8px 6px!important;
+    grid-template-columns:24px minmax(0,1fr)!important;
+    gap:5px!important;
+  }
+  .serviceExplorerTab>span{
+    width:24px!important;
+    height:24px!important;
+  }
+  .serviceExplorerTab strong{font-size:9px!important}
+  .serviceExplorerTab small{font-size:6.5px!important}
+  .serviceExplorerStage{min-height:520px!important}
+  .serviceExplorerCopy h3{font-size:23px!important}
+}
