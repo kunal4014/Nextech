@@ -238,22 +238,32 @@ serviceSteps.forEach((step,index)=>{
   });
 });
 
-/* Give the desktop review grid gentle movement without turning it into a carousel.
-   On phones the existing swipeable cards remain fully user-controlled. */
-const reviewCards=[...document.querySelectorAll('.review')];
-let reviewSpotlight=0;
-function updateReviewSpotlight(){
-  if(!reviewCards.length)return;
-  reviewCards.forEach((card,i)=>card.classList.toggle('reviewSpotlight',i===reviewSpotlight));
-}
-updateReviewSpotlight();
-if(reviewCards.length>1 && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-  setInterval(()=>{
-    if(document.hidden||innerWidth<701)return;
-    reviewSpotlight=(reviewSpotlight+1)%reviewCards.length;
-    updateReviewSpotlight();
-  },4200);
-}
+
+/* Continuous customer review rail.
+   Duplicate the seven real review cards once for a seamless loop.
+   Touch/hover/focus pauses the motion so people can read comfortably. */
+(() => {
+  const marquee=document.getElementById('reviewMarquee');
+  const track=document.getElementById('reviewTrack');
+  if(!marquee||!track)return;
+
+  const originals=[...track.children];
+  originals.forEach(card=>{
+    const clone=card.cloneNode(true);
+    clone.setAttribute('aria-hidden','true');
+    track.appendChild(clone);
+  });
+
+  const pause=()=>marquee.classList.add('is-paused');
+  const resume=()=>marquee.classList.remove('is-paused');
+
+  marquee.addEventListener('pointerdown',pause,{passive:true});
+  marquee.addEventListener('pointerup',()=>setTimeout(resume,900),{passive:true});
+  marquee.addEventListener('pointercancel',resume,{passive:true});
+  marquee.addEventListener('touchstart',pause,{passive:true});
+  marquee.addEventListener('touchend',()=>setTimeout(resume,1200),{passive:true});
+})();
+
 
 /* Turn the concept booking form into a usable booking handoff.
    It validates locally and opens a pre-filled email draft to the workshop;
@@ -318,29 +328,6 @@ if('IntersectionObserver' in window){
     trackedNavLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+visible.target.id));
   },{rootMargin:'-34% 0px -54% 0px',threshold:[0,.1,.25,.5]});
   sectionTargets.forEach(item=>navObserver.observe(item.section));
-}
-
-/* Review controls + pause on hover */
-const reviewWrap=document.querySelector('#reviews .reviews');
-const reviewDots=[...document.querySelectorAll('.reviewDot')];
-let reviewPaused=false;
-reviewWrap?.addEventListener('mouseenter',()=>reviewPaused=true);
-reviewWrap?.addEventListener('mouseleave',()=>reviewPaused=false);
-
-reviewDots.forEach((dot,i)=>dot.addEventListener('click',()=>{
-  reviewSpotlight=i;
-  updateReviewSpotlight();
-  reviewDots.forEach((d,idx)=>d.classList.toggle('active',idx===i));
-  reviewCards[i]?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
-}));
-
-if(reviewCards.length>1 && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-  setInterval(()=>{
-    if(reviewPaused||document.hidden||innerWidth<701)return;
-    reviewSpotlight=(reviewSpotlight+1)%reviewCards.length;
-    updateReviewSpotlight();
-    reviewDots.forEach((d,idx)=>d.classList.toggle('active',idx===reviewSpotlight));
-  },4600);
 }
 
 /* Lightweight analytics hooks.
