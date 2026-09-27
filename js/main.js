@@ -366,11 +366,12 @@ bookingFormForTracking?.addEventListener('submit',()=>{
 
 
 /* =========================================
-   INTERACTIVE SERVICE EXPLORER
+   SCROLL-DRIVEN SERVICE EXPLORER
 ========================================= */
 (() => {
   const explorer=document.getElementById('serviceExplorer');
-  if(!explorer)return;
+  const scrollStory=document.getElementById('serviceExplorerScroll');
+  if(!explorer||!scrollStory)return;
 
   const tabs=[...explorer.querySelectorAll('.serviceExplorerTab')];
   const photos=[...explorer.querySelectorAll('.serviceExplorerPhoto')];
@@ -427,19 +428,19 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   };
 
   const sceneKeys=Object.keys(scenes);
-  const cycleMs=5500;
-  const manualHoldMs=12000;
-  const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
+  const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
   let active='servicing';
-  let timer=null;
-  let visible=false;
-  let touchPaused=false;
-  let manualHoldUntil=0;
+  let ticking=false;
 
-  function renderScene(key,track=true){
+  function stickyTop(){
+    return innerWidth<=700 ? 112 : 126;
+  }
+
+  function renderScene(key,track=false){
     const scene=scenes[key];
     if(!scene)return;
 
+    const changed=key!==active;
     active=key;
     explorer.dataset.mode=key;
 
@@ -459,115 +460,83 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       tab.setAttribute('aria-selected',String(selected));
     });
 
-    progress.forEach((bar,i)=>{
-      bar.classList.toggle('active',i===sceneKeys.indexOf(key));
-    });
-
-    requestAnimationFrame(()=>explorer.classList.remove('is-switching'));
+    if(changed && !reducedMotion.matches){
+      explorer.classList.remove('scene-enter');
+      void explorer.offsetWidth;
+      explorer.classList.add('scene-enter');
+    }
 
     if(track && typeof nextechTrack==='function'){
       nextechTrack('service_explorer_select',{service:key});
     }
   }
 
-  function canAutoplay(){
-    return visible &&
-      !document.hidden &&
-      !reduceMotion.matches &&
-      !touchPaused &&
-      Date.now()>=manualHoldUntil;
+  function updateProgress(overall,index){
+    const scaled=Math.max(0,Math.min(sceneKeys.length,overall*sceneKeys.length));
+    const local=Math.max(0,Math.min(1,scaled-index));
+
+    progress.forEach((bar,i)=>{
+      const fill=i<index ? 1 : i===index ? local : 0;
+      bar.style.setProperty('--scroll-fill',fill.toFixed(3));
+      bar.classList.toggle('active',i===index);
+      bar.classList.toggle('complete',i<index);
+    });
+
+    explorer.style.setProperty('--service-scroll-progress',overall.toFixed(4));
+    explorer.style.setProperty('--service-local-progress',local.toFixed(4));
   }
 
-  function clearCycle(){
-    if(timer){
-      clearTimeout(timer);
-      timer=null;
-    }
+  function updateFromScroll(){
+    ticking=false;
+
+    const rect=scrollStory.getBoundingClientRect();
+    const top=stickyTop();
+    const travel=Math.max(1,rect.height-innerHeight+top);
+    const overall=Math.max(0,Math.min(1,(top-rect.top)/travel));
+    const scaled=Math.min(sceneKeys.length-.0001,overall*sceneKeys.length);
+    const index=Math.min(sceneKeys.length-1,Math.floor(scaled));
+
+    renderScene(sceneKeys[index],false);
+    updateProgress(overall,index);
   }
 
-  function updatePauseState(){
-    const paused=!canAutoplay();
-    explorer.classList.toggle('autoplay-paused',paused);
-    if(paused){
-      clearCycle();
-    }else{
-      scheduleCycle(true);
-    }
+  function requestUpdate(){
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(updateFromScroll);
   }
 
-  function restartProgress(){
-    explorer.classList.remove('autoplay-running');
-    void explorer.offsetWidth;
-    if(canAutoplay()) explorer.classList.add('autoplay-running');
+  function scrollToScene(index){
+    const rect=scrollStory.getBoundingClientRect();
+    const absoluteTop=scrollY+rect.top;
+    const top=stickyTop();
+    const travel=Math.max(1,scrollStory.offsetHeight-innerHeight+top);
+    const targetProgress=(index+.18)/sceneKeys.length;
+    const destination=absoluteTop-top+(travel*targetProgress);
+
+    scrollTo({
+      top:Math.max(0,destination),
+      behavior:reducedMotion.matches?'auto':'smooth'
+    });
   }
 
-  function scheduleCycle(resetProgress=false){
-    clearCycle();
-    if(!canAutoplay())return;
-
-    if(resetProgress) restartProgress();
-
-    timer=setTimeout(()=>{
-      if(!canAutoplay()){
-        updatePauseState();
-        return;
+  tabs.forEach((tab,index)=>{
+    tab.addEventListener('click',()=>{
+      scrollToScene(index);
+      if(typeof nextechTrack==='function'){
+        nextechTrack('service_explorer_select',{service:sceneKeys[index]});
       }
-      const currentIndex=sceneKeys.indexOf(active);
-      const next=sceneKeys[(currentIndex+1)%sceneKeys.length];
-      explorer.classList.add('is-switching');
-      renderScene(next,false);
-      scheduleCycle(true);
-    },cycleMs);
-  }
-
-  function selectManually(key){
-    if(!scenes[key])return;
-    manualHoldUntil=Date.now()+manualHoldMs;
-    clearCycle();
-    explorer.classList.remove('autoplay-running');
-    explorer.classList.add('autoplay-paused','is-switching');
-    renderScene(key,true);
-
-    setTimeout(()=>{
-      if(Date.now()>=manualHoldUntil) updatePauseState();
-    },manualHoldMs+40);
-  }
-
-  tabs.forEach(tab=>{
-    const key=tab.dataset.explorerMode;
-    tab.addEventListener('click',()=>selectManually(key));
+    });
   });
 
-  explorer.addEventListener('touchstart',()=>{
-    touchPaused=true;
-    updatePauseState();
-  },{passive:true});
-  explorer.addEventListener('touchend',()=>{
-    touchPaused=false;
-    setTimeout(updatePauseState,900);
-  },{passive:true});
-  explorer.addEventListener('touchcancel',()=>{
-    touchPaused=false;
-    updatePauseState();
-  },{passive:true});
+  addEventListener('scroll',requestUpdate,{passive:true});
+  addEventListener('resize',requestUpdate,{passive:true});
+  reducedMotion.addEventListener?.('change',requestUpdate);
 
-  document.addEventListener('visibilitychange',updatePauseState);
-  reduceMotion.addEventListener?.('change',updatePauseState);
-
-  if('IntersectionObserver' in window){
-    const observer=new IntersectionObserver(entries=>{
-      visible=entries.some(entry=>entry.isIntersecting && entry.intersectionRatio>=0.22);
-      updatePauseState();
-    },{threshold:[0,.22,.5]});
-    observer.observe(explorer);
-  }else{
-    visible=true;
-    updatePauseState();
-  }
-
-  progress[0]?.classList.add('active');
+  renderScene(sceneKeys[0],false);
+  updateProgress(0,0);
+  updateFromScroll();
 })();
-
 /* =========================================
    CURRENT-SITE COOKIE NOTICE
 ========================================= */
