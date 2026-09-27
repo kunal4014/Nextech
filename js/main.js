@@ -437,6 +437,11 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   function updateFromScroll(){
     ticking=false;
 
+    if(innerWidth<=700){
+      updateProgress((sceneKeys.indexOf(active)+1)/sceneKeys.length,sceneKeys.indexOf(active));
+      return;
+    }
+
     if(reducedMotion.matches){
       updateProgress(0,sceneKeys.indexOf(active));
       return;
@@ -460,6 +465,16 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   }
 
   function scrollToScene(index){
+    if(innerWidth<=700){
+      renderScene(sceneKeys[index],true);
+      updateProgress((index+1)/sceneKeys.length,index);
+      const rail=explorer.querySelector('.serviceExplorerNav');
+      const tab=tabs[index];
+      if(rail&&tab){
+        rail.scrollTo({left:tab.offsetLeft-rail.offsetLeft-(rail.clientWidth-tab.clientWidth)/2,behavior:reducedMotion.matches?'instant':'smooth'});
+      }
+      return;
+    }
     if(reducedMotion.matches){
       renderScene(sceneKeys[index],true);
       updateProgress(index/sceneKeys.length,index);
