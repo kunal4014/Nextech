@@ -380,7 +380,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   const copy=document.getElementById('serviceExplorerText');
   const cta=document.getElementById('serviceExplorerCta');
   const progress=[...explorer.querySelectorAll('.serviceExplorerProgress i')];
-  const hotspots=[...explorer.querySelectorAll('.explorerHotspot')];
 
   const scenes={
     servicing:{
@@ -392,7 +391,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/d40123d5-a4a2-4892-b3a6-dc5a8e1fb974.jpg',
       pos:'67% center',
       size:'cover',
-      hotspots:['Engine','Oil & filter','Service point']
     },
     brakes:{
       mode:'02 · Safety systems',
@@ -403,7 +401,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/3c3c3a10-cc64-44db-a750-b366cf550306.jpg',
       pos:'64% center',
       size:'cover',
-      hotspots:['Rotor','Caliper','Inspection']
     },
     diagnostics:{
       mode:'03 · Fault finding',
@@ -414,7 +411,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/c0bb13ff-9b80-402e-8911-fecf059ce249.jpg',
       pos:'64% center',
       size:'cover',
-      hotspots:['Engine','Systems scan','Fault data']
     },
     suspension:{
       mode:'04 · Ride & handling',
@@ -425,7 +421,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/6b2b79ee-30b6-4093-820d-b0ce13698354.jpg',
       pos:'62% center',
       size:'cover',
-      hotspots:['Strut','Hub','Mount']
     },
     transmission:{
       mode:'05 · Driveline',
@@ -436,7 +431,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/fbb8da4c-c2dc-486f-aa78-edae7badf058.jpg',
       pos:'64% center',
       size:'cover',
-      hotspots:['Driveline','Transmission','Inspection']
     },
     tyres:{
       mode:'06 · Road contact',
@@ -447,7 +441,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/cb397713-82c9-489e-887e-ef8d3a0178f5.jpg',
       pos:'68% center',
       size:'cover',
-      hotspots:['Tyre','Wear','Balance']
     }
   };
 
@@ -501,10 +494,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     });
 
     progress.forEach((bar,i)=>bar.classList.toggle('active',i===Object.keys(scenes).indexOf(key)));
-    hotspots.forEach((spot,i)=>{
-      const label=spot.querySelector('b');
-      if(label)label.textContent=scene.hotspots[i]||'';
-    });
 
     explorer.classList.remove('is-switching','is-loading');
 
