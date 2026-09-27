@@ -361,6 +361,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   if(!explorer||!scrollStory)return;
 
   const tabs=[...explorer.querySelectorAll('.serviceExplorerTab')];
+  const rail=explorer.querySelector('.serviceExplorerNav');
   const photos=[...explorer.querySelectorAll('.serviceExplorerPhoto')];
   const mode=document.getElementById('serviceExplorerMode');
   const kicker=document.getElementById('serviceExplorerKicker');
@@ -471,7 +472,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     if(innerWidth<=700){
       renderScene(sceneKeys[index],true);
       updateProgress((index+1)/sceneKeys.length,index);
-      const rail=explorer.querySelector('.serviceExplorerNav');
       const tab=tabs[index];
       if(rail&&tab){
         rail.scrollTo({left:tab.offsetLeft-rail.offsetLeft-(rail.clientWidth-tab.clientWidth)/2,behavior:reducedMotion.matches?'auto':'smooth'});
@@ -507,6 +507,11 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   renderScene(sceneKeys[0],false);
   updateProgress(0,0);
   updateFromScroll();
+  const resetInitialRail=()=>{
+    if(innerWidth<=700&&active==='servicing'&&rail)rail.scrollLeft=0;
+  };
+  addEventListener('pageshow',resetInitialRail);
+  resetInitialRail();
 })();
 
 /* =========================================
