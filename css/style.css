@@ -2573,43 +2573,18 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 
 
 
-/* =========================================
-   REAL NEXTECH PNG NAV LOGO
-========================================= */
+/* REAL NEXTECH PNG NAV LOGO */
 .brandLogo{
   display:block;
-  width:205px;
-  height:66px;
-  max-width:none;
+  width:170px;
+  height:50px;
   object-fit:contain;
   object-position:left center;
 }
+
 @media(max-width:700px){
   .brandLogo{
-    width:166px;
-    height:52px;
+    width:150px;
+    height:50px;
   }
-}
-
-
-/* =========================================
-   FINAL NEXTECH LOGO SIZE
-   Keep the real logo dominant in the header.
-========================================= */
-.nav .brand{
-  display:flex!important;
-  align-items:center!important;
-  justify-self:start!important;
-  min-width:0!important;
-  overflow:visible!important;
-}
-.nav .brandLogo{
-  display:block!important;
-  width:330px!important;
-  height:auto!important;
-  max-width:none!important;
-  max-height:none!important;
-  object-fit:contain!important;
-  object-position:left center!important;
-  transform:none!important;
 }
