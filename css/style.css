@@ -271,8 +271,7 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .wrap{width:min(calc(100% - 24px),var(--max))}.navin{height:70px}.brandLogo{width:150px;max-height:56px}.brand{font-size:11px;letter-spacing:.11em}.mark{width:34px;height:34px;font-size:20px}
   .scrollExperience{height:150vh}.stage{top:104px;height:calc(100vh - 104px);min-height:730px}
   .stageInner{display:block;padding-top:18px}.storyCopy{padding-top:12px}.storyTitle{font-size:52px;line-height:.9}.storyText{font-size:15px}.storyMeta{gap:16px;margin-top:22px}
-  .viewport3d{position:absolute;left:0;right:0;bottom:22px;height:43%;min-height:320px}.sceneLabel,.scrollHint{display:none}
-  .serviceSync{margin-top:16px;gap:7px}.serviceStep{grid-template-columns:42px 1fr;padding:10px 11px}.serviceStepNum{width:35px;height:35px;font-size:10px}
+  .viewport3d{position:absolute;left:0;right:0;bottom:22px;height:43%;min-height:320px}.sceneLabel,.serviceSync{margin-top:16px;gap:7px}.serviceStep{grid-template-columns:42px 1fr;padding:10px 11px}.serviceStepNum{width:35px;height:35px;font-size:10px}
   .diagPanel{left:14px;right:14px;top:auto;bottom:8px;width:auto;min-width:0}.diagPanel .system:nth-of-type(n+4){display:none}
   .serviceGrid,.metrics,.contactGrid,.formRow{grid-template-columns:1fr}.journeyMedia{min-height:430px}.journeyCaption{left:20px;right:20px;bottom:18px}.journeySteps{grid-template-columns:1fr}.section{padding:72px 0}.sectionHead{gap:20px}.contact{padding:24px}.mobileMenu{top:104px}
 }
@@ -827,10 +826,6 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 
   .serviceStepText span{
     font-size:clamp(9px,2.8vw,11px);
-  }
-
-  .scrollHint{
-    display:none;
   }
 
   /* Service introduction */
