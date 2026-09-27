@@ -563,3 +563,24 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   progress[0]?.classList.add('active');
 
 })();
+
+
+/* =========================================
+   CURRENT-SITE COOKIE NOTICE
+========================================= */
+(() => {
+  const notice=document.getElementById('cookieNotice');
+  const okay=document.getElementById('cookieOkay');
+  if(!notice||!okay)return;
+
+  try{
+    if(sessionStorage.getItem('nextechCookieNoticeDismissed')==='1'){
+      notice.hidden=true;
+    }
+  }catch(e){}
+
+  okay.addEventListener('click',()=>{
+    notice.hidden=true;
+    try{sessionStorage.setItem('nextechCookieNoticeDismissed','1')}catch(e){}
+  });
+})();
