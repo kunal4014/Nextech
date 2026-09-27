@@ -23,6 +23,10 @@
 
 
 <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin>
+<link rel="preconnect" href="https://www.google.com" crossorigin>
+<link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="//www.google.com">
+<link rel="dns-prefetch" href="//maps.gstatic.com">
 <link rel="preload" as="image" href="assets/services/servicing.jpg" fetchpriority="high">
 <link rel="preload" as="image" href="assets/services/brakes.jpg" fetchpriority="low">
 <link rel="preload" as="image" href="assets/services/diagnostics.jpg" fetchpriority="low">
@@ -422,11 +426,12 @@
     <div class="locationGrid">
       <div class="mapCard">
         <iframe
+          id="locationMap"
           title="Nextech Auto Repairs location"
-          loading="lazy"
-          fetchpriority="low"
+          loading="eager"
+          fetchpriority="high"
           referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=113-115%20Port%20Rd%2C%20Queenstown%20SA%205014&output=embed"></iframe>
+          data-src="https://www.google.com/maps?q=113-115%20Port%20Rd%2C%20Queenstown%20SA%205014&output=embed"></iframe>
       </div>
       <aside class="locationInfo">
         <div class="locationBadge">Queenstown · Adelaide</div>
@@ -532,6 +537,6 @@
   <a href="tel:0883412199">Call workshop</a>
   <a class="primary" href="#contact">Book service</a>
 </div>
-<script src="js/main.js?v=20260927-0450" defer></script>
+<script src="js/main.js?v=20260927-0500" defer></script>
 </body>
 </html>

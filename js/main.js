@@ -532,3 +532,44 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     try{sessionStorage.setItem('nextechCookieNoticeDismissed','1')}catch(e){}
   });
 })();
+
+
+/* =========================================
+   FAST GOOGLE MAP WARMUP
+========================================= */
+(() => {
+  const map=document.getElementById('locationMap');
+  if(!map||!map.dataset.src)return;
+
+  let started=false;
+
+  function startMap(){
+    if(started)return;
+    started=true;
+    map.src=map.dataset.src;
+    map.removeAttribute('data-src');
+  }
+
+  /* If the user approaches the location section quickly, start immediately. */
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>{
+      if(entries.some(entry=>entry.isIntersecting)){
+        startMap();
+        observer.disconnect();
+      }
+    },{
+      rootMargin:'1600px 0px 1600px 0px',
+      threshold:0
+    });
+    observer.observe(map);
+  }
+
+  /* Otherwise warm it shortly after critical page loading has finished. */
+  addEventListener('load',()=>{
+    if('requestIdleCallback' in window){
+      requestIdleCallback(startMap,{timeout:1400});
+    }else{
+      setTimeout(startMap,650);
+    }
+  },{once:true});
+})();
