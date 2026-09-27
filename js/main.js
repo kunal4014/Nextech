@@ -402,7 +402,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Keep it serviced. Keep it reliable.',
       text:'Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to keep your vehicle running reliably.',
       cta:'Book servicing →',
-      image:'https://images.pexels.com/photos/8478254/pexels-photo-8478254.jpeg?auto=compress&cs=tinysrgb&w=1800',
+      image:'https://images.pexels.com/photos/8478254/pexels-photo-8478254.jpeg?auto=compress&cs=tinysrgb&w=1400&q=72',
       pos:'67% center',
       size:'cover',
       hotspots:['Engine','Oil & filter','Service point']
@@ -464,47 +464,108 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     }
   };
 
-  let active='servicing';
 
-  function setScene(key,track=true){
+  let active='servicing';
+  const preloadCache=new Map();
+
+  function preloadScene(key,priority='low'){
+    const scene=scenes[key];
+    if(!scene)return Promise.resolve();
+    if(preloadCache.has(key))return preloadCache.get(key);
+
+    const promise=new Promise(resolve=>{
+      const img=new Image();
+      try{img.fetchPriority=priority;}catch(e){}
+      img.decoding='async';
+      img.onload=()=>{
+        if(typeof img.decode==='function'){
+          img.decode().catch(()=>{}).finally(resolve);
+        }else{
+          resolve();
+        }
+      };
+      img.onerror=resolve;
+      img.src=scene.image;
+    });
+
+    preloadCache.set(key,promise);
+    return promise;
+  }
+
+  function renderScene(key,track=true){
+    const scene=scenes[key];
+    if(!scene)return;
+
+    active=key;
+    explorer.dataset.mode=key;
+    image.style.backgroundImage='url("'+scene.image+'")';
+    image.style.backgroundPosition=scene.pos||'center center';
+    image.style.backgroundSize=scene.size||'cover';
+    mode.textContent=scene.mode;
+    kicker.textContent=scene.kicker;
+    title.textContent=scene.title;
+    copy.textContent=scene.text;
+    cta.textContent=scene.cta;
+
+    tabs.forEach(tab=>{
+      const selected=tab.dataset.explorerMode===key;
+      tab.classList.toggle('active',selected);
+      tab.setAttribute('aria-selected',String(selected));
+    });
+
+    progress.forEach((bar,i)=>bar.classList.toggle('active',i===Object.keys(scenes).indexOf(key)));
+    hotspots.forEach((spot,i)=>{
+      const label=spot.querySelector('b');
+      if(label)label.textContent=scene.hotspots[i]||'';
+    });
+
+    explorer.classList.remove('is-switching','is-loading');
+
+    if(track && typeof nextechTrack==='function'){
+      nextechTrack('service_explorer_select',{service:key});
+    }
+  }
+
+  async function setScene(key,track=true){
     const scene=scenes[key];
     if(!scene||key===active&&track)return;
 
-    explorer.classList.add('is-switching');
-
-    setTimeout(()=>{
-      active=key;
-      explorer.dataset.mode=key;
-      image.style.backgroundImage='url("'+scene.image+'")';
-      image.style.backgroundPosition=scene.pos||'center center';
-      image.style.backgroundSize=scene.size||'cover';
-      mode.textContent=scene.mode;
-      kicker.textContent=scene.kicker;
-      title.textContent=scene.title;
-      copy.textContent=scene.text;
-      cta.textContent=scene.cta;
-
-      tabs.forEach(tab=>{
-        const selected=tab.dataset.explorerMode===key;
-        tab.classList.toggle('active',selected);
-        tab.setAttribute('aria-selected',String(selected));
-      });
-
-      progress.forEach((bar,i)=>bar.classList.toggle('active',i===Object.keys(scenes).indexOf(key)));
-      hotspots.forEach((spot,i)=>{
-        const label=spot.querySelector('b');
-        if(label)label.textContent=scene.hotspots[i]||'';
-      });
-
-      explorer.classList.remove('is-switching');
-
-      if(track && typeof nextechTrack==='function'){
-        nextechTrack('service_explorer_select',{service:key});
-      }
-    },180);
+    explorer.classList.add('is-switching','is-loading');
+    await preloadScene(key,'high');
+    renderScene(key,track);
   }
 
-  tabs.forEach(tab=>tab.addEventListener('click',()=>setScene(tab.dataset.explorerMode)));
+  // Prime the visible/default service immediately.
+  preloadScene('servicing','high');
+
+  // Start warming the remaining images shortly before the section enters view,
+  // so hero loading stays fast but service switching feels instant.
+  const warmAll=()=>{
+    const keys=Object.keys(scenes).filter(key=>key!=='servicing');
+    keys.forEach((key,index)=>{
+      setTimeout(()=>preloadScene(key,'low'),index*90);
+    });
+  };
+
+  if('IntersectionObserver' in window){
+    const warmObserver=new IntersectionObserver(entries=>{
+      if(entries.some(entry=>entry.isIntersecting)){
+        warmAll();
+        warmObserver.disconnect();
+      }
+    },{rootMargin:'900px 0px'});
+    warmObserver.observe(explorer);
+  }else{
+    window.addEventListener('load',warmAll,{once:true});
+  }
+
+  tabs.forEach(tab=>{
+    const key=tab.dataset.explorerMode;
+    tab.addEventListener('pointerenter',()=>preloadScene(key,'high'),{passive:true});
+    tab.addEventListener('touchstart',()=>preloadScene(key,'high'),{passive:true});
+    tab.addEventListener('focus',()=>preloadScene(key,'high'),{passive:true});
+    tab.addEventListener('click',()=>setScene(key));
+  });
 
 
   function refreshActiveSceneFit(){
@@ -518,4 +579,5 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   refreshActiveSceneFit();
 
   progress[0]?.classList.add('active');
+
 })();
