@@ -4,6 +4,17 @@ menuBtn?.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
 mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.remove('open')));
 
 const exp=document.getElementById('experience');
+const mobileActionBar=document.querySelector('.mobileActionBar');
+function updateMobileActions(){
+  if(!exp||!mobileActionBar)return;
+  const pastHero=exp.getBoundingClientRect().bottom<=window.innerHeight+1;
+  mobileActionBar.classList.toggle('is-visible',pastHero);
+  document.body.classList.toggle('past-hero',pastHero);
+}
+addEventListener('scroll',updateMobileActions,{passive:true});
+addEventListener('resize',updateMobileActions,{passive:true});
+updateMobileActions();
+
 const heroVideo=document.getElementById('heroVideo');
 const title=document.getElementById('storyTitle');
 const textEl=document.getElementById('storyText');
