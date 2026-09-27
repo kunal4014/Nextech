@@ -1887,6 +1887,7 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   font-size:clamp(13px,1.05vw,16px);
   line-height:1.65;
 }
+.serviceSwipeHint{display:none}
 
 /* Same composition on every device: service rail + active visual */
 .serviceExplorer{
@@ -2664,6 +2665,19 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .serviceExplorerScroll{height:auto;min-height:0}
   .serviceExplorerSticky{position:relative;top:auto}
   .serviceExplorer{display:flex;flex-direction:column;gap:12px}
+  .serviceSwipeHint{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:7px;
+    margin:-4px 0 -7px;
+    color:#b9c7ce;
+    font-size:10px;
+    font-weight:750;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+  }
+  .serviceSwipeHint svg{width:17px;height:17px;color:var(--red)}
   .serviceExplorerNav{
     display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;
     scroll-snap-type:x proximity;scrollbar-width:none;padding:2px 2px 8px;
