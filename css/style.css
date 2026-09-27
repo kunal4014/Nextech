@@ -2597,92 +2597,46 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
    Keep the real logo dominant in the header.
 ========================================= */
 .nav .brand{
-  min-width:330px;
-  overflow:visible;
-  align-self:center;
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-.nav .brandMark{
-  width:104px;
-  height:58px;
-  overflow:hidden;
-  display:block;
-  flex:0 0 104px;
-  position:relative;
+  display:flex!important;
+  align-items:center!important;
+  justify-self:start!important;
+  min-width:0!important;
+  overflow:visible!important;
 }
 .nav .brandLogo{
   display:block!important;
-  width:232px!important;
+  width:330px!important;
   height:auto!important;
   max-width:none!important;
   max-height:none!important;
   object-fit:contain!important;
   object-position:left center!important;
-  position:absolute;
-  left:0;
-  top:50%;
-  transform:translateY(-50%)!important;
+  transform:none!important;
 }
-.nav .brandName{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  line-height:1;
-  white-space:nowrap;
-}
-.nav .brandName strong{
-  color:#fff;
-  font-size:26px;
-  font-weight:950;
-  letter-spacing:.055em;
-}
-.nav .brandName small{
-  margin-top:5px;
-  color:#c92f35;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:.26em;
+
+/* Give the original wide logo enough physical height instead of clipping it
+   inside the old 80px navigation row. */
+.navin{
+  height:104px;
 }
 @media(max-width:1100px){
-  .nav .brand{
-    min-width:280px;
-    gap:10px;
-  }
-  .nav .brandMark{
-    width:86px;
-    flex-basis:86px;
-  }
   .nav .brandLogo{
-    width:205px!important;
+    width:290px!important;
   }
-  .nav .brandName strong{
-    font-size:22px;
+  .navin{
+    height:96px;
   }
 }
 @media(max-width:920px){
-  .nav .brand{
-    min-width:0;
+  .nav .brandLogo{
+    width:250px!important;
   }
 }
 @media(max-width:700px){
-  .nav .brand{
-    gap:8px;
-  }
-  .nav .brandMark{
-    width:70px;
-    height:48px;
-    flex-basis:70px;
-  }
   .nav .brandLogo{
-    width:172px!important;
+    width:205px!important;
   }
-  .nav .brandName strong{
-    font-size:18px;
-  }
-  .nav .brandName small{
-    font-size:7px;
-    letter-spacing:.20em;
+  .navin{
+    height:78px;
   }
 }
