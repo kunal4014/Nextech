@@ -1936,21 +1936,31 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     inset 0 1px 0 rgba(255,255,255,.025);
   isolation:isolate;
 }
-.serviceExplorerImage{
+.serviceExplorerMedia{
   position:absolute;
   inset:0;
   z-index:0;
-  background-image:url('/assets/services/servicing.jpg');
-  background-size:cover;
-  background-position:67% center;
-  background-repeat:no-repeat;
-  background-color:#05080c;
+  overflow:hidden;
+  background:#05080c;
+}
+.serviceExplorerPhoto{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  opacity:0;
   filter:saturate(.94) contrast(1.04) brightness(.82);
   transform:scale(1.015);
-  transition:opacity .22s ease,transform .7s cubic-bezier(.2,.8,.2,1),filter .3s ease;
+  transition:opacity .22s ease,transform .7s cubic-bezier(.2,.8,.2,1);
+}
+.serviceExplorerPhoto.active{
+  opacity:1;
 }
 @media(hover:hover) and (pointer:fine){
-  .serviceExplorerStage:hover .serviceExplorerImage{transform:scale(1.035)}
+  .serviceExplorerStage:hover .serviceExplorerPhoto.active{transform:scale(1.035)}
+}
 }
 .serviceExplorerShade{
   position:absolute;
@@ -2063,15 +2073,15 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   background:var(--blue);
   box-shadow:0 0 10px rgba(85,197,255,.45);
 }
-.serviceExplorer.is-switching .serviceExplorerImage{opacity:.35}
+
 
 /* Same image crop/focal point on phone/tablet/laptop */
-.serviceExplorer[data-mode="servicing"] .serviceExplorerImage{background-position:67% center}
-.serviceExplorer[data-mode="brakes"] .serviceExplorerImage{background-position:64% center}
-.serviceExplorer[data-mode="diagnostics"] .serviceExplorerImage{background-position:64% center}
-.serviceExplorer[data-mode="suspension"] .serviceExplorerImage{background-position:62% center}
-.serviceExplorer[data-mode="transmission"] .serviceExplorerImage{background-position:64% center}
-.serviceExplorer[data-mode="tyres"] .serviceExplorerImage{background-position:68% center}
+.serviceExplorerPhoto[data-explorer-photo="servicing"]{object-position:67% center}
+.serviceExplorerPhoto[data-explorer-photo="brakes"]{object-position:64% center}
+.serviceExplorerPhoto[data-explorer-photo="diagnostics"]{object-position:64% center}
+.serviceExplorerPhoto[data-explorer-photo="suspension"]{object-position:62% center}
+.serviceExplorerPhoto[data-explorer-photo="transmission"]{object-position:64% center}
+.serviceExplorerPhoto[data-explorer-photo="tyres"]{object-position:68% center}
 
 /* Laptop */
 @media(min-width:1180px){
@@ -2125,8 +2135,8 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     min-height:560px;
     border-radius:18px;
   }
-  .serviceExplorerImage,
-  .serviceExplorerStage:hover .serviceExplorerImage{
+  .serviceExplorerPhoto,
+  .serviceExplorerStage:hover .serviceExplorerPhoto.active{
     transform:scale(1.015);
   }
   .serviceExplorerStatus{display:none}
@@ -2187,7 +2197,7 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 }
 
 @media(prefers-reduced-motion:reduce){
-  .serviceExplorerImage,
+  .serviceExplorerPhoto,
   .serviceExplorerTab,
   .serviceExplorerProgress i,
   .serviceExplorerCopy a::after{
