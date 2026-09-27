@@ -341,12 +341,12 @@ serviceSteps.forEach((step,i)=>{
   }));
 });
 
-/* Extend booking email with contact preferences and record the intent locally. */
-const bookingFormForTracking=document.getElementById('demoBookingForm');
+/* Record booking submit intent without storing customer details. */
+const bookingFormForTracking=document.getElementById('bookingForm');
 bookingFormForTracking?.addEventListener('submit',()=>{
   bookingFormForTracking.classList.add('formPrepared');
   const fd=new FormData(bookingFormForTracking);
-  nextechTrack('booking_request_prepared',{
+  nextechTrack('booking_request_started',{
     service:(fd.get('Service')||'').toString(),
     preferred_date:(fd.get('Preferred date')||'').toString()
   });
