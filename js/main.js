@@ -402,7 +402,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Keep it serviced. Keep it reliable.',
       text:'Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to keep your vehicle running reliably.',
       cta:'Book servicing →',
-      image:'https://images.pexels.com/photos/10490621/pexels-photo-10490621.jpeg?auto=compress&cs=tinysrgb&w=1800',
+      image:'https://images.pexels.com/photos/8478254/pexels-photo-8478254.jpeg?auto=compress&cs=tinysrgb&w=1800',
       pos:'center 48%',
       hotspots:['Engine','Oil & filter','Service point']
     },
@@ -412,7 +412,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Stopping power checked properly.',
       text:'Brake pads, rotors and stopping performance checked properly so your vehicle stays safe, predictable and responsive.',
       cta:'Book a brake check →',
-      image:'https://images.pexels.com/photos/6870299/pexels-photo-6870299.jpeg?auto=compress&cs=tinysrgb&w=1800',
+      image:'https://amayasautorepair.com/assets/mechanic-brakes-DA8EEi6d.jpg',
       pos:'center 48%',
       hotspots:['Rotor','Caliper','Inspection']
     },
@@ -422,7 +422,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Find the issue before replacing parts.',
       text:'Modern scanning and fault finding helps identify the real problem before unnecessary parts are replaced.',
       cta:'Book diagnostics →',
-      image:'https://nextechautorepairs.com.au/wp-content/uploads/2020/04/service-tab.png',
+      image:'https://uautos.com.br/uploads/blog/quando-o-carro-comeca-a-falhar-o-que-pode-ser-e-como-agir.png',
       pos:'58% 52%',
       hotspots:['Engine','Systems scan','Fault data']
     },
@@ -432,7 +432,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Restore comfort, handling and control.',
       text:'Inspection and repair of steering and suspension components to improve ride quality, steering feel and road control.',
       cta:'Book suspension inspection →',
-      image:'https://images.pexels.com/photos/34277924/pexels-photo-34277924.jpeg?auto=compress&cs=tinysrgb&w=1800',
+      image:'https://www.standardsprings.ru/upload/iblock/05c/5dswzlldes2pjpyfyjtbcxfb55qyh68n.png',
       pos:'center 47%',
       hotspots:['Strut','Hub','Mount']
     },
@@ -442,7 +442,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Smooth power delivery starts underneath.',
       text:'Transmission and driveline servicing, diagnosis and repair to keep power delivery smooth and dependable.',
       cta:'Book transmission service →',
-      image:'https://nextechautorepairs.com.au/wp-content/uploads/2023/07/1_0x0_790x520_0x520_bad-driving-habits-gearstick-1.jpg',
+      image:'https://cdn.wayke.se/cfit/73555653373449a8a0bc66b0d57cd437/eab412bd6ec44efb9123fecccf5bc5dc?w=1200',
       pos:'center',
       hotspots:['Driveline','Transmission','Inspection']
     },
@@ -452,7 +452,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Everything starts where the car meets the road.',
       text:'Tyre replacement, wear checks and balancing help maintain grip, braking performance and a smoother drive.',
       cta:'Book tyre service →',
-      image:'https://nextechautorepairs.com.au/wp-content/uploads/2020/03/pexels-anna-shvets-4315574.jpg',
+      image:'https://www.garage-marti.ch/media/0i3nha3u/teaser_reifenservice_werkstatt__l5a1053_20250925.jpg?height=900&width=1400&v=1dc3215a7916d20',
       pos:'center 48%',
       hotspots:['Tyre','Wear','Balance']
     }
