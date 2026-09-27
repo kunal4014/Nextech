@@ -2596,3 +2596,19 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     object-fit:contain;object-position:left center;
   }
 }
+
+/* Editorial spacing for the service introduction. */
+@media(min-width:1180px){
+  .serviceExplorerHead{
+    grid-template-columns:minmax(0,1fr) minmax(260px,370px);
+    align-items:end;
+    gap:clamp(28px,5vw,88px);
+    padding-bottom:clamp(28px,3vw,44px);
+    border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  .serviceExplorerHead>p{
+    max-width:370px;
+    padding-left:20px;
+    border-left:2px solid var(--red);
+  }
+}
