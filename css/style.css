@@ -1160,6 +1160,18 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     border:1px solid rgba(255,255,255,.10);
     backdrop-filter:blur(18px);
     box-shadow:0 16px 40px rgba(0,0,0,.38);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateY(16px);
+    transition:opacity .2s ease,transform .2s ease,visibility .2s;
+  }
+
+  .mobileActionBar.is-visible{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:none;
   }
 
   .mobileActionBar a{
@@ -2444,6 +2456,9 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     width:auto;
     max-width:none;
     font-size:10px;
+  }
+  body:not(.past-hero) .cookieNotice{
+    bottom:calc(12px + env(safe-area-inset-bottom));
   }
 }
 
