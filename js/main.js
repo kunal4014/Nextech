@@ -530,33 +530,28 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     const scene=scenes[key];
     if(!scene||key===active&&track)return;
 
-    explorer.classList.add('is-switching','is-loading');
+    explorer.classList.add('is-loading');
     await preloadScene(key,'high');
+    explorer.classList.add('is-switching');
     renderScene(key,track);
   }
 
   // Prime the visible/default service immediately.
   preloadScene('servicing','high');
 
-  // Start warming the remaining images shortly before the section enters view,
-  // so hero loading stays fast but service switching feels instant.
+  // Warm every remaining service image almost immediately after first paint.
+  // This removes the first-click wait while still letting the hero start first.
   const warmAll=()=>{
     const keys=Object.keys(scenes).filter(key=>key!=='servicing');
     keys.forEach((key,index)=>{
-      setTimeout(()=>preloadScene(key,'low'),index*90);
+      setTimeout(()=>preloadScene(key,'low'),index*60);
     });
   };
 
-  if('IntersectionObserver' in window){
-    const warmObserver=new IntersectionObserver(entries=>{
-      if(entries.some(entry=>entry.isIntersecting)){
-        warmAll();
-        warmObserver.disconnect();
-      }
-    },{rootMargin:'900px 0px'});
-    warmObserver.observe(explorer);
+  if(document.readyState==='complete'){
+    setTimeout(warmAll,120);
   }else{
-    window.addEventListener('load',warmAll,{once:true});
+    window.addEventListener('load',()=>setTimeout(warmAll,120),{once:true});
   }
 
   tabs.forEach(tab=>{
