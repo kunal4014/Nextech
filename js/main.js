@@ -41,17 +41,9 @@ function setActiveVideoScene(scene){
   if(currentVideoScene!==scene.step){
     currentVideoScene=scene.step;
     serviceSteps.forEach((el,i)=>el.classList.toggle('active',i===scene.step));
-    title.style.opacity='.18';
-    textEl.style.opacity='.18';
-    ey.style.opacity='.18';
-    requestAnimationFrame(()=>{
-      title.innerHTML=scene.title;
-      textEl.textContent=scene.text;
-      ey.textContent=scene.ey;
-      title.style.opacity='1';
-      textEl.style.opacity='1';
-      ey.style.opacity='1';
-    });
+    title.innerHTML=scene.title;
+    textEl.textContent=scene.text;
+    ey.textContent=scene.ey;
   }
 }
 
@@ -74,10 +66,6 @@ function parallax(){
   if(heroVideo) heroVideo.style.transform='scale(1.035) translate3d(0,'+(amount*10)+'px,0)';
   if(heroMotionFallback) heroMotionFallback.style.transform='scale(1.035) translate3d(0,'+(amount*10)+'px,0)';
 }
-
-title.style.transition='opacity .22s ease';
-textEl.style.transition='opacity .22s ease';
-ey.style.transition='opacity .22s ease';
 
 if(heroVideo){
   heroVideo.muted=true;
