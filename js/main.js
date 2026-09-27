@@ -380,6 +380,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   const title=document.getElementById('serviceExplorerTitle');
   const copy=document.getElementById('serviceExplorerText');
   const cta=document.getElementById('serviceExplorerCta');
+  const learn=document.getElementById('serviceExplorerLearn');
   const progress=[...explorer.querySelectorAll('.serviceExplorerProgress i')];
 
   const scenes={
@@ -388,42 +389,48 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       kicker:'Logbook servicing & maintenance',
       title:'Keep it serviced. Keep it reliable.',
       text:'Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to keep your vehicle running reliably.',
-      cta:'Book servicing →'
+      cta:'Book servicing →',
+      learn:'services/logbook-servicing/'
     },
     brakes:{
       mode:'02 · Safety systems',
       kicker:'Brakes & clutch',
       title:'Stopping power checked properly.',
       text:'Brake pads, rotors and stopping performance checked properly so your vehicle stays safe, predictable and responsive.',
-      cta:'Book a brake check →'
+      cta:'Book a brake check →',
+      learn:'services/brakes/'
     },
     diagnostics:{
       mode:'03 · Fault finding',
       kicker:'Advanced vehicle diagnostics',
       title:'Find the issue before replacing parts.',
       text:'Modern scanning and fault finding helps identify the real problem before unnecessary parts are replaced.',
-      cta:'Book diagnostics →'
+      cta:'Book diagnostics →',
+      learn:'services/diagnostics/'
     },
     suspension:{
       mode:'04 · Ride & handling',
       kicker:'Steering & suspension',
       title:'Restore comfort, handling and control.',
       text:'Inspection and repair of steering and suspension components to improve ride quality, steering feel and road control.',
-      cta:'Book suspension inspection →'
+      cta:'Book suspension inspection →',
+      learn:'services/suspension/'
     },
     transmission:{
       mode:'05 · Driveline',
       kicker:'Transmission service & repair',
       title:'Smooth power delivery starts underneath.',
       text:'Transmission and driveline servicing, diagnosis and repair to keep power delivery smooth and dependable.',
-      cta:'Book transmission service →'
+      cta:'Book transmission service →',
+      learn:'services/transmission/'
     },
     tyres:{
       mode:'06 · Road contact',
       kicker:'Tyres & wheel care',
       title:'Everything starts where the car meets the road.',
       text:'Tyre replacement, wear checks and balancing help maintain grip, braking performance and a smoother drive.',
-      cta:'Book tyre service →'
+      cta:'Book tyre service →',
+      learn:'services/tyres/'
     }
   };
 
@@ -453,6 +460,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     title.textContent=scene.title;
     copy.textContent=scene.text;
     cta.textContent=scene.cta;
+    if(learn && scene.learn) learn.href=scene.learn;
 
     tabs.forEach(tab=>{
       const selected=tab.dataset.explorerMode===key;

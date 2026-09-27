@@ -1,0 +1,106 @@
+:root{
+  --bg:#05080b;--bg2:#090e13;--panel:#0d141a;--text:#f6f8fa;--muted:#99a7b1;
+  --red:#e53b38;--line:rgba(255,255,255,.09);--max:1240px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:
+radial-gradient(circle at 72% 3%,rgba(229,59,56,.08),transparent 25%),
+linear-gradient(180deg,#040609,#070b0f 55%,#05080b)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.shell{width:min(calc(100% - 40px),var(--max));margin:auto}
+.siteTop{border-bottom:1px solid var(--line);background:#303030;color:#d8dde0;font-size:12px}
+.siteTop .shell{min-height:36px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.siteNav{position:sticky;top:0;z-index:30;background:rgba(5,8,11,.91);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.navIn{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{display:flex;flex-direction:column;line-height:.85}
+.brand strong{font-size:20px;letter-spacing:.08em}
+.brand small{margin-top:7px;font-size:8px;letter-spacing:.24em;color:#9ba8b0}
+.navLinks{display:flex;align-items:center;gap:22px;font-size:13px;font-weight:750}
+.bookBtn,.primaryBtn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:999px;background:var(--red);color:#fff;font-weight:850;border:1px solid rgba(255,255,255,.08)}
+.secondaryBtn{display:inline-flex;align-items:center;justify-content:center;padding:12px 17px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);font-weight:800}
+.breadcrumb{padding-top:28px;color:#788994;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.breadcrumb a{color:#b4c0c7}
+.serviceHero{padding:34px 0 72px}
+.heroGrid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(460px,1.08fr);gap:28px;align-items:stretch}
+.heroCopy{padding:46px 0 24px;display:flex;flex-direction:column;justify-content:center}
+.ey{font-size:10px;letter-spacing:.19em;text-transform:uppercase;color:#ef8f8b;font-weight:900}
+h1{max-width:780px;margin:15px 0 18px;font-size:clamp(52px,6vw,88px);line-height:.9;letter-spacing:-.065em}
+.heroCopy>p{max-width:690px;margin:0;color:#b5c0c6;font-size:17px;line-height:1.72}
+.heroActions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.heroMedia{position:relative;min-height:570px;overflow:hidden;border-radius:28px;border:1px solid var(--line);background:#0a0e12;box-shadow:0 35px 90px rgba(0,0,0,.4)}
+.heroMedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.96) contrast(1.03) brightness(.9)}
+.heroMedia:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(4,7,10,.72))}
+.heroBadge{position:absolute;z-index:2;left:18px;bottom:18px;padding:10px 13px;border-radius:999px;background:rgba(5,8,11,.72);border:1px solid rgba(255,255,255,.12);font-size:9px;letter-spacing:.16em;text-transform:uppercase;backdrop-filter:blur(12px)}
+.trustStrip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:26px;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--line)}
+.trustStrip div{padding:17px 18px;background:#090e13}
+.trustStrip strong{display:block;font-size:18px;margin-bottom:4px}
+.trustStrip span{color:#84939d;font-size:11px}
+.contentSection{padding:82px 0;border-top:1px solid rgba(255,255,255,.055)}
+.sectionIntro{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:end;margin-bottom:30px}
+.sectionIntro h2{margin:12px 0 0;font-size:clamp(38px,4.5vw,62px);line-height:.94;letter-spacing:-.05em}
+.sectionIntro p{margin:0;color:var(--muted);font-size:15px;line-height:1.75}
+.helpGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.helpCard{min-height:210px;padding:23px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,#0f161d,#090f14)}
+.helpCard span{display:block;color:#ef7772;font-size:10px;font-weight:900;letter-spacing:.14em}
+.helpCard h3{margin:36px 0 8px;font-size:21px;letter-spacing:-.025em}
+.helpCard p{margin:0;color:#8f9da6;font-size:13px;line-height:1.6}
+.twoCol{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{padding:28px;border-radius:24px;border:1px solid var(--line);background:#0b1116}
+.panel h2,.panel h3{margin:0 0 14px;letter-spacing:-.035em}
+.panel h2{font-size:35px}.panel h3{font-size:24px}
+.panel p{color:#9aa8b1;line-height:1.7}
+.signList{display:grid;gap:10px;margin:20px 0 0;padding:0;list-style:none}
+.signList li{position:relative;padding:14px 15px 14px 42px;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:#ffffff04;color:#d6dee3;font-size:13px}
+.signList li:before{content:"";position:absolute;left:17px;top:50%;width:8px;height:8px;border-radius:50%;background:var(--red);transform:translateY(-50%);box-shadow:0 0 12px rgba(229,59,56,.35)}
+.faq{display:grid;gap:10px}
+.faq details{border:1px solid var(--line);border-radius:16px;background:#0b1116;padding:0 18px}
+.faq summary{cursor:pointer;padding:18px 30px 18px 0;font-weight:800;list-style:none;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";position:absolute;right:2px;top:17px;color:#e96b66;font-size:20px}
+.faq details[open] summary:after{content:"−"}
+.faq details p{margin:-2px 0 18px;color:#96a5ae;line-height:1.65;font-size:14px}
+.relatedGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.relatedCard{padding:22px;border:1px solid var(--line);border-radius:18px;background:#ffffff04;transition:.2s}
+.relatedCard:hover{transform:translateY(-3px);border-color:rgba(229,59,56,.3)}
+.relatedCard small{display:block;color:#e36a66;text-transform:uppercase;letter-spacing:.14em;font-size:9px;margin-bottom:9px}
+.relatedCard strong{font-size:19px}
+.ctaPanel{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;padding:34px;border:1px solid rgba(229,59,56,.22);border-radius:26px;background:
+radial-gradient(circle at 92% 0,rgba(229,59,56,.12),transparent 28%),
+linear-gradient(180deg,#10171d,#0a1015)}
+.ctaPanel h2{margin:0 0 8px;font-size:clamp(32px,4vw,52px);letter-spacing:-.05em}
+.ctaPanel p{margin:0;color:#95a4ad;line-height:1.6}
+.ctaButtons{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.serviceHub{padding:64px 0 88px}
+.hubGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.hubCard{overflow:hidden;border:1px solid var(--line);border-radius:22px;background:#0b1116}
+.hubCard img{width:100%;aspect-ratio:16/9;object-fit:cover;filter:brightness(.88)}
+.hubCard div{padding:20px}
+.hubCard small{color:#e97772;font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.hubCard h2{margin:9px 0 8px;font-size:25px}
+.hubCard p{margin:0;color:#8f9da6;font-size:13px;line-height:1.55}
+.hubCard a{display:inline-block;margin-top:16px;font-weight:850;font-size:13px}
+footer{padding:30px 0 42px;color:#78868f;font-size:11px}
+.footerIn{padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footerLinks{display:flex;flex-wrap:wrap;gap:12px 18px}
+.footerLinks a:hover{color:#fff}
+@media(max-width:900px){
+  .heroGrid,.sectionIntro,.twoCol{grid-template-columns:1fr}
+  .heroMedia{min-height:500px}.helpGrid{grid-template-columns:repeat(2,1fr)}
+  .hubGrid{grid-template-columns:repeat(2,1fr)}.trustStrip{grid-template-columns:repeat(2,1fr)}
+  .ctaPanel{grid-template-columns:1fr}.ctaButtons{justify-content:flex-start}
+  .navLinks{display:none}
+}
+@media(max-width:600px){
+  .shell{width:calc(100% - 24px)}
+  .siteTop .shell{justify-content:center}.siteTop .shell span:first-child{display:none}
+  .navIn{min-height:68px}.brand strong{font-size:17px}.bookBtn{padding:10px 13px;font-size:12px}
+  .serviceHero{padding:24px 0 58px}.heroCopy{padding:18px 0 8px}
+  h1{font-size:clamp(42px,12vw,58px)}
+  .heroCopy>p{font-size:15px}.heroMedia{min-height:380px;border-radius:20px}
+  .trustStrip{grid-template-columns:1fr 1fr}.trustStrip div{padding:14px}
+  .contentSection{padding:62px 0}.helpGrid,.hubGrid,.relatedGrid{grid-template-columns:1fr}
+  .helpCard{min-height:0}.sectionIntro{gap:18px}.panel{padding:22px}
+  .ctaPanel{padding:24px}.ctaButtons{display:grid}.ctaButtons a{width:100%}
+}
