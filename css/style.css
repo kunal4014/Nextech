@@ -221,12 +221,12 @@ linear-gradient(145deg,#0b1116,#060a0e)}
 .servicePhoto:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(3,6,9,.04),rgba(3,6,9,.12) 48%,rgba(3,6,9,.62));pointer-events:none}
 .servicePhoto:after{content:"";position:absolute;inset:-3%;z-index:0;background:inherit;background-size:cover;background-position:center;transform:scale(1.03);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
 .serviceChapter:hover .servicePhoto:after{transform:scale(1.085)}
-.oilPhoto{background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2017/03/services-item-img02.jpg');background-position:center}
-.brakePhoto{background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2020/03/pexels-cottonbro-studio-4489749-1.jpg');background-position:62% center}
+.oilPhoto{background-image:url('https://images.pexels.com/photos/8478254/pexels-photo-8478254.jpeg?auto=compress&cs=tinysrgb&w=1800');background-position:center}
+.brakePhoto{background-image:url('https://amayasautorepair.com/assets/mechanic-brakes-DA8EEi6d.jpg');background-position:62% center}
 .diagPhoto{background-image:linear-gradient(145deg,#111920,#060a0e)}
-.diagPhoto:after{background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2020/04/service-tab.png');background-size:88% auto;background-repeat:no-repeat;background-position:45% 54%;filter:drop-shadow(0 24px 34px rgba(0,0,0,.42));transform:scale(1)}
+.diagPhoto:after{background-image:url('https://uautos.com.br/uploads/blog/quando-o-carro-comeca-a-falhar-o-que-pode-ser-e-como-agir.png');background-size:88% auto;background-repeat:no-repeat;background-position:45% 54%;filter:drop-shadow(0 24px 34px rgba(0,0,0,.42));transform:scale(1)}
 .serviceChapter:hover .diagPhoto:after{transform:scale(1.035)}
-.suspensionPhoto{background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2020/03/pexels-anna-shvets-4315574.jpg');background-position:center 48%}
+.suspensionPhoto{background-image:url('https://www.standardsprings.ru/upload/iblock/05c/5dswzlldes2pjpyfyjtbcxfb55qyh68n.png');background-position:center 48%}
 .photoBadge{position:absolute;z-index:3;left:22px;bottom:22px;padding:12px 14px;border-radius:14px;background:rgba(6,10,13,.72);border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(12px)}
 .photoBadge span{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#acd2e5;margin-bottom:4px}
 .photoBadge strong{display:block;font-size:15px}
@@ -602,19 +602,19 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 .serviceChapter.serviceScene:hover .chapterVisual:after{transform:scale(1.065)}
 
 .oilScene .chapterVisual:after{
-  background-image:url('https://images.pexels.com/photos/10490621/pexels-photo-10490621.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  background-image:url('https://images.pexels.com/photos/8478254/pexels-photo-8478254.jpeg?auto=compress&cs=tinysrgb&w=1800');
   background-position:center 48%
 }
 .brakeScene .chapterVisual:after{
-  background-image:url('https://images.pexels.com/photos/6870299/pexels-photo-6870299.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  background-image:url('https://amayasautorepair.com/assets/mechanic-brakes-DA8EEi6d.jpg');
   background-position:center 48%
 }
 .suspensionScene .chapterVisual:after{
-  background-image:url('https://images.pexels.com/photos/34277924/pexels-photo-34277924.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  background-image:url('https://www.standardsprings.ru/upload/iblock/05c/5dswzlldes2pjpyfyjtbcxfb55qyh68n.png');
   background-position:center 47%
 }
 .serviceDiag2.diagFull .chapterVisual:after{
-  background-image:url('https://nextechautorepairs.com.au/wp-content/uploads/2020/04/service-tab.png') !important;
+  background-image:url('https://uautos.com.br/uploads/blog/quando-o-carro-comeca-a-falhar-o-que-pode-ser-e-como-agir.png') !important;
   background-size:84% auto !important;
   background-position:58% 52% !important;
   filter:drop-shadow(0 34px 46px rgba(0,0,0,.48)) !important;
@@ -2576,7 +2576,7 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 .serviceExplorerImage{
   position:absolute;
   inset:-2%;
-  background-image:url('https://images.pexels.com/photos/10490621/pexels-photo-10490621.jpeg?auto=compress&cs=tinysrgb&w=1800');
+  background-image:url('https://images.pexels.com/photos/8478254/pexels-photo-8478254.jpeg?auto=compress&cs=tinysrgb&w=1800');
   background-size:cover;
   background-position:center;
   filter:saturate(.92) contrast(1.05) brightness(.82);
@@ -2819,3 +2819,12 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     left:20px;right:20px;bottom:16px;
   }
 }
+
+
+/* Service-specific photo crops */
+.serviceExplorer[data-mode="servicing"] .serviceExplorerImage{background-position:58% center!important}
+.serviceExplorer[data-mode="brakes"] .serviceExplorerImage{background-position:57% center!important}
+.serviceExplorer[data-mode="diagnostics"] .serviceExplorerImage{background-position:62% center!important}
+.serviceExplorer[data-mode="suspension"] .serviceExplorerImage{background-position:64% center!important}
+.serviceExplorer[data-mode="transmission"] .serviceExplorerImage{background-position:60% center!important}
+.serviceExplorer[data-mode="tyres"] .serviceExplorerImage{background-position:63% center!important}
