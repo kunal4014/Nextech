@@ -433,7 +433,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   let active='servicing';
   let timer=null;
   let visible=false;
-  let hoverPaused=false;
   let touchPaused=false;
   let manualHoldUntil=0;
 
@@ -475,7 +474,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     return visible &&
       !document.hidden &&
       !reduceMotion.matches &&
-      !hoverPaused &&
       !touchPaused &&
       Date.now()>=manualHoldUntil;
   }
@@ -538,15 +536,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   tabs.forEach(tab=>{
     const key=tab.dataset.explorerMode;
     tab.addEventListener('click',()=>selectManually(key));
-  });
-
-  explorer.addEventListener('mouseenter',()=>{
-    hoverPaused=true;
-    updatePauseState();
-  });
-  explorer.addEventListener('mouseleave',()=>{
-    hoverPaused=false;
-    updatePauseState();
   });
 
   explorer.addEventListener('touchstart',()=>{
