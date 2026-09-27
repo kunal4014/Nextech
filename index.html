@@ -3,6 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>
+(() => {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  const nav = performance.getEntriesByType?.('navigation')?.[0];
+  const isReload = nav ? nav.type === 'reload' : performance.navigation?.type === 1;
+
+  if (isReload && location.hash) {
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+
+  if (isReload) {
+    window.addEventListener('DOMContentLoaded', () => window.scrollTo(0, 0), { once: true });
+    window.addEventListener('load', () => window.scrollTo(0, 0), { once: true });
+  }
+})();
+</script>
+
 
 <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
 <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin>
