@@ -366,12 +366,11 @@ bookingFormForTracking?.addEventListener('submit',()=>{
 
 
 /* =========================================
-   SCROLL-DRIVEN SERVICE EXPLORER
+   INTERACTIVE SERVICE EXPLORER
 ========================================= */
 (() => {
   const explorer=document.getElementById('serviceExplorer');
-  const scrollStory=document.getElementById('serviceExplorerScroll');
-  if(!explorer||!scrollStory)return;
+  if(!explorer)return;
 
   const tabs=[...explorer.querySelectorAll('.serviceExplorerTab')];
   const photos=[...explorer.querySelectorAll('.serviceExplorerPhoto')];
@@ -380,7 +379,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   const title=document.getElementById('serviceExplorerTitle');
   const copy=document.getElementById('serviceExplorerText');
   const cta=document.getElementById('serviceExplorerCta');
-  const learn=document.getElementById('serviceExplorerLearn');
   const progress=[...explorer.querySelectorAll('.serviceExplorerProgress i')];
 
   const scenes={
@@ -389,65 +387,52 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       kicker:'Logbook servicing & maintenance',
       title:'Keep it serviced. Keep it reliable.',
       text:'Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to keep your vehicle running reliably.',
-      cta:'Book servicing →',
-      learn:'services/logbook-servicing/'
+      cta:'Book servicing →'
     },
     brakes:{
       mode:'02 · Safety systems',
       kicker:'Brakes & clutch',
       title:'Stopping power checked properly.',
       text:'Brake pads, rotors and stopping performance checked properly so your vehicle stays safe, predictable and responsive.',
-      cta:'Book a brake check →',
-      learn:'services/brakes/'
+      cta:'Book a brake check →'
     },
     diagnostics:{
       mode:'03 · Fault finding',
       kicker:'Advanced vehicle diagnostics',
       title:'Find the issue before replacing parts.',
       text:'Modern scanning and fault finding helps identify the real problem before unnecessary parts are replaced.',
-      cta:'Book diagnostics →',
-      learn:'services/diagnostics/'
+      cta:'Book diagnostics →'
     },
     suspension:{
       mode:'04 · Ride & handling',
       kicker:'Steering & suspension',
       title:'Restore comfort, handling and control.',
       text:'Inspection and repair of steering and suspension components to improve ride quality, steering feel and road control.',
-      cta:'Book suspension inspection →',
-      learn:'services/suspension/'
+      cta:'Book suspension inspection →'
     },
     transmission:{
       mode:'05 · Driveline',
       kicker:'Transmission service & repair',
       title:'Smooth power delivery starts underneath.',
       text:'Transmission and driveline servicing, diagnosis and repair to keep power delivery smooth and dependable.',
-      cta:'Book transmission service →',
-      learn:'services/transmission/'
+      cta:'Book transmission service →'
     },
     tyres:{
       mode:'06 · Road contact',
       kicker:'Tyres & wheel care',
       title:'Everything starts where the car meets the road.',
       text:'Tyre replacement, wear checks and balancing help maintain grip, braking performance and a smoother drive.',
-      cta:'Book tyre service →',
-      learn:'services/tyres/'
+      cta:'Book tyre service →'
     }
   };
 
   const sceneKeys=Object.keys(scenes);
-  const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
   let active='servicing';
-  let ticking=false;
 
-  function stickyTop(){
-    return innerWidth<=700 ? 112 : 126;
-  }
-
-  function renderScene(key,track=false){
+  function renderScene(key,track=true){
     const scene=scenes[key];
     if(!scene)return;
 
-    const changed=key!==active;
     active=key;
     explorer.dataset.mode=key;
 
@@ -460,7 +445,6 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     title.textContent=scene.title;
     copy.textContent=scene.text;
     cta.textContent=scene.cta;
-    if(learn && scene.learn) learn.href=scene.learn;
 
     tabs.forEach(tab=>{
       const selected=tab.dataset.explorerMode===key;
@@ -468,83 +452,28 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       tab.setAttribute('aria-selected',String(selected));
     });
 
-    if(changed && !reducedMotion.matches){
-      explorer.classList.remove('scene-enter');
-      void explorer.offsetWidth;
-      explorer.classList.add('scene-enter');
-    }
+    progress.forEach((bar,i)=>bar.classList.toggle('active',i===sceneKeys.indexOf(key)));
+
+    requestAnimationFrame(()=>explorer.classList.remove('is-switching'));
 
     if(track && typeof nextechTrack==='function'){
       nextechTrack('service_explorer_select',{service:key});
     }
   }
 
-  function updateProgress(overall,index){
-    const scaled=Math.max(0,Math.min(sceneKeys.length,overall*sceneKeys.length));
-    const local=Math.max(0,Math.min(1,scaled-index));
-
-    progress.forEach((bar,i)=>{
-      const fill=i<index ? 1 : i===index ? local : 0;
-      bar.style.setProperty('--scroll-fill',fill.toFixed(3));
-      bar.classList.toggle('active',i===index);
-      bar.classList.toggle('complete',i<index);
-    });
-
-    explorer.style.setProperty('--service-scroll-progress',overall.toFixed(4));
-    explorer.style.setProperty('--service-local-progress',local.toFixed(4));
+  function setScene(key){
+    if(!scenes[key]||key===active)return;
+    explorer.classList.add('is-switching');
+    renderScene(key,true);
   }
 
-  function updateFromScroll(){
-    ticking=false;
-
-    const rect=scrollStory.getBoundingClientRect();
-    const top=stickyTop();
-    const travel=Math.max(1,rect.height-innerHeight+top);
-    const overall=Math.max(0,Math.min(1,(top-rect.top)/travel));
-    const scaled=Math.min(sceneKeys.length-.0001,overall*sceneKeys.length);
-    const index=Math.min(sceneKeys.length-1,Math.floor(scaled));
-
-    renderScene(sceneKeys[index],false);
-    updateProgress(overall,index);
-  }
-
-  function requestUpdate(){
-    if(ticking)return;
-    ticking=true;
-    requestAnimationFrame(updateFromScroll);
-  }
-
-  function scrollToScene(index){
-    const rect=scrollStory.getBoundingClientRect();
-    const absoluteTop=scrollY+rect.top;
-    const top=stickyTop();
-    const travel=Math.max(1,scrollStory.offsetHeight-innerHeight+top);
-    const targetProgress=(index+.18)/sceneKeys.length;
-    const destination=absoluteTop-top+(travel*targetProgress);
-
-    scrollTo({
-      top:Math.max(0,destination),
-      behavior:reducedMotion.matches?'auto':'smooth'
-    });
-  }
-
-  tabs.forEach((tab,index)=>{
-    tab.addEventListener('click',()=>{
-      scrollToScene(index);
-      if(typeof nextechTrack==='function'){
-        nextechTrack('service_explorer_select',{service:sceneKeys[index]});
-      }
-    });
+  tabs.forEach(tab=>{
+    tab.addEventListener('click',()=>setScene(tab.dataset.explorerMode));
   });
 
-  addEventListener('scroll',requestUpdate,{passive:true});
-  addEventListener('resize',requestUpdate,{passive:true});
-  reducedMotion.addEventListener?.('change',requestUpdate);
-
-  renderScene(sceneKeys[0],false);
-  updateProgress(0,0);
-  updateFromScroll();
+  progress[0]?.classList.add('active');
 })();
+
 /* =========================================
    CURRENT-SITE COOKIE NOTICE
 ========================================= */
