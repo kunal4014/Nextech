@@ -404,9 +404,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       cta:'Book servicing →',
       image:'https://images.pexels.com/photos/8478254/pexels-photo-8478254.jpeg?auto=compress&cs=tinysrgb&w=1800',
       pos:'60% center',
-      mobilePos:'67% center',
       size:'cover',
-      mobileSize:'cover',
       hotspots:['Engine','Oil & filter','Service point']
     },
     brakes:{
@@ -417,9 +415,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       cta:'Book a brake check →',
       image:'https://amayasautorepair.com/assets/mechanic-brakes-DA8EEi6d.jpg',
       pos:'58% center',
-      mobilePos:'64% center',
       size:'cover',
-      mobileSize:'cover',
       hotspots:['Rotor','Caliper','Inspection']
     },
     diagnostics:{
@@ -430,9 +426,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       cta:'Book diagnostics →',
       image:'https://uautos.com.br/uploads/blog/quando-o-carro-comeca-a-falhar-o-que-pode-ser-e-como-agir.png',
       pos:'center center',
-      mobilePos:'center 36%',
       size:'contain',
-      mobileSize:'contain',
       hotspots:['Engine','Systems scan','Fault data']
     },
     suspension:{
@@ -443,9 +437,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       cta:'Book suspension inspection →',
       image:'https://www.standardsprings.ru/upload/iblock/05c/5dswzlldes2pjpyfyjtbcxfb55qyh68n.png',
       pos:'center center',
-      mobilePos:'center 38%',
       size:'contain',
-      mobileSize:'contain',
       hotspots:['Strut','Hub','Mount']
     },
     transmission:{
@@ -456,9 +448,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       cta:'Book transmission service →',
       image:'https://cdn.wayke.se/cfit/73555653373449a8a0bc66b0d57cd437/eab412bd6ec44efb9123fecccf5bc5dc?w=1200',
       pos:'60% center',
-      mobilePos:'64% center',
       size:'cover',
-      mobileSize:'cover',
       hotspots:['Driveline','Transmission','Inspection']
     },
     tyres:{
@@ -469,9 +459,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       cta:'Book tyre service →',
       image:'https://www.garage-marti.ch/media/0i3nha3u/teaser_reifenservice_werkstatt__l5a1053_20250925.jpg?height=900&width=1400&v=1dc3215a7916d20',
       pos:'62% center',
-      mobilePos:'68% center',
       size:'cover',
-      mobileSize:'cover',
       hotspots:['Tyre','Wear','Balance']
     }
   };
@@ -488,9 +476,8 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       active=key;
       explorer.dataset.mode=key;
       image.style.backgroundImage='url("'+scene.image+'")';
-      const isMobile=window.innerWidth<=700;
-      image.style.backgroundPosition=isMobile?(scene.mobilePos||scene.pos||'center center'):(scene.pos||'center center');
-      image.style.backgroundSize=isMobile?(scene.mobileSize||scene.size||'cover'):(scene.size||'cover');
+      image.style.backgroundPosition=scene.pos||'center center';
+      image.style.backgroundSize=scene.size||'cover';
       mode.textContent=scene.mode;
       kicker.textContent=scene.kicker;
       title.textContent=scene.title;
@@ -523,9 +510,8 @@ bookingFormForTracking?.addEventListener('submit',()=>{
   function refreshActiveSceneFit(){
     const scene=scenes[active];
     if(!scene)return;
-    const isMobile=window.innerWidth<=700;
-    image.style.backgroundPosition=isMobile?(scene.mobilePos||scene.pos||'center center'):(scene.pos||'center center');
-    image.style.backgroundSize=isMobile?(scene.mobileSize||scene.size||'cover'):(scene.size||'cover');
+    image.style.backgroundPosition=scene.pos||'center center';
+    image.style.backgroundSize=scene.size||'cover';
   }
 
   window.addEventListener('resize',refreshActiveSceneFit,{passive:true});
