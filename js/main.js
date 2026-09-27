@@ -388,7 +388,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Keep it serviced. Keep it reliable.',
       text:'Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to keep your vehicle running reliably.',
       cta:'Book servicing →',
-      image:'assets/services/servicing.jpg',
+      image:'/assets/services/servicing.jpg',
       pos:'67% center',
       size:'cover',
     },
@@ -398,7 +398,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Stopping power checked properly.',
       text:'Brake pads, rotors and stopping performance checked properly so your vehicle stays safe, predictable and responsive.',
       cta:'Book a brake check →',
-      image:'assets/services/brakes.jpg',
+      image:'/assets/services/brakes.jpg',
       pos:'64% center',
       size:'cover',
     },
@@ -408,7 +408,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Find the issue before replacing parts.',
       text:'Modern scanning and fault finding helps identify the real problem before unnecessary parts are replaced.',
       cta:'Book diagnostics →',
-      image:'assets/services/diagnostics.jpg',
+      image:'/assets/services/diagnostics.jpg',
       pos:'64% center',
       size:'cover',
     },
@@ -418,7 +418,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Restore comfort, handling and control.',
       text:'Inspection and repair of steering and suspension components to improve ride quality, steering feel and road control.',
       cta:'Book suspension inspection →',
-      image:'assets/services/suspension.jpg',
+      image:'/assets/services/suspension.jpg',
       pos:'62% center',
       size:'cover',
     },
@@ -428,7 +428,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Smooth power delivery starts underneath.',
       text:'Transmission and driveline servicing, diagnosis and repair to keep power delivery smooth and dependable.',
       cta:'Book transmission service →',
-      image:'assets/services/transmission.jpg',
+      image:'/assets/services/transmission.jpg',
       pos:'64% center',
       size:'cover',
     },
@@ -438,7 +438,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Everything starts where the car meets the road.',
       text:'Tyre replacement, wear checks and balancing help maintain grip, braking performance and a smoother drive.',
       cta:'Book tyre service →',
-      image:'assets/services/tyres.jpg',
+      image:'/assets/services/tyres.jpg',
       pos:'68% center',
       size:'cover',
     }
@@ -495,35 +495,27 @@ bookingFormForTracking?.addEventListener('submit',()=>{
 
     progress.forEach((bar,i)=>bar.classList.toggle('active',i===Object.keys(scenes).indexOf(key)));
 
-    explorer.classList.remove('is-switching','is-loading');
+    explorer.classList.remove('is-switching');
 
     if(track && typeof nextechTrack==='function'){
       nextechTrack('service_explorer_select',{service:key});
     }
   }
 
-  async function setScene(key,track=true){
+  function setScene(key,track=true){
     const scene=scenes[key];
     if(!scene||key===active&&track)return;
 
-    explorer.classList.add('is-loading');
-    await preloadScene(key,'high');
+    preloadScene(key,'high');
     explorer.classList.add('is-switching');
     renderScene(key,track);
   }
 
-  // The visible/default image is preloaded in HTML. Warm the remaining
-  // same-origin service assets just after first paint so they do not compete
-  // with the hero video request.
-  preloadScene('servicing','high');
-  const warmLocalScenes=()=>Object.keys(scenes)
-    .filter(key=>key!=='servicing')
-    .forEach((key,index)=>setTimeout(()=>preloadScene(key,'low'),index*45));
-  if('requestIdleCallback' in window){
-    requestIdleCallback(warmLocalScenes,{timeout:700});
-  }else{
-    setTimeout(warmLocalScenes,350);
-  }
+  // All six images are same-origin, compressed and preloaded in HTML.
+  // Warm them immediately as a fallback for browsers that ignore image preload hints.
+  Object.keys(scenes).forEach((key,index)=>{
+    setTimeout(()=>preloadScene(key,key==='servicing'?'high':'low'),index*20);
+  });
 
   tabs.forEach(tab=>{
     const key=tab.dataset.explorerMode;
