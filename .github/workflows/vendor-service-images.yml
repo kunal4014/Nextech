@@ -1,0 +1,61 @@
+name: Vendor service images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/vendor-service-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download service images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/services
+          curl --fail --location --retry 3 --connect-timeout 10 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/d40123d5-a4a2-4892-b3a6-dc5a8e1fb974.jpg' \
+            -o assets/services/servicing.jpg
+          curl --fail --location --retry 3 --connect-timeout 10 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/3c3c3a10-cc64-44db-a750-b366cf550306.jpg' \
+            -o assets/services/brakes.jpg
+          curl --fail --location --retry 3 --connect-timeout 10 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/c0bb13ff-9b80-402e-8911-fecf059ce249.jpg' \
+            -o assets/services/diagnostics.jpg
+          curl --fail --location --retry 3 --connect-timeout 10 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/c1bb5876-7e1f-4920-98ef-c5f7daddd0ff.jpg' \
+            -o assets/services/suspension.jpg
+          curl --fail --location --retry 3 --connect-timeout 10 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/fbb8da4c-c2dc-486f-aa78-edae7badf058.jpg' \
+            -o assets/services/transmission.jpg
+          curl --fail --location --retry 3 --connect-timeout 10 \
+            'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/cb397713-82c9-489e-887e-ef8d3a0178f5.jpg' \
+            -o assets/services/tyres.jpg
+
+          test -s assets/services/servicing.jpg
+          test -s assets/services/brakes.jpg
+          test -s assets/services/diagnostics.jpg
+          test -s assets/services/suspension.jpg
+          test -s assets/services/transmission.jpg
+          test -s assets/services/tyres.jpg
+
+      - name: Commit local assets
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/services
+          if git diff --cached --quiet; then
+            echo "Assets already current."
+            exit 0
+          fi
+          git commit -m "Vendor service images into repository [vendor-assets]"
+          git push
