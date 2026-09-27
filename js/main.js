@@ -396,7 +396,11 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     active=key;
     explorer.dataset.mode=key;
 
-    photos.forEach(photo=>photo.classList.toggle('active',photo.dataset.explorerPhoto===key));
+    photos.forEach(photo=>{
+      const selected=photo.dataset.explorerPhoto===key;
+      if(selected)photo.loading='eager';
+      photo.classList.toggle('active',selected);
+    });
     mode.textContent=scene.mode;
     kicker.textContent=scene.kicker;
     title.textContent=scene.title;
@@ -527,44 +531,25 @@ bookingFormForTracking?.addEventListener('submit',()=>{
 })();
 
 
-/* =========================================
-   FAST GOOGLE MAP WARMUP
-========================================= */
+/* Load the location map when the visitor approaches it. */
 (() => {
   const map=document.getElementById('locationMap');
   if(!map||!map.dataset.src)return;
 
-  let started=false;
-
   function startMap(){
-    if(started)return;
-    started=true;
     map.src=map.dataset.src;
     map.removeAttribute('data-src');
   }
 
-  /* If the user approaches the location section quickly, start immediately. */
   if('IntersectionObserver' in window){
     const observer=new IntersectionObserver(entries=>{
       if(entries.some(entry=>entry.isIntersecting)){
         startMap();
         observer.disconnect();
       }
-    },{
-      rootMargin:'1600px 0px 1600px 0px',
-      threshold:0
-    });
+    },{rootMargin:'300px 0px',threshold:0});
     observer.observe(map);
+  }else{
+    startMap();
   }
-
-  /* Otherwise warm it shortly after critical page loading has finished. */
-  addEventListener('load',()=>{
-    if('requestIdleCallback' in window){
-      requestIdleCallback(startMap,{timeout:1400});
-    }else{
-      setTimeout(startMap,650);
-    }
-  },{once:true});
 })();
-
-
