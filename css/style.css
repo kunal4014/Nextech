@@ -2613,30 +2613,3 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   object-position:left center!important;
   transform:none!important;
 }
-
-/* Give the original wide logo enough physical height instead of clipping it
-   inside the old 80px navigation row. */
-.navin{
-  height:104px;
-}
-@media(max-width:1100px){
-  .nav .brandLogo{
-    width:290px!important;
-  }
-  .navin{
-    height:96px;
-  }
-}
-@media(max-width:920px){
-  .nav .brandLogo{
-    width:250px!important;
-  }
-}
-@media(max-width:700px){
-  .nav .brandLogo{
-    width:205px!important;
-  }
-  .navin{
-    height:78px;
-  }
-}
