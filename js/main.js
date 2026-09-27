@@ -435,7 +435,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Restore comfort, handling and control.',
       text:'Inspection and repair of steering and suspension components to improve ride quality, steering feel and road control.',
       cta:'Book suspension inspection →',
-      image:'https://www.standardsprings.ru/upload/iblock/05c/5dswzlldes2pjpyfyjtbcxfb55qyh68n.png',
+      image:'https://images.pexels.com/photos/34277924/pexels-photo-34277924.jpeg?auto=compress&cs=tinysrgb&w=1600&q=78',
       pos:'center 38%',
       size:'contain',
       hotspots:['Strut','Hub','Mount']
