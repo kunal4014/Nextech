@@ -312,23 +312,62 @@ demoBookingForm?.addEventListener('submit',e=>{
    BUSINESS VALUE POLISH
 ========================================= */
 
-/* Active section indicator in the main navigation */
+/* Active section indicator in the main navigation.
+   Home is the hero/top area; later sections activate only after their
+   actual section boundary crosses below the fixed header. */
 const trackedNavLinks=[...document.querySelectorAll('.navlinks a[href^="#"]')];
-const sectionTargets=trackedNavLinks
-  .map(link=>({link,id:link.getAttribute('href').slice(1)}))
-  .map(item=>({...item,section:document.getElementById(item.id)}))
-  .filter(item=>item.section);
+const navSections=[
+  {hash:'#top',section:null},
+  {hash:'#service-explorer',section:document.getElementById('service-explorer')},
+  {hash:'#why',section:document.getElementById('why')},
+  {hash:'#reviews',section:document.getElementById('reviews')},
+  {hash:'#contact',section:document.getElementById('contact')}
+].filter(item=>item.hash==='#top'||item.section);
 
-if('IntersectionObserver' in window){
-  const navObserver=new IntersectionObserver(entries=>{
-    const visible=entries
-      .filter(e=>e.isIntersecting)
-      .sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
-    if(!visible)return;
-    trackedNavLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+visible.target.id));
-  },{rootMargin:'-34% 0px -54% 0px',threshold:[0,.1,.25,.5]});
-  sectionTargets.forEach(item=>navObserver.observe(item.section));
+let navTicking=false;
+
+function setActiveNav(hash){
+  trackedNavLinks.forEach(link=>{
+    link.classList.toggle('active',link.getAttribute('href')===hash);
+  });
 }
+
+function updateActiveNav(){
+  navTicking=false;
+
+  const activationLine=window.scrollY+(window.innerWidth<=700?122:136);
+  let activeHash='#top';
+
+  navSections.slice(1).forEach(item=>{
+    if(item.section && item.section.offsetTop<=activationLine){
+      activeHash=item.hash;
+    }
+  });
+
+  /* At the bottom of the document, Contact should always win. */
+  if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-8){
+    activeHash='#contact';
+  }
+
+  setActiveNav(activeHash);
+}
+
+function requestActiveNavUpdate(){
+  if(navTicking)return;
+  navTicking=true;
+  requestAnimationFrame(updateActiveNav);
+}
+
+trackedNavLinks.forEach(link=>{
+  link.addEventListener('click',()=>{
+    setActiveNav(link.getAttribute('href'));
+  });
+});
+
+addEventListener('scroll',requestActiveNavUpdate,{passive:true});
+addEventListener('resize',requestActiveNavUpdate,{passive:true});
+addEventListener('load',updateActiveNav,{once:true});
+updateActiveNav();
 
 /* Lightweight analytics hooks.
    If GA/gtag is connected later these fire automatically; dataLayer also works with GTM. */
