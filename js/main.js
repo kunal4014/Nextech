@@ -199,14 +199,6 @@ if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: red
   revealTargets.forEach(el=>el.classList.add('revealed'));
 }
 
-/* Concept form behaves like a real interaction without contacting Nextech. */
-const demoBookingForm=document.getElementById('demoBookingForm');
-const demoFormStatus=document.getElementById('demoFormStatus');
-
-
-
-
-
 /* =========================================
    EA34117 conversion enhancements
 ========================================= */
@@ -263,49 +255,6 @@ serviceSteps.forEach((step,index)=>{
   marquee.addEventListener('touchstart',pause,{passive:true});
   marquee.addEventListener('touchend',()=>setTimeout(resume,1200),{passive:true});
 })();
-
-
-/* Turn the concept booking form into a usable booking handoff.
-   It validates locally and opens a pre-filled email draft to the workshop;
-   nothing is sent without the visitor explicitly sending the email. */
-demoBookingForm?.addEventListener('submit',e=>{
-  e.preventDefault();
-  if(!demoBookingForm.checkValidity()){
-    demoBookingForm.reportValidity();
-    return;
-  }
-
-  const formData=new FormData(demoBookingForm);
-  const value=name=>(formData.get(name)||'').toString().trim();
-  const subject='Nextech booking request — '+(value('Vehicle')||value('Name')||'website enquiry');
-  const lines=[
-    'Hi Nextech,',
-    '',
-    'I would like to request a service booking.',
-    '',
-    'Name: '+value('Name'),
-    'Phone: '+value('Phone'),
-    'Email: '+value('Email'),
-    'Vehicle: '+value('Vehicle'),
-    'Registration: '+value('Registration'),
-    'Service: '+value('Service'),
-    'Preferred date: '+value('Preferred date'),
-    'Preferred time: '+value('Preferred time'),
-    '',
-    'What I need looked at:',
-    value('Details')||'Not specified',
-    '',
-    'Please contact me to confirm availability.'
-  ];
-
-  if(demoFormStatus){
-    demoFormStatus.textContent='Your booking details are ready. Opening a pre-filled email to Nextech — review it, then send when you are happy.';
-    demoFormStatus.classList.add('show');
-  }
-
-  const mailto='mailto:nextechautorepairs@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join('\n'));
-  setTimeout(()=>{ window.location.href=mailto; },180);
-});
 
 
 /* =========================================
