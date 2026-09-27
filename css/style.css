@@ -2590,3 +2590,24 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     height:52px;
   }
 }
+
+
+/* =========================================
+   FINAL NEXTECH LOGO SIZE
+========================================= */
+.nav .brandLogo{
+  display:block!important;
+  height:72px!important;
+  width:auto!important;
+  max-height:72px!important;
+  max-width:220px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+}
+@media(max-width:700px){
+  .nav .brandLogo{
+    height:52px!important;
+    max-height:52px!important;
+    max-width:160px!important;
+  }
+}
