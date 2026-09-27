@@ -2675,52 +2675,6 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 }
 .serviceExplorerCopy a:hover::after{width:100%}
 
-.serviceExplorerHotspots{
-  position:absolute;
-  inset:0;
-  z-index:4;
-  pointer-events:none;
-}
-.explorerHotspot{
-  position:absolute;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  color:#d9edf5;
-  font-size:9px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  opacity:.85;
-  transition:opacity .3s ease,transform .3s ease;
-}
-.explorerHotspot i{
-  width:12px;height:12px;
-  border-radius:50%;
-  border:1px solid rgba(85,197,255,.9);
-  box-shadow:0 0 0 8px rgba(85,197,255,.08),0 0 20px rgba(85,197,255,.24);
-  position:relative;
-}
-.explorerHotspot i::after{
-  content:"";
-  position:absolute;
-  width:3px;height:3px;
-  border-radius:50%;
-  background:var(--blue);
-  left:50%;top:50%;
-  transform:translate(-50%,-50%);
-}
-.explorerHotspot b{
-  padding:6px 8px;
-  border-radius:9px;
-  background:rgba(5,9,12,.65);
-  border:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(8px);
-  font-weight:700;
-}
-.eh1{left:58%;top:33%}
-.eh2{left:72%;top:50%}
-.eh3{left:48%;top:57%}
-
 .serviceExplorerProgress{
   position:absolute;
   z-index:5;
@@ -3086,10 +3040,6 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .serviceExplorerHotspots{
     display:block!important;
   }
-  .explorerHotspot{
-    transform:scale(.72);
-    transform-origin:left center;
-  }
   .serviceExplorerProgress{
     left:14px!important;
     right:14px!important;
@@ -3295,10 +3245,6 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 .serviceExplorerHotspots{
   display:block!important;
 }
-.explorerHotspot{
-  transform:scale(clamp(.72,.7 + .2vw,1))!important;
-  transform-origin:left center!important;
-}
 .serviceExplorerProgress{
   left:clamp(14px,2vw,34px)!important;
   right:clamp(14px,2vw,34px)!important;
@@ -3444,9 +3390,6 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .serviceExplorerCopy a{
     margin-top:13px!important;
     font-size:11px!important;
-  }
-  .explorerHotspot{
-    transform:scale(.72)!important;
   }
   .serviceExplorerProgress{
     left:14px!important;
