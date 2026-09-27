@@ -388,7 +388,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Keep it serviced. Keep it reliable.',
       text:'Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to keep your vehicle running reliably.',
       cta:'Book servicing →',
-      image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/d40123d5-a4a2-4892-b3a6-dc5a8e1fb974.jpg',
+      image:'assets/services/servicing.jpg',
       pos:'67% center',
       size:'cover',
     },
@@ -398,7 +398,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Stopping power checked properly.',
       text:'Brake pads, rotors and stopping performance checked properly so your vehicle stays safe, predictable and responsive.',
       cta:'Book a brake check →',
-      image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/3c3c3a10-cc64-44db-a750-b366cf550306.jpg',
+      image:'assets/services/brakes.jpg',
       pos:'64% center',
       size:'cover',
     },
@@ -408,7 +408,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Find the issue before replacing parts.',
       text:'Modern scanning and fault finding helps identify the real problem before unnecessary parts are replaced.',
       cta:'Book diagnostics →',
-      image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/c0bb13ff-9b80-402e-8911-fecf059ce249.jpg',
+      image:'assets/services/diagnostics.jpg',
       pos:'64% center',
       size:'cover',
     },
@@ -418,7 +418,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Restore comfort, handling and control.',
       text:'Inspection and repair of steering and suspension components to improve ride quality, steering feel and road control.',
       cta:'Book suspension inspection →',
-      image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/c1bb5876-7e1f-4920-98ef-c5f7daddd0ff.jpg',
+      image:'assets/services/suspension.jpg',
       pos:'62% center',
       size:'cover',
     },
@@ -428,7 +428,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Smooth power delivery starts underneath.',
       text:'Transmission and driveline servicing, diagnosis and repair to keep power delivery smooth and dependable.',
       cta:'Book transmission service →',
-      image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/fbb8da4c-c2dc-486f-aa78-edae7badf058.jpg',
+      image:'assets/services/transmission.jpg',
       pos:'64% center',
       size:'cover',
     },
@@ -438,7 +438,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Everything starts where the car meets the road.',
       text:'Tyre replacement, wear checks and balancing help maintain grip, braking performance and a smoother drive.',
       cta:'Book tyre service →',
-      image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/cb397713-82c9-489e-887e-ef8d3a0178f5.jpg',
+      image:'assets/services/tyres.jpg',
       pos:'68% center',
       size:'cover',
     }
@@ -512,12 +512,18 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     renderScene(key,track);
   }
 
-  // Prime all service images immediately. They are small, compressed assets and
-  // should already be in cache by the time the visitor reaches this section.
+  // The visible/default image is preloaded in HTML. Warm the remaining
+  // same-origin service assets just after first paint so they do not compete
+  // with the hero video request.
   preloadScene('servicing','high');
-  Object.keys(scenes)
+  const warmLocalScenes=()=>Object.keys(scenes)
     .filter(key=>key!=='servicing')
-    .forEach((key,index)=>setTimeout(()=>preloadScene(key,'low'),index*25));
+    .forEach((key,index)=>setTimeout(()=>preloadScene(key,'low'),index*45));
+  if('requestIdleCallback' in window){
+    requestIdleCallback(warmLocalScenes,{timeout:700});
+  }else{
+    setTimeout(warmLocalScenes,350);
+  }
 
   tabs.forEach(tab=>{
     const key=tab.dataset.explorerMode;
