@@ -2462,3 +2462,104 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 
 
 
+
+
+/* =========================================
+   PREMIUM SERVICE REVEAL
+   Keeps the normal selector; adds motion only when JS opts in.
+========================================= */
+.serviceExplorerSection.service-premium-ready .serviceExplorerHead{
+  opacity:0;
+  transform:translateY(18px);
+}
+.serviceExplorerSection.service-premium-ready .serviceExplorerTab{
+  opacity:0;
+  transform:translateX(-18px);
+}
+.serviceExplorerSection.service-premium-ready .serviceExplorerStage{
+  opacity:0;
+  transform:translateY(18px) scale(.985);
+}
+.serviceExplorerSection.service-premium-ready .serviceExplorerHead,
+.serviceExplorerSection.service-premium-ready .serviceExplorerTab,
+.serviceExplorerSection.service-premium-ready .serviceExplorerStage{
+  transition:
+    opacity .62s cubic-bezier(.2,.75,.2,1),
+    transform .72s cubic-bezier(.2,.75,.2,1),
+    border-color .22s ease,
+    background .22s ease,
+    box-shadow .22s ease;
+  will-change:opacity,transform;
+}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerHead{
+  opacity:1;
+  transform:none;
+}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab{
+  opacity:.66;
+  transform:none;
+}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab.active{
+  opacity:1;
+}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerStage{
+  opacity:1;
+  transform:none;
+}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(1){transition-delay:.05s}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(2){transition-delay:.10s}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(3){transition-delay:.15s}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(4){transition-delay:.20s}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(5){transition-delay:.25s}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerTab:nth-child(6){transition-delay:.30s}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerStage{transition-delay:.12s}
+
+/* Tiny premium depth while scrolling through the section. */
+.serviceExplorerSection.service-premium-ready .serviceExplorerPhoto.active{
+  transform:translate3d(0,calc(var(--service-parallax,0) * 1px),0) scale(1.018);
+}
+@media(hover:hover) and (pointer:fine){
+  .serviceExplorerSection.service-premium-ready .serviceExplorerStage:hover .serviceExplorerPhoto.active{
+    transform:translate3d(0,calc(var(--service-parallax,0) * 1px),0) scale(1.032);
+  }
+}
+
+/* Thin brand pulse on entry, then settles. */
+.serviceExplorerSection.service-premium-ready .serviceExplorerStage::after{
+  content:"";
+  position:absolute;
+  z-index:6;
+  left:0;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:linear-gradient(180deg,transparent,var(--red) 35%,var(--red) 65%,transparent);
+  opacity:0;
+  transform:scaleY(.3);
+  transform-origin:center;
+  pointer-events:none;
+}
+.serviceExplorerSection.service-premium-ready.is-visible .serviceExplorerStage::after{
+  animation:serviceEntryPulse 1.15s .18s cubic-bezier(.2,.75,.2,1) both;
+}
+@keyframes serviceEntryPulse{
+  0%{opacity:0;transform:scaleY(.25)}
+  35%{opacity:.85;transform:scaleY(1)}
+  100%{opacity:.15;transform:scaleY(.72)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .serviceExplorerSection.service-premium-ready .serviceExplorerHead,
+  .serviceExplorerSection.service-premium-ready .serviceExplorerTab,
+  .serviceExplorerSection.service-premium-ready .serviceExplorerStage{
+    opacity:1!important;
+    transform:none!important;
+    transition:none!important;
+  }
+  .serviceExplorerSection.service-premium-ready .serviceExplorerPhoto.active{
+    transform:scale(1.015)!important;
+  }
+  .serviceExplorerSection.service-premium-ready .serviceExplorerStage::after{
+    display:none!important;
+  }
+}

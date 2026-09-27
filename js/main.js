@@ -573,3 +573,60 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     }
   },{once:true});
 })();
+
+
+/* =========================================
+   PREMIUM SERVICE SECTION REVEAL
+========================================= */
+(() => {
+  const section=document.getElementById('service-explorer');
+  const explorer=document.getElementById('serviceExplorer');
+  if(!section||!explorer)return;
+
+  const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
+  if(reduceMotion.matches)return;
+
+  section.classList.add('service-premium-ready');
+
+  const reveal=()=>{
+    section.classList.add('is-visible');
+  };
+
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>{
+      if(entries.some(entry=>entry.isIntersecting)){
+        reveal();
+        observer.disconnect();
+      }
+    },{
+      rootMargin:'0px 0px -12% 0px',
+      threshold:.12
+    });
+    observer.observe(section);
+  }else{
+    reveal();
+  }
+
+  let ticking=false;
+  function updateServiceDepth(){
+    ticking=false;
+    const rect=section.getBoundingClientRect();
+    const vh=innerHeight||document.documentElement.clientHeight;
+    if(rect.bottom<0||rect.top>vh)return;
+
+    const center=rect.top+(rect.height/2);
+    const viewportCenter=vh/2;
+    const normalized=Math.max(-1,Math.min(1,(center-viewportCenter)/vh));
+    explorer.style.setProperty('--service-parallax',(normalized*-9).toFixed(2));
+  }
+
+  function requestServiceDepth(){
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(updateServiceDepth);
+  }
+
+  addEventListener('scroll',requestServiceDepth,{passive:true});
+  addEventListener('resize',requestServiceDepth,{passive:true});
+  updateServiceDepth();
+})();
