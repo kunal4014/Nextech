@@ -387,54 +387,67 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       kicker:'Logbook servicing & maintenance',
       title:'Keep it serviced. Keep it reliable.',
       text:'Routine servicing, oil and filter changes, fluid checks and scheduled maintenance to keep your vehicle running reliably.',
-      cta:'Book servicing →',
+      cta:'Book servicing →'
     },
     brakes:{
       mode:'02 · Safety systems',
       kicker:'Brakes & clutch',
       title:'Stopping power checked properly.',
       text:'Brake pads, rotors and stopping performance checked properly so your vehicle stays safe, predictable and responsive.',
-      cta:'Book a brake check →',
+      cta:'Book a brake check →'
     },
     diagnostics:{
       mode:'03 · Fault finding',
       kicker:'Advanced vehicle diagnostics',
       title:'Find the issue before replacing parts.',
       text:'Modern scanning and fault finding helps identify the real problem before unnecessary parts are replaced.',
-      cta:'Book diagnostics →',
+      cta:'Book diagnostics →'
     },
     suspension:{
       mode:'04 · Ride & handling',
       kicker:'Steering & suspension',
       title:'Restore comfort, handling and control.',
       text:'Inspection and repair of steering and suspension components to improve ride quality, steering feel and road control.',
-      cta:'Book suspension inspection →',
+      cta:'Book suspension inspection →'
     },
     transmission:{
       mode:'05 · Driveline',
       kicker:'Transmission service & repair',
       title:'Smooth power delivery starts underneath.',
       text:'Transmission and driveline servicing, diagnosis and repair to keep power delivery smooth and dependable.',
-      cta:'Book transmission service →',
+      cta:'Book transmission service →'
     },
     tyres:{
       mode:'06 · Road contact',
       kicker:'Tyres & wheel care',
       title:'Everything starts where the car meets the road.',
       text:'Tyre replacement, wear checks and balancing help maintain grip, braking performance and a smoother drive.',
-      cta:'Book tyre service →',
+      cta:'Book tyre service →'
     }
   };
 
-
+  const sceneKeys=Object.keys(scenes);
+  const cycleMs=5500;
+  const manualHoldMs=12000;
+  const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
   let active='servicing';
+  let timer=null;
+  let visible=false;
+  let hoverPaused=false;
+  let touchPaused=false;
+  let manualHoldUntil=0;
+
   function renderScene(key,track=true){
     const scene=scenes[key];
     if(!scene)return;
 
     active=key;
     explorer.dataset.mode=key;
-    photos.forEach(photo=>photo.classList.toggle('active',photo.dataset.explorerPhoto===key));
+
+    photos.forEach(photo=>{
+      photo.classList.toggle('active',photo.dataset.explorerPhoto===key);
+    });
+
     mode.textContent=scene.mode;
     kicker.textContent=scene.kicker;
     title.textContent=scene.title;
@@ -447,30 +460,124 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       tab.setAttribute('aria-selected',String(selected));
     });
 
-    progress.forEach((bar,i)=>bar.classList.toggle('active',i===Object.keys(scenes).indexOf(key)));
+    progress.forEach((bar,i)=>{
+      bar.classList.toggle('active',i===sceneKeys.indexOf(key));
+    });
 
-    explorer.classList.remove('is-switching');
+    requestAnimationFrame(()=>explorer.classList.remove('is-switching'));
 
     if(track && typeof nextechTrack==='function'){
       nextechTrack('service_explorer_select',{service:key});
     }
   }
 
-  function setScene(key,track=true){
-    const scene=scenes[key];
-    if(!scene||key===active&&track)return;
-    explorer.classList.add('is-switching');
-    renderScene(key,track);
+  function canAutoplay(){
+    return visible &&
+      !document.hidden &&
+      !reduceMotion.matches &&
+      !hoverPaused &&
+      !touchPaused &&
+      Date.now()>=manualHoldUntil;
+  }
+
+  function clearCycle(){
+    if(timer){
+      clearTimeout(timer);
+      timer=null;
+    }
+  }
+
+  function updatePauseState(){
+    const paused=!canAutoplay();
+    explorer.classList.toggle('autoplay-paused',paused);
+    if(paused){
+      clearCycle();
+    }else{
+      scheduleCycle(true);
+    }
+  }
+
+  function restartProgress(){
+    explorer.classList.remove('autoplay-running');
+    void explorer.offsetWidth;
+    if(canAutoplay()) explorer.classList.add('autoplay-running');
+  }
+
+  function scheduleCycle(resetProgress=false){
+    clearCycle();
+    if(!canAutoplay())return;
+
+    if(resetProgress) restartProgress();
+
+    timer=setTimeout(()=>{
+      if(!canAutoplay()){
+        updatePauseState();
+        return;
+      }
+      const currentIndex=sceneKeys.indexOf(active);
+      const next=sceneKeys[(currentIndex+1)%sceneKeys.length];
+      explorer.classList.add('is-switching');
+      renderScene(next,false);
+      scheduleCycle(true);
+    },cycleMs);
+  }
+
+  function selectManually(key){
+    if(!scenes[key])return;
+    manualHoldUntil=Date.now()+manualHoldMs;
+    clearCycle();
+    explorer.classList.remove('autoplay-running');
+    explorer.classList.add('autoplay-paused','is-switching');
+    renderScene(key,true);
+
+    setTimeout(()=>{
+      if(Date.now()>=manualHoldUntil) updatePauseState();
+    },manualHoldMs+40);
   }
 
   tabs.forEach(tab=>{
     const key=tab.dataset.explorerMode;
-    tab.addEventListener('click',()=>setScene(key));
+    tab.addEventListener('click',()=>selectManually(key));
   });
-progress[0]?.classList.add('active');
 
+  explorer.addEventListener('mouseenter',()=>{
+    hoverPaused=true;
+    updatePauseState();
+  });
+  explorer.addEventListener('mouseleave',()=>{
+    hoverPaused=false;
+    updatePauseState();
+  });
+
+  explorer.addEventListener('touchstart',()=>{
+    touchPaused=true;
+    updatePauseState();
+  },{passive:true});
+  explorer.addEventListener('touchend',()=>{
+    touchPaused=false;
+    setTimeout(updatePauseState,900);
+  },{passive:true});
+  explorer.addEventListener('touchcancel',()=>{
+    touchPaused=false;
+    updatePauseState();
+  },{passive:true});
+
+  document.addEventListener('visibilitychange',updatePauseState);
+  reduceMotion.addEventListener?.('change',updatePauseState);
+
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>{
+      visible=entries.some(entry=>entry.isIntersecting && entry.intersectionRatio>=0.22);
+      updatePauseState();
+    },{threshold:[0,.22,.5]});
+    observer.observe(explorer);
+  }else{
+    visible=true;
+    updatePauseState();
+  }
+
+  progress[0]?.classList.add('active');
 })();
-
 
 /* =========================================
    CURRENT-SITE COOKIE NOTICE
