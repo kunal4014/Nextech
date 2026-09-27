@@ -2573,18 +2573,26 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 
 
 
-/* REAL NEXTECH PNG NAV LOGO */
-.brandLogo{
-  display:block;
-  width:170px;
-  height:50px;
-  object-fit:contain;
-  object-position:left center;
+/* Nextech header logo: give the full supplied image room to read. */
+@media(min-width:1025px){
+  .navin{height:96px;grid-template-columns:310px minmax(0,1fr) auto}
+  .nav .brand{width:310px;height:96px;overflow:visible}
+  .nav .brandLogo,.nav.is-scrolled .brandLogo{
+    display:block;width:310px;height:96px;max-width:none;max-height:none;
+    object-fit:contain;object-position:left center;
+  }
+  .stage{top:134px;height:calc(100vh - 134px)}
 }
-
+@media(min-width:701px) and (max-width:1024px){
+  .nav .brand{width:220px;height:70px;overflow:visible}
+  .nav .brandLogo,.nav.is-scrolled .brandLogo{
+    width:220px;height:70px;max-height:none;object-fit:contain;object-position:left center;
+  }
+}
 @media(max-width:700px){
-  .brandLogo{
-    width:150px;
-    height:50px;
+  .nav .brand{width:170px;height:60px;overflow:visible}
+  .nav .brandLogo,.nav.is-scrolled .brandLogo{
+    width:170px;height:60px;max-width:100%;max-height:none;
+    object-fit:contain;object-position:left center;
   }
 }
