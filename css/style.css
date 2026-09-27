@@ -2458,3 +2458,43 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   background:var(--red);
   box-shadow:0 0 12px rgba(229,59,56,.45);
 }
+
+
+/* =========================================
+   SERVICE EXPLORER AUTOPLAY
+========================================= */
+.serviceExplorer.is-switching .serviceExplorerPhoto.active{
+  opacity:.25;
+}
+.serviceExplorer.autoplay-running .serviceExplorerProgress i.active{
+  position:relative;
+  overflow:hidden;
+  background:rgba(255,255,255,.13);
+  box-shadow:none;
+}
+.serviceExplorer.autoplay-running .serviceExplorerProgress i.active::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  transform-origin:left center;
+  background:var(--red);
+  box-shadow:0 0 10px rgba(229,59,56,.45);
+  animation:serviceExplorerAutoProgress 5.5s linear forwards;
+}
+.serviceExplorer.autoplay-paused .serviceExplorerProgress i.active{
+  background:var(--red);
+  box-shadow:0 0 10px rgba(229,59,56,.45);
+}
+.serviceExplorer.autoplay-paused .serviceExplorerProgress i.active::after{
+  animation-play-state:paused;
+}
+@keyframes serviceExplorerAutoProgress{
+  from{transform:scaleX(0)}
+  to{transform:scaleX(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  .serviceExplorer.autoplay-running .serviceExplorerProgress i.active::after{
+    animation:none;
+    transform:scaleX(1);
+  }
+}
