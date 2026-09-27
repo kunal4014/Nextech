@@ -2597,28 +2597,68 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
    Keep the real logo dominant in the header.
 ========================================= */
 .nav .brand{
-  min-width:340px;
+  min-width:330px;
   overflow:visible;
   align-self:center;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.nav .brandMark{
+  width:104px;
+  height:58px;
+  overflow:hidden;
+  display:block;
+  flex:0 0 104px;
+  position:relative;
 }
 .nav .brandLogo{
   display:block!important;
-  width:340px!important;
+  width:232px!important;
   height:auto!important;
   max-width:none!important;
   max-height:none!important;
   object-fit:contain!important;
   object-position:left center!important;
-  flex:0 0 auto;
-  transform:scale(1.08);
-  transform-origin:left center;
+  position:absolute;
+  left:0;
+  top:50%;
+  transform:translateY(-50%)!important;
+}
+.nav .brandName{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  line-height:1;
+  white-space:nowrap;
+}
+.nav .brandName strong{
+  color:#fff;
+  font-size:26px;
+  font-weight:950;
+  letter-spacing:.055em;
+}
+.nav .brandName small{
+  margin-top:5px;
+  color:#c92f35;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.26em;
 }
 @media(max-width:1100px){
   .nav .brand{
-    min-width:285px;
+    min-width:280px;
+    gap:10px;
+  }
+  .nav .brandMark{
+    width:86px;
+    flex-basis:86px;
   }
   .nav .brandLogo{
-    width:285px!important;
+    width:205px!important;
+  }
+  .nav .brandName strong{
+    font-size:22px;
   }
 }
 @media(max-width:920px){
@@ -2627,11 +2667,22 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   }
 }
 @media(max-width:700px){
+  .nav .brand{
+    gap:8px;
+  }
+  .nav .brandMark{
+    width:70px;
+    height:48px;
+    flex-basis:70px;
+  }
   .nav .brandLogo{
-    width:205px!important;
-    height:auto!important;
-    max-width:none!important;
-    max-height:none!important;
-    transform:scale(1.04);
+    width:172px!important;
+  }
+  .nav .brandName strong{
+    font-size:18px;
+  }
+  .nav .brandName small{
+    font-size:7px;
+    letter-spacing:.20em;
   }
 }
