@@ -15,7 +15,7 @@ button{font:inherit}
 .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
 
 /* NAV */
-.utilityBar{position:fixed;inset:0 0 auto;z-index:2100;height:38px;background:#3a3a3a;border-bottom:1px solid rgba(255,255,255,.08);color:#f1f1f1}
+.utilityBar{position:fixed;inset:0 0 auto;z-index:2100;height:38px;background:linear-gradient(90deg,#77151b 0%,#a3262d 50%,#77151b 100%);border-bottom:1px solid rgba(255,255,255,.18);color:#fff}
 .utilityIn{height:38px;display:grid;grid-template-columns:1fr auto 1fr;gap:28px;align-items:center;font-size:12px;font-weight:650}
 .utilityItem.phone{justify-self:center}.utilityItem.address{justify-self:end}
 .utilityItem{display:flex;align-items:center;gap:9px;white-space:nowrap;min-width:0}
