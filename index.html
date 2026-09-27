@@ -95,66 +95,6 @@
         </div>
 
       </div>
-
-      <div class="viewport3d">
-        <div class="mechanicalWorld" id="mechanicalWorld">
-          <div class="layer sceneCar" id="sceneCar">
-            <div class="sceneLabel">Scene 01 · Workshop</div>
-            <div class="carBadge">Vehicle servicing · workshop bay</div>
-            <div class="carBody">
-              <div class="carShell">
-                <div class="headlight h1"></div><div class="headlight h2"></div>
-                <div class="wheel w1"></div><div class="wheel w2"></div>
-              </div>
-              <div class="hoist"></div>
-            </div>
-          </div>
-
-          <div class="layer sceneOil" id="sceneOil">
-            <div class="sceneLabel">Scene 02 · Oil & engine service</div>
-            <div class="engineBlock">
-              <div class="engineBase"></div><div class="cover"></div><div class="pipe p1"></div><div class="pipe p2"></div>
-            </div>
-            <div class="oilBottle"><div class="cap"></div><div class="bottleBody"></div><div class="oilStream"></div></div>
-            <div class="oilCaption">Oil & filter · engine servicing</div>
-          </div>
-
-          <div class="layer sceneBrake" id="sceneBrake">
-            <div class="sceneLabel">Scene 03 · Brakes</div>
-            <div class="rotorWrap">
-              <div class="rotor"></div><div class="hub"></div>
-              <div class="hole" style="left:48%;top:14%"></div><div class="hole" style="left:69%;top:26%"></div>
-              <div class="hole" style="left:78%;top:49%"></div><div class="hole" style="left:66%;top:71%"></div>
-              <div class="hole" style="left:44%;top:79%"></div><div class="hole" style="left:23%;top:65%"></div>
-              <div class="hole" style="left:15%;top:43%"></div><div class="hole" style="left:28%;top:22%"></div>
-              <div class="caliper"></div>
-            </div>
-            <div class="brakeNote"><small>Safety systems</small><strong>Brake inspection · pads · rotors</strong></div>
-          </div>
-
-          <div class="layer sceneDiag" id="sceneDiag">
-            <div class="sceneLabel">Scene 04 · Diagnostics</div>
-            <div class="diagCar">
-              <div class="scan"></div>
-              <svg viewBox="0 0 760 460" aria-hidden="true">
-                <path d="M115 305 L156 232 Q195 185 265 165 L462 157 Q531 158 580 205 L644 286 Q665 310 650 338 L620 365 L140 365 Q104 351 94 326 Z" fill="none" stroke="#6acfff" stroke-width="4"/>
-                <path d="M222 216 Q259 178 316 171 L450 166 Q497 168 540 207 L558 236 L202 236 Z" fill="none" stroke="#4aa8d8" stroke-width="3"/>
-                <circle cx="225" cy="348" r="57" fill="none" stroke="#6acfff" stroke-width="4"/><circle cx="548" cy="348" r="57" fill="none" stroke="#6acfff" stroke-width="4"/>
-                <path d="M156 286 Q330 238 621 291" fill="none" stroke="#6acfff" stroke-width="3" opacity=".7"/>
-              </svg>
-            </div>
-            <div class="diagPanel">
-              <small>Full vehicle scan</small>
-              <div class="system"><span>Engine</span><i class="dot"></i></div>
-              <div class="system"><span>Transmission</span><i class="dot"></i></div>
-              <div class="system"><span>ABS / Braking</span><i class="dot"></i></div>
-              <div class="system"><span>Suspension</span><i class="dot"></i></div>
-              <div class="system"><span>Electrical</span><i class="dot"></i></div>
-              <div class="progress"><i></i></div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="scrollHint"><span class="scrollDot"></span>Scroll to explore</div>
     </div>
   </div>
@@ -474,6 +414,7 @@
         <iframe
           title="Nextech Auto Repairs location"
           loading="lazy"
+          fetchpriority="low"
           referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=113-115%20Port%20Rd%2C%20Queenstown%20SA%205014&output=embed"></iframe>
       </div>
@@ -581,6 +522,6 @@
   <a href="tel:0883412199">Call workshop</a>
   <a class="primary" href="#contact">Book service</a>
 </div>
-<script src="js/main.js"></script>
+<script src="js/main.js" defer></script>
 </body>
 </html>
