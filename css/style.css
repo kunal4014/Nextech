@@ -226,7 +226,7 @@ linear-gradient(145deg,#0b1116,#060a0e)}
 .diagPhoto{background-image:linear-gradient(145deg,#111920,#060a0e)}
 .diagPhoto:after{background-image:url('https://uautos.com.br/uploads/blog/quando-o-carro-comeca-a-falhar-o-que-pode-ser-e-como-agir.png');background-size:88% auto;background-repeat:no-repeat;background-position:45% 54%;filter:drop-shadow(0 24px 34px rgba(0,0,0,.42));transform:scale(1)}
 .serviceChapter:hover .diagPhoto:after{transform:scale(1.035)}
-.suspensionPhoto{background-image:url('https://www.standardsprings.ru/upload/iblock/05c/5dswzlldes2pjpyfyjtbcxfb55qyh68n.png');background-position:center 48%}
+.suspensionPhoto{background-image:url('https://images.pexels.com/photos/34277924/pexels-photo-34277924.jpeg?auto=compress&cs=tinysrgb&w=1600&q=78');background-position:center 48%}
 .photoBadge{position:absolute;z-index:3;left:22px;bottom:22px;padding:12px 14px;border-radius:14px;background:rgba(6,10,13,.72);border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(12px)}
 .photoBadge span{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#acd2e5;margin-bottom:4px}
 .photoBadge strong{display:block;font-size:15px}
@@ -610,7 +610,7 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   background-position:center 48%
 }
 .suspensionScene .chapterVisual:after{
-  background-image:url('https://www.standardsprings.ru/upload/iblock/05c/5dswzlldes2pjpyfyjtbcxfb55qyh68n.png');
+  background-image:url('https://images.pexels.com/photos/34277924/pexels-photo-34277924.jpeg?auto=compress&cs=tinysrgb&w=1600&q=78');
   background-position:center 47%
 }
 .serviceDiag2.diagFull .chapterVisual:after{
