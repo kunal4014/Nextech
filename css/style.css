@@ -2850,27 +2850,27 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
 /* Desktop fit rules by service */
 .serviceExplorer[data-mode="servicing"] .serviceExplorerImage{
   background-size:cover!important;
-  background-position:60% center!important;
+  background-position:67% center!important;
 }
 .serviceExplorer[data-mode="brakes"] .serviceExplorerImage{
   background-size:cover!important;
-  background-position:58% center!important;
+  background-position:64% center!important;
 }
 .serviceExplorer[data-mode="diagnostics"] .serviceExplorerImage{
   background-size:contain!important;
-  background-position:center center!important;
+  background-position:center 36%!important;
 }
 .serviceExplorer[data-mode="suspension"] .serviceExplorerImage{
   background-size:contain!important;
-  background-position:center center!important;
+  background-position:center 38%!important;
 }
 .serviceExplorer[data-mode="transmission"] .serviceExplorerImage{
   background-size:cover!important;
-  background-position:60% center!important;
+  background-position:64% center!important;
 }
 .serviceExplorer[data-mode="tyres"] .serviceExplorerImage{
   background-size:cover!important;
-  background-position:62% center!important;
+  background-position:68% center!important;
 }
 
 /* Keep copy readable when a contained technical image leaves empty space */
@@ -3130,3 +3130,13 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
   .serviceExplorerStage{min-height:520px!important}
   .serviceExplorerCopy h3{font-size:23px!important}
 }
+
+
+/* Mobile is the visual source of truth for service imagery.
+   Desktop/tablet use the same photo, crop and focal point; only sizing changes. */
+.serviceExplorer[data-mode="servicing"] .serviceExplorerImage{background-position:67% center!important}
+.serviceExplorer[data-mode="brakes"] .serviceExplorerImage{background-position:64% center!important}
+.serviceExplorer[data-mode="diagnostics"] .serviceExplorerImage{background-position:center 36%!important}
+.serviceExplorer[data-mode="suspension"] .serviceExplorerImage{background-position:center 38%!important}
+.serviceExplorer[data-mode="transmission"] .serviceExplorerImage{background-position:64% center!important}
+.serviceExplorer[data-mode="tyres"] .serviceExplorerImage{background-position:68% center!important}
