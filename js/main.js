@@ -471,7 +471,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       const rail=explorer.querySelector('.serviceExplorerNav');
       const tab=tabs[index];
       if(rail&&tab){
-        rail.scrollTo({left:tab.offsetLeft-rail.offsetLeft-(rail.clientWidth-tab.clientWidth)/2,behavior:reducedMotion.matches?'instant':'smooth'});
+        rail.scrollTo({left:tab.offsetLeft-rail.offsetLeft-(rail.clientWidth-tab.clientWidth)/2,behavior:reducedMotion.matches?'auto':'smooth'});
       }
       return;
     }
