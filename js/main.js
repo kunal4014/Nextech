@@ -418,7 +418,7 @@ bookingFormForTracking?.addEventListener('submit',()=>{
       title:'Restore comfort, handling and control.',
       text:'Inspection and repair of steering and suspension components to improve ride quality, steering feel and road control.',
       cta:'Book suspension inspection →',
-      image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/6b2b79ee-30b6-4093-820d-b0ce13698354.jpg',
+      image:'https://d2ol7oe51mr4n9.cloudfront.net/user_3JJXrUDtrHtPk5XgHxxLSOPLJ0o/c1bb5876-7e1f-4920-98ef-c5f7daddd0ff.jpg',
       pos:'62% center',
       size:'cover',
     },
@@ -512,23 +512,12 @@ bookingFormForTracking?.addEventListener('submit',()=>{
     renderScene(key,track);
   }
 
-  // Prime the visible/default service immediately.
+  // Prime all service images immediately. They are small, compressed assets and
+  // should already be in cache by the time the visitor reaches this section.
   preloadScene('servicing','high');
-
-  // Warm every remaining service image almost immediately after first paint.
-  // This removes the first-click wait while still letting the hero start first.
-  const warmAll=()=>{
-    const keys=Object.keys(scenes).filter(key=>key!=='servicing');
-    keys.forEach((key,index)=>{
-      setTimeout(()=>preloadScene(key,'low'),index*60);
-    });
-  };
-
-  if(document.readyState==='complete'){
-    setTimeout(warmAll,120);
-  }else{
-    window.addEventListener('load',()=>setTimeout(warmAll,120),{once:true});
-  }
+  Object.keys(scenes)
+    .filter(key=>key!=='servicing')
+    .forEach((key,index)=>setTimeout(()=>preloadScene(key,'low'),index*25));
 
   tabs.forEach(tab=>{
     const key=tab.dataset.explorerMode;
