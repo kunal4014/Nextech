@@ -2595,23 +2595,7 @@ footer{padding:28px 0 36px;color:#7e8b95;font-size:12px}
     linear-gradient(90deg,rgba(3,6,9,.70) 0%,rgba(3,6,9,.20) 50%,rgba(3,6,9,.08) 100%),
     linear-gradient(180deg,rgba(3,6,9,.06) 0%,rgba(3,6,9,.08) 48%,rgba(3,6,9,.86) 100%);
 }
-.serviceExplorerScan{
-  position:absolute;
-  z-index:2;
-  left:8%;right:8%;
-  height:1px;
-  top:25%;
-  opacity:0;
-  background:linear-gradient(90deg,transparent,var(--blue),transparent);
-  box-shadow:0 0 22px rgba(85,197,255,.8);
-}
-.serviceExplorer[data-mode="diagnostics"] .serviceExplorerScan{
-  opacity:1;
-  animation:explorerScan 3.4s ease-in-out infinite;
-}
-@keyframes explorerScan{
-  0%,100%{top:25%;opacity:.2}
-  50%{top:76%;opacity:1}
+50%{top:76%;opacity:1}
 }
 
 .serviceExplorerTop{
